@@ -1,0 +1,17 @@
+{
+    "name": "wohnparc/moeware-client",
+    "description": "The PHP client library for the Moeware GraphQL API",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Wohnparc\\MoewareClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wohnparc Dev Team",
+            "email": "dev@wohnparc.de"
+        }
+    ],
+    "require": {}
+}
