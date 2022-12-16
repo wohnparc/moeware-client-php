@@ -4,7 +4,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Wohnparc\\MoewareClient\\": "src/"
+            "Wohnparc\\Moeware\\": "src/"
         }
     },
     "authors": [
@@ -14,6 +14,7 @@
         }
     ],
     "require": {
-        "gmostafa/php-graphql-oqm": "^1.4"
+        "gmostafa/php-graphql-oqm": "^1.4",
+        "softonic/graphql-client": "^2.2"
     }
 }
