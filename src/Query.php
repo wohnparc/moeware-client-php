@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -32,6 +32,9 @@ abstract class Query {
         return $this->errors;
     }
 
+    /**
+     * @return bool
+     */
     final public function hasErrors(): bool {
         return count($this->errors) > 0;
     }

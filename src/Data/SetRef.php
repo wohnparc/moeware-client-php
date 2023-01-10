@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
@@ -55,6 +55,9 @@ class SetRef {
     // -- MAGIC METHODS
     //
 
+    /**
+     * @return string
+     */
     public function __toString(): string {
         return "$this->baseID/" . str_pad($this->variantID, 2, "0", STR_PAD_LEFT);
     }
@@ -75,6 +78,7 @@ class SetRef {
 
     /**
      * @param array $data
+     *
      * @return static
      */
     public static function fromArray(array $data): self {

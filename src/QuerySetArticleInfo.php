@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -104,7 +104,7 @@ class QuerySetArticleInfo extends Query {
      * @return static
      */
     public static function fromArray(array $data): self {
-        $data = $data['querySetArticleInfo'];
+        $data = $data['setArticleInfo'];
 
         return new self(
             (string)($data['status'] ?? ''),
@@ -119,8 +119,8 @@ class QuerySetArticleInfo extends Query {
      */
     public static function query(): string {
         return <<<'GQL'
-        query queryArticleInfo($refs: [InputArticleRef!]!) {
-          articleInfo(refs: $refs) {
+        query querySetArticleInfo($refs: [InputSetArticleRef!]!) {
+          setArticleInfo(refs: $refs) {
             status
             message
             setArticles {
@@ -135,6 +135,7 @@ class QuerySetArticleInfo extends Query {
                     }
                     numberOfPieces
                 }
+                calculatedInventoryPrice
             }
             invalidSetArticles {
                 set {
@@ -148,6 +149,7 @@ class QuerySetArticleInfo extends Query {
                     }
                     numberOfPieces
                 }
+                calculatedInventoryPrice
             }
           }
         }

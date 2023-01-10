@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -77,8 +77,6 @@ class QueryUpdatedArticleAndSetRefs extends Query {
      * @return static
      */
     public static function fromArray(array $data): self {
-        $data = $data['queryUpdatedArticleAndSetRefs'];
-
         return new self(
             array_map(ArticleRef::mapFromArray(), $data['updatedArticleRefs'] ?? []),
             array_map(SetRef::mapFromArray(), $data['updatedSetRefs'] ?? []),

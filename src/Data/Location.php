@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
@@ -14,6 +14,12 @@ class Location {
      */
     private int $number;
 
+    /**
+     * Location constructor.
+     *
+     * @param string $code
+     * @param int $number
+     */
     public function __construct(string $code, int $number) {
         $this->code = $code;
         $this->number = $number;
@@ -33,6 +39,11 @@ class Location {
         return $this->number;
     }
 
+    /**
+     * @param array $data
+     *
+     * @return static
+     */
     public static function fromArray(array $data): self {
         return new self(
             (string)($data['code'] ?? ""),
@@ -40,6 +51,9 @@ class Location {
         );
     }
 
+    /**
+     * @return callable
+     */
     public static function mapFromArray(): callable {
         return static function(array $data): self {
             return self::fromArray($data);

@@ -3,13 +3,16 @@
 include "../vendor/autoload.php";
 
 use Wohnparc\Moeware\Client;
+use Wohnparc\Moeware\Data\ArticleRef;
+use Wohnparc\Moeware\Data\SetArticleItem;
 use Wohnparc\Moeware\Data\SetArticleRef;
+use Wohnparc\Moeware\Data\SetRef;
 
 $key = "<key>";
 
-$client = new Client("http://localhost:8000/$/graphql", $key);
+$client = new Client("https://price2spy.mw.wohnparc.dev/$/graphql", $key);
 
-$date = new DateTime(strtotime("now - 1 day"));
+$date = new DateTime("now - 1 day");
 
 $updatedRefs = $client->queryUpdatedArticleAndSetRefs($date);
 
@@ -17,14 +20,21 @@ print_r($updatedRefs->getArticleRefs());
 
 print_r($updatedRefs->getSetRefs());
 
-$articleInfo = $client->queryArticleInfo($updatedRefs->getArticleRefs());
+$articleInfo = $client->queryArticleInfo([
+    new ArticleRef(1701234,0)
+]);
 
 print_r($articleInfo);
 
 $setArticleInfo = $client->querySetArticleInfo([
     new SetArticleRef(
-        $updatedRefs->getSetRefs()[0],
-        [],
+        new SetRef(1701234,0),
+        [
+            new SetArticleItem(
+                new ArticleRef(1701234,0),
+                1
+            )
+        ],
     ),
 ]);
 

@@ -10,6 +10,9 @@ use Wohnparc\Moeware\Data\SetArticleRef;
 
 class Client {
 
+    /**
+     * @var GQLClient
+     */
     private GQLClient $client;
 
     /**
@@ -27,6 +30,11 @@ class Client {
         ]);
     }
 
+    /**
+     * @param DateTime $since
+     *
+     * @return QueryUpdatedArticleRefs|null
+     */
     final public function queryUpdatedArticleRefs(DateTime $since): ?QueryUpdatedArticleRefs {
         $response = $this->client->query(
             QueryUpdatedArticleRefs::query(),
@@ -40,6 +48,11 @@ class Client {
         return QueryUpdatedArticleRefs::fromArray($response->getData());
     }
 
+    /**
+     * @param DateTime $since
+     *
+     * @return QueryUpdatedSetRefs|null
+     */
     final public function queryUpdatedSetRefs(DateTime $since): ?QueryUpdatedSetRefs {
         $response = $this->client->query(
             QueryUpdatedSetRefs::query(),
@@ -53,6 +66,11 @@ class Client {
         return QueryUpdatedSetRefs::fromArray($response->getData());
     }
 
+    /**
+     * @param DateTime $since
+     *
+     * @return QueryUpdatedArticleAndSetRefs|null
+     */
     final public function queryUpdatedArticleAndSetRefs(DateTime $since): ?QueryUpdatedArticleAndSetRefs {
         $response = $this->client->query(
             QueryUpdatedArticleAndSetRefs::query(),

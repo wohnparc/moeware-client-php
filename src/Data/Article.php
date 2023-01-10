@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
@@ -117,6 +117,11 @@ class Article {
         return $this->calculatedInventoryPrice;
     }
 
+    /**
+     * @param array $data
+     *
+     * @return static
+     */
     public static function fromArray(array $data): self {
         return new self(
             (string)($data['id'] ?? ""),
@@ -132,6 +137,9 @@ class Article {
         );
     }
 
+    /**
+     * @return callable
+     */
     public static function mapFromArray(): callable {
         return static function(array $data): self {
             return self::fromArray($data);

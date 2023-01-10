@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -106,7 +106,7 @@ class QueryArticleInfo extends Query {
      * @return static
      */
     public static function fromArray(array $data): self {
-        $data = $data['queryArticleInfo'];
+        $data = $data['articleInfo'];
 
         return new self(
             (string)($data['status'] ?? ''),

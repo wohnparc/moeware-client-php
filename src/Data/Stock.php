@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
@@ -22,6 +22,13 @@ class Stock {
      */
     private ?DateTime $expectedAt;
 
+    /**
+     * Stock constructor.
+     *
+     * @param Location $location
+     * @param int $quantity
+     * @param DateTime|null $expectedAt
+     */
     private function __construct(Location $location, int $quantity, ?DateTime $expectedAt) {
         $this->location = $location;
         $this->quantity = $quantity;
@@ -55,6 +62,11 @@ class Stock {
         return $this->expectedAt;
     }
 
+    /**
+     * @param array $data
+     *
+     * @return static
+     */
     public static function fromArray(array $data): self {
         return new self(
             Location::fromArray($data['location'] ?? []),
@@ -67,6 +79,9 @@ class Stock {
         );
     }
 
+    /**
+     * @return callable
+     */
     public static function mapFromArray(): callable {
         return static function(array $data): self {
             return self::fromArray($data);
