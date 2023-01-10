@@ -4,7 +4,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Wohnparc\\MoewareClient\\": "src/"
+            "Wohnparc\\Moeware\\": "src/"
         }
     },
     "authors": [
@@ -13,5 +13,7 @@
             "email": "dev@wohnparc.de"
         }
     ],
-    "require": {}
+    "require": {
+        "softonic/graphql-client": "^2.2"
+    }
 }
