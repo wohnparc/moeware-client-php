@@ -14,7 +14,6 @@
         }
     ],
     "require": {
-        "gmostafa/php-graphql-oqm": "^1.4",
         "softonic/graphql-client": "^2.2"
     }
 }
