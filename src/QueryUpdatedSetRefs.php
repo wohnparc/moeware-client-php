@@ -7,7 +7,7 @@ use DateTimeInterface;
 use Wohnparc\Moeware\Data\SetRef;
 use Wohnparc\Moeware\Util\Util;
 
-class QueryUpdatedSetRefs extends Query {
+final class QueryUpdatedSetRefs extends Query {
 
     /**
      * @var SetRef[]

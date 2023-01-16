@@ -5,7 +5,7 @@ namespace Wohnparc\Moeware\Data;
 use DateTime;
 use Wohnparc\Moeware\Util\Util;
 
-class Stock {
+final class Stock {
 
     /**
      * @var Location

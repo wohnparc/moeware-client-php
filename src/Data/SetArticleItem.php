@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class SetArticleItem {
+final class SetArticleItem {
 
     /**
      * @var ArticleRef

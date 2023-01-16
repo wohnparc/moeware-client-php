@@ -7,7 +7,7 @@ use DateTimeInterface;
 use Wohnparc\Moeware\Data\Article;
 use Wohnparc\Moeware\Data\ArticleRef;
 
-class QueryArticleInfo extends Query {
+final class QueryArticleInfo extends Query {
 
     /**
      * @var string

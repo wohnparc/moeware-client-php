@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware;
 
-class GraphQLError {
+final class GraphQLError {
 
     /**
      * @var string

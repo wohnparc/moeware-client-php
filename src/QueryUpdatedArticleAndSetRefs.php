@@ -8,7 +8,7 @@ use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Data\SetRef;
 use Wohnparc\Moeware\Util\Util;
 
-class QueryUpdatedArticleAndSetRefs extends Query {
+final class QueryUpdatedArticleAndSetRefs extends Query {
 
     /**
      * @var ArticleRef[]

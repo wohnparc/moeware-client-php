@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class Location {
+final class Location {
 
     /**
      * @var string

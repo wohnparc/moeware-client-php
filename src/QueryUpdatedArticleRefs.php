@@ -7,7 +7,7 @@ use DateTimeInterface;
 use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Util\Util;
 
-class QueryUpdatedArticleRefs extends Query {
+final class QueryUpdatedArticleRefs extends Query {
 
     /**
      * @var ArticleRef[]

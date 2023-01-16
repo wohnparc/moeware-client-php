@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class Article {
+final class Article {
 
     /**
      * @var string

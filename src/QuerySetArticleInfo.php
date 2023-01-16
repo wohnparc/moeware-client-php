@@ -5,7 +5,7 @@ namespace Wohnparc\Moeware;
 use Wohnparc\Moeware\Data\SetArticle;
 use Wohnparc\Moeware\Data\SetArticleRef;
 
-class QuerySetArticleInfo extends Query {
+final class QuerySetArticleInfo extends Query {
 
     /**
      * @var string
