@@ -9,14 +9,12 @@
       "email": "dev@wohnparc.de"
     }
   ],
-  "autoload": {
-    "psr-4": {
-      "Wohnparc\\Moeware\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
+  "config": {
+    "platform": {
+      "php": "7.4.33"
+    },
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
     }
   },
   "require": {
@@ -28,9 +26,14 @@
     "pestphp/pest": "^1.21",
     "phpstan/phpstan": "^1.4"
   },
-  "config": {
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
+  "autoload": {
+    "psr-4": {
+      "Wohnparc\\Moeware\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
     }
   }
 }
