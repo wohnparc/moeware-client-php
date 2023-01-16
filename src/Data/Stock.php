@@ -5,7 +5,7 @@ namespace Wohnparc\Moeware\Data;
 use DateTime;
 use Wohnparc\Moeware\Util\Util;
 
-class Stock {
+final class Stock {
 
     /**
      * @var Location
@@ -63,7 +63,7 @@ class Stock {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

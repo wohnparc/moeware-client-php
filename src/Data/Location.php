@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class Location {
+final class Location {
 
     /**
      * @var string
@@ -40,7 +40,7 @@ class Location {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

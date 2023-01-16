@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware;
 
-class GraphQLError {
+final class GraphQLError {
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class GraphQLError {
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     final public function getPath(): array
     {
@@ -50,7 +50,7 @@ class GraphQLError {
     //
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class Article {
+final class Article {
 
     /**
      * @var string
@@ -101,7 +101,7 @@ class Article {
     /**
      * Returns the current stock data of the article.
      *
-     * @return array
+     * @return Stock[]
      */
     final public function getStock(): array {
         return $this->stock;
@@ -118,7 +118,7 @@ class Article {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

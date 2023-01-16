@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class ArticleRef {
+final class ArticleRef {
 
     /**
      * @var int
@@ -51,7 +51,7 @@ class ArticleRef {
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     final public function toArray(): array {
         return [
@@ -61,7 +61,8 @@ class ArticleRef {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
+     *
      * @return static
      */
     public static function fromArray(array $data): self {

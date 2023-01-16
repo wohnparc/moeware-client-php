@@ -8,7 +8,7 @@ use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Data\SetRef;
 use Wohnparc\Moeware\Util\Util;
 
-class QueryUpdatedArticleAndSetRefs extends Query {
+final class QueryUpdatedArticleAndSetRefs extends Query {
 
     /**
      * @var ArticleRef[]
@@ -38,7 +38,8 @@ class QueryUpdatedArticleAndSetRefs extends Query {
     }
 
     /**
-     * @param array $errors
+     * @param array<string, mixed> $errors
+     *
      * @return static
      */
     public static function withErrors(array $errors): self {
@@ -72,7 +73,7 @@ class QueryUpdatedArticleAndSetRefs extends Query {
     //
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */
@@ -104,7 +105,7 @@ class QueryUpdatedArticleAndSetRefs extends Query {
     /**
      * @param DateTime $since
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public static function variables(DateTime $since): array {
         return [
