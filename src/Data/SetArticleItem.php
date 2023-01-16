@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class SetArticleItem {
+final class SetArticleItem {
 
     /**
      * @var ArticleRef
@@ -58,7 +58,7 @@ class SetArticleItem {
     //
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     final public function toArray(): array {
         return [
@@ -68,7 +68,7 @@ class SetArticleItem {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

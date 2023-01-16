@@ -5,7 +5,7 @@ namespace Wohnparc\Moeware;
 use Wohnparc\Moeware\Data\SetArticle;
 use Wohnparc\Moeware\Data\SetArticleRef;
 
-class QuerySetArticleInfo extends Query {
+final class QuerySetArticleInfo extends Query {
 
     /**
      * @var string
@@ -51,7 +51,8 @@ class QuerySetArticleInfo extends Query {
     }
 
     /**
-     * @param array $errors
+     * @param array<string, mixed> $errors
+     *
      * @return static
      */
     public static function withErrors(array $errors): self {
@@ -81,14 +82,14 @@ class QuerySetArticleInfo extends Query {
     }
 
     /**
-     * @return array
+     * @return SetArticle[]
      */
     final public function getSetArticles(): array {
         return $this->setArticles;
     }
 
     /**
-     * @return array
+     * @return SetArticle[]
      */
     final public function getInvalidSetArticles(): array {
         return $this->invalidSetArticles;
@@ -99,7 +100,7 @@ class QuerySetArticleInfo extends Query {
     //
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */
@@ -159,7 +160,7 @@ class QuerySetArticleInfo extends Query {
     /**
      * @param SetArticleRef[] $refs
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public static function variables(array $refs): array {
         return [
