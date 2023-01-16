@@ -40,7 +40,7 @@ final class Location {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

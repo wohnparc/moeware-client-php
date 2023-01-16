@@ -25,7 +25,8 @@ final class QueryUpdatedArticleRefs extends Query {
     }
 
     /**
-     * @param array $errors
+     * @param array<string, mixed> $errors
+     *
      * @return static
      */
     public static function withErrors(array $errors): self {
@@ -48,7 +49,7 @@ final class QueryUpdatedArticleRefs extends Query {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */
@@ -77,7 +78,7 @@ final class QueryUpdatedArticleRefs extends Query {
     /**
      * @param DateTime $since
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public static function variables(DateTime $since): array {
         return [

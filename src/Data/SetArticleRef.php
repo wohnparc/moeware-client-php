@@ -41,7 +41,7 @@ final class SetArticleRef {
     }
 
     /**
-     * @return array
+     * @return SetArticleItem[]
      */
     final public function getItems(): array {
         return $this->items;
@@ -52,7 +52,7 @@ final class SetArticleRef {
     //
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     final public function toArray(): array {
         return [

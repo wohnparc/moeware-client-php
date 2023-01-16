@@ -58,7 +58,7 @@ final class SetArticleItem {
     //
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     final public function toArray(): array {
         return [
@@ -68,7 +68,7 @@ final class SetArticleItem {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

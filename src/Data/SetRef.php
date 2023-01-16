@@ -67,7 +67,7 @@ final class SetRef {
     //
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     final public function toArray(): array {
         return [
@@ -77,7 +77,7 @@ final class SetRef {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

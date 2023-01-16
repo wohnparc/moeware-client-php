@@ -63,7 +63,7 @@ final class Stock {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

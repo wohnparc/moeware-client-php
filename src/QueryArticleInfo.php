@@ -53,7 +53,8 @@ final class QueryArticleInfo extends Query {
     }
 
     /**
-     * @param array $errors
+     * @param array<string, mixed> $errors
+     *
      * @return static
      */
     public static function withErrors(array $errors): self {
@@ -83,14 +84,14 @@ final class QueryArticleInfo extends Query {
     }
 
     /**
-     * @return array
+     * @return Article[]
      */
     final public function getArticles(): array {
         return $this->articles;
     }
 
     /**
-     * @return array
+     * @return ArticleRef[]
      */
     final public function getUnknownArticles(): array {
         return $this->unknownArticles;
@@ -101,7 +102,7 @@ final class QueryArticleInfo extends Query {
     //
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */
@@ -155,7 +156,7 @@ final class QueryArticleInfo extends Query {
     /**
      * @param ArticleRef[] $refs
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public static function variables(array $refs): array {
         return [

@@ -51,7 +51,7 @@ final class ArticleRef {
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     final public function toArray(): array {
         return [
@@ -61,7 +61,8 @@ final class ArticleRef {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
+     *
      * @return static
      */
     public static function fromArray(array $data): self {

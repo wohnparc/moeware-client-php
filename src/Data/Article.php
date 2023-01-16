@@ -101,7 +101,7 @@ final class Article {
     /**
      * Returns the current stock data of the article.
      *
-     * @return array
+     * @return Stock[]
      */
     final public function getStock(): array {
         return $this->stock;
@@ -118,7 +118,7 @@ final class Article {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

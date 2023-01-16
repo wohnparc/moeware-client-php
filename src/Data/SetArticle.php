@@ -45,7 +45,7 @@ final class SetArticle {
     }
 
     /**
-     * @return array
+     * @return SetArticleItem[]
      */
     final public function getItems(): array {
         return $this->items;
@@ -59,7 +59,7 @@ final class SetArticle {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */

@@ -38,7 +38,7 @@ final class GraphQLError {
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     final public function getPath(): array
     {
@@ -50,7 +50,7 @@ final class GraphQLError {
     //
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */
