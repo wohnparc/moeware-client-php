@@ -59,7 +59,7 @@ final class SetRef {
      * @return string
      */
     public function __toString(): string {
-        return "$this->baseID/" . str_pad($this->variantID, 2, "0", STR_PAD_LEFT);
+        return "$this->baseID/" . str_pad((string)$this->variantID, 2, "0", STR_PAD_LEFT);
     }
 
     //
