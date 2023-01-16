@@ -29,7 +29,7 @@ final class Stock {
      * @param int $quantity
      * @param DateTime|null $expectedAt
      */
-    private function __construct(Location $location, int $quantity, ?DateTime $expectedAt) {
+    public function __construct(Location $location, int $quantity, ?DateTime $expectedAt) {
         $this->location = $location;
         $this->quantity = $quantity;
         $this->expectedAt = $expectedAt;
