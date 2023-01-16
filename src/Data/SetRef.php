@@ -2,7 +2,7 @@
 
 namespace Wohnparc\Moeware\Data;
 
-class SetRef {
+final class SetRef {
 
     /**
      * @var int
@@ -59,7 +59,7 @@ class SetRef {
      * @return string
      */
     public function __toString(): string {
-        return "$this->baseID/" . str_pad($this->variantID, 2, "0", STR_PAD_LEFT);
+        return "$this->baseID/" . str_pad((string)$this->variantID, 2, "0", STR_PAD_LEFT);
     }
 
     //
@@ -67,7 +67,7 @@ class SetRef {
     //
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     final public function toArray(): array {
         return [
@@ -77,7 +77,7 @@ class SetRef {
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      */
