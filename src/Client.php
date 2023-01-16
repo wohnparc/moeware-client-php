@@ -130,21 +130,48 @@ class Client {
     }
 
     /**
+     * Executes a QuerySetArticleInfo request to the GraphQL API and returns a mapped object.
+     *
+     * Note: It automatically splits the SetArticleRef array input into chunks
+     * and performs multiple requests if necessary to prevent the response
+     * from being too big. The result will still be a single QuerySetArticleInfo
+     * object which contains the data from all the requests.
+     *
      * @param SetArticleRef[] $refs
      *
      * @return QuerySetArticleInfo
      */
     final public function querySetArticleInfo(array $refs): ?QuerySetArticleInfo {
-        $response = $this->client->query(
-            QuerySetArticleInfo::query(),
-            QuerySetArticleInfo::variables($refs),
-        );
+        $chunks = array_chunk($refs,1000);
 
-        if ($response->hasErrors()) {
-            return QuerySetArticleInfo::withErrors($response->getErrors());
+        /** @var QuerySetArticleInfo $lastResponse */
+        $lastResponse = [];
+
+        $setArticles = [];
+        $invalidSetArticles = [];
+
+        foreach ($chunks as $chunk) {
+            $response = $this->client->query(
+                QuerySetArticleInfo::query(),
+                QuerySetArticleInfo::variables($chunk),
+            );
+
+            if ($response->hasErrors()) {
+                return QuerySetArticleInfo::withErrors($response->getErrors());
+            }
+
+            $lastResponse = QuerySetArticleInfo::fromArray($response->getData());
+
+            $setArticles[] = $lastResponse->getSetArticles();
+            $invalidSetArticles[] = $lastResponse->getInvalidSetArticles();
         }
 
-        return QuerySetArticleInfo::fromArray($response->getData());
+        return new QuerySetArticleInfo(
+            $lastResponse->getStatus(),
+            $lastResponse->getMessage(),
+            array_merge(...$setArticles),
+            array_merge(...$invalidSetArticles),
+        );
     }
 
 }
