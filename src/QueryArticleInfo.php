@@ -10,26 +10,6 @@ use Wohnparc\Moeware\Data\ArticleRef;
 final class QueryArticleInfo extends Query {
 
     /**
-     * @var string
-     */
-    private string $status;
-
-    /**
-     * @var string
-     */
-    private string $message;
-
-    /**
-     * @var Article[]
-     */
-    private array $articles;
-
-    /**
-     * @var ArticleRef[]
-     */
-    private array $unknownArticles;
-
-    /**
      * GetArticleInfo constructor.
      *
      * @param string $status
@@ -38,18 +18,12 @@ final class QueryArticleInfo extends Query {
      * @param ArticleRef[] $unknownArticles
      */
     public function __construct(
-        string $status,
-        string $message,
-        array $articles,
-        array $unknownArticles
-    )
-    {
+        private string $status,
+        private string $message,
+        private array $articles,
+        private array $unknownArticles
+    ) {
         parent::__construct([]);
-
-        $this->status = $status;
-        $this->message = $message;
-        $this->articles = $articles;
-        $this->unknownArticles = $unknownArticles;
     }
 
     /**
@@ -72,28 +46,28 @@ final class QueryArticleInfo extends Query {
     /**
      * @return string
      */
-    final public function getStatus(): string {
+    public function getStatus(): string {
         return $this->status;
     }
 
     /**
      * @return string
      */
-    final public function getMessage(): string {
+    public function getMessage(): string {
         return $this->message;
     }
 
     /**
      * @return Article[]
      */
-    final public function getArticles(): array {
+    public function getArticles(): array {
         return $this->articles;
     }
 
     /**
      * @return ArticleRef[]
      */
-    final public function getUnknownArticles(): array {
+    public function getUnknownArticles(): array {
         return $this->unknownArticles;
     }
 

@@ -5,21 +5,6 @@ namespace Wohnparc\Moeware\Data;
 final class SetArticle {
 
     /**
-     * @var SetRef
-     */
-    private SetRef $set;
-
-    /**
-     * @var SetArticleItem[]
-     */
-    private array $items;
-
-    /**
-     * @var int|null
-     */
-    private ?int $calculatedInventoryPrice;
-
-    /**
      * SetArticle constructor.
      *
      * @param SetRef $set
@@ -27,36 +12,39 @@ final class SetArticle {
      * @param int|null $calculatedInventoryPrice
      */
     public function __construct(
-        SetRef $set,
-        array $items,
-        ?int $calculatedInventoryPrice
-    )
-    {
-        $this->set = $set;
-        $this->items = $items;
-        $this->calculatedInventoryPrice = $calculatedInventoryPrice;
-    }
+        private SetRef $set,
+        private array $items,
+        private ?int $calculatedInventoryPrice,
+    ) {}
+
+    //
+    // -- GETTER
+    //
 
     /**
      * @return SetRef
      */
-    final public function getSet(): SetRef {
+    public function getSet(): SetRef {
         return $this->set;
     }
 
     /**
      * @return SetArticleItem[]
      */
-    final public function getItems(): array {
+    public function getItems(): array {
         return $this->items;
     }
 
     /**
      * @return int|null
      */
-    final public function getCalculatedInventoryPrice(): ?int {
+    public function getCalculatedInventoryPrice(): ?int {
         return $this->calculatedInventoryPrice;
     }
+
+    //
+    // -- HELPER
+    //
 
     /**
      * @param array<string, mixed> $data
