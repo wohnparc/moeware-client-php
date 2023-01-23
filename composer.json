@@ -11,20 +11,20 @@
   ],
   "config": {
     "platform": {
-      "php": "7.4.33"
+      "php": "8.0.27"
     },
     "allow-plugins": {
       "pestphp/pest-plugin": true
     }
   },
   "require": {
-    "php": ">=7.4",
-    "softonic/graphql-client": "^1.3"
+    "php": ">=8.0",
+    "softonic/graphql-client": "^2.2.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5",
-    "pestphp/pest": "^1.21",
-    "phpstan/phpstan": "^1.4"
+    "phpunit/phpunit": "^9.5.28",
+    "pestphp/pest": "^v1.22.3",
+    "phpstan/phpstan": "^1.9.14"
   },
   "autoload": {
     "psr-4": {
