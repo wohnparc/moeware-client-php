@@ -1,5 +1,7 @@
 
-![php >= 8.0](https://img.shields.io/badge/php-%3E=_8.0-informational)
+![library version](https://img.shields.io/packagist/v/wohnparc/moeware-client)
+![php version](https://img.shields.io/packagist/dependency-v/wohnparc/moeware-client/php)
+![license](https://img.shields.io/packagist/l/wohnparc/moeware-client)
 
 # moeware-client-php
 
