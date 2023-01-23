@@ -45,7 +45,10 @@ final class ArticleRef {
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array{
+     *     baseID: int,
+     *     variantID: int,
+     * }
      */
     public function toArray(): array {
         return [
@@ -55,7 +58,10 @@ final class ArticleRef {
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     baseID: int,
+     *     variantID: int,
+     * } $data
      *
      * @return static
      */
@@ -67,20 +73,14 @@ final class ArticleRef {
     }
 
     /**
-     * @return callable
+     * @return callable(static): array{
+     *     baseID: int,
+     *     variantID: int,
+     * }
      */
     public static function mapToArray(): callable {
         return static function(self $self): array {
             return $self->toArray();
-        };
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
         };
     }
 

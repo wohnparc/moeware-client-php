@@ -45,7 +45,19 @@ class Client {
             return QueryUpdatedArticleRefs::withErrors($response->getErrors());
         }
 
-        return QueryUpdatedArticleRefs::fromArray($response->getData());
+        /**
+         * @var array{
+         *     queryUpdatedArticleRefs: array{
+         *         updatedArticleRefs: array{
+         *             baseID: int,
+         *             variantID: int,
+         *         },
+         *     }[],
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryUpdatedArticleRefs::fromArray($data);
     }
 
     /**
@@ -63,7 +75,19 @@ class Client {
             return QueryUpdatedSetRefs::withErrors($response->getErrors());
         }
 
-        return QueryUpdatedSetRefs::fromArray($response->getData());
+        /**
+         * @var array{
+         *     queryUpdatedSetRefs: array{
+         *         updatedSetRefs: array{
+         *             baseID: int,
+         *             variantID: int,
+         *         }[],
+         *     },
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryUpdatedSetRefs::fromArray($data);
     }
 
     /**
@@ -81,7 +105,21 @@ class Client {
             return QueryUpdatedArticleAndSetRefs::withErrors($response->getErrors());
         }
 
-        return QueryUpdatedArticleAndSetRefs::fromArray($response->getData());
+        /**
+         * @var array{
+         *     updatedArticleRefs: array{
+         *         baseID: int,
+         *         variantID: int,
+         *     }[],
+         *     updatedSetRefs: array{
+         *         baseID: int,
+         *         variantID: int,
+         *     }[],
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryUpdatedArticleAndSetRefs::fromArray($data);
     }
 
     /**
@@ -94,7 +132,7 @@ class Client {
      *
      * @param ArticleRef[] $refs
      *
-     * @return QueryArticleInfo
+     * @return QueryArticleInfo|null
      */
     final public function queryArticleInfo(array $refs): ?QueryArticleInfo {
         $chunks = array_chunk($refs,1000);
@@ -115,7 +153,39 @@ class Client {
                 return QueryArticleInfo::withErrors($response->getErrors());
             }
 
-            $lastResponse = QueryArticleInfo::fromArray($response->getData());
+            /**
+             * @var array{
+             *     articleInfo: array{
+             *         status: string,
+             *         message: ?string,
+             *         articles: array{
+             *             id: string,
+             *             ref: array{
+             *                 baseID: int,
+             *                 variantID: int,
+             *             },
+             *             title: string,
+             *             description: string,
+             *             stock: array{
+             *                 location: array{
+             *                     code: string,
+             *                     number: int,
+             *                 },
+             *                 quantity: int,
+             *                 expectedAt: ?string,
+             *             }[],
+             *             calculatedInventoryPrice: ?int,
+             *         }[],
+             *         unknownArticles: array{
+             *             baseID: int,
+             *             variantID: int,
+             *         }[],
+             *     },
+             * } $data
+             */
+            $data = $response->getData();
+
+            $lastResponse = QueryArticleInfo::fromArray($data);
 
             $articles[] = $lastResponse->getArticles();
             $unknownArticles[] = $lastResponse->getUnknownArticles();
@@ -139,7 +209,7 @@ class Client {
      *
      * @param SetArticleRef[] $refs
      *
-     * @return QuerySetArticleInfo
+     * @return QuerySetArticleInfo|null
      */
     final public function querySetArticleInfo(array $refs): ?QuerySetArticleInfo {
         $chunks = array_chunk($refs,1000);
@@ -160,7 +230,45 @@ class Client {
                 return QuerySetArticleInfo::withErrors($response->getErrors());
             }
 
-            $lastResponse = QuerySetArticleInfo::fromArray($response->getData());
+            /**
+             * @var array{
+             *     setArticleInfo: array{
+             *         status: string,
+             *         message: ?string,
+             *         setArticles: array{
+             *             set: array{
+             *                 baseID: int,
+             *                 variantID: int,
+             *             },
+             *             items: array{
+             *                 article: array{
+             *                     baseID: int,
+             *                     variantID: int,
+             *                 },
+             *                 numberOfPieces: int,
+             *             }[],
+             *             calculatedInventoryPrice: ?int,
+             *         }[],
+             *         invalidSetArticles: array{
+             *             set: array{
+             *                 baseID: int,
+             *                 variantID: int,
+             *             },
+             *             items: array{
+             *                 article: array{
+             *                     baseID: int,
+             *                     variantID: int,
+             *                 },
+             *                 numberOfPieces: int,
+             *             }[],
+             *             calculatedInventoryPrice: ?int,
+             *         }[],
+             *     },
+             * } $data
+             */
+            $data = $response->getData();
+
+            $lastResponse = QuerySetArticleInfo::fromArray($data);
 
             $setArticles[] = $lastResponse->getSetArticles();
             $invalidSetArticles[] = $lastResponse->getInvalidSetArticles();

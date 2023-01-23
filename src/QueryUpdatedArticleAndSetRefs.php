@@ -24,14 +24,17 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
     }
 
     /**
-     * @param array<string, mixed> $errors
+     * @param array<array{
+     *     message: string,
+     *     path: string[],
+     * }> $errors
      *
      * @return static
      */
     public static function withErrors(array $errors): self {
-        $self = self::fromArray([]);
+        $self = new self([], []);
 
-        $self->errors = array_map(GraphQLError::mapFromArray(), $errors);
+        $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
 
         return $self;
     }
@@ -59,14 +62,23 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     updatedArticleRefs: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     }[],
+     *     updatedSetRefs: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     }[],
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            array_map(ArticleRef::mapFromArray(), $data['updatedArticleRefs'] ?? []),
-            array_map(SetRef::mapFromArray(), $data['updatedSetRefs'] ?? []),
+            array_map([ArticleRef::class, 'fromArray'], $data['updatedArticleRefs']),
+            array_map([SetRef::class, 'fromArray'], $data['updatedSetRefs']),
         );
     }
 
@@ -91,7 +103,9 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
     /**
      * @param DateTime $since
      *
-     * @return array<string, mixed>
+     * @return array{
+     *     since: string,
+     * }
      */
     public static function variables(DateTime $since): array {
         return [

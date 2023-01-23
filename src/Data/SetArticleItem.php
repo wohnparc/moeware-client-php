@@ -44,7 +44,13 @@ final class SetArticleItem {
     //
 
     /**
-     * @return array<string, mixed>
+     * @return array{
+     *     article: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     numberOfPieces: int,
+     * }
      */
     public function toArray(): array {
         return [
@@ -54,33 +60,21 @@ final class SetArticleItem {
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     article: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     numberOfPieces: int,
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            ArticleRef::fromArray($data['article'] ?? []),
-            (int)($data['numberOfPieces'] ?? 0),
+            ArticleRef::fromArray($data['article']),
+            (int)($data['numberOfPieces']),
         );
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapToArray(): callable {
-        return static function(self $self): array {
-            return $self->toArray();
-        };
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
-        };
     }
 
 }

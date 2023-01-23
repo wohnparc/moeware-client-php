@@ -38,24 +38,18 @@ final class Location {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     code: string,
+     *     number: int,
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            (string)($data['code'] ?? ""),
-            (int)($data['number'] ?? 0)
+            (string)($data['code']),
+            (int)($data['number'])
         );
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
-        };
     }
 
 }

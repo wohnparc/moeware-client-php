@@ -36,29 +36,23 @@ final class GraphQLError {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     message: string,
+     *     path: string[],
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            (string)($data['message'] ?? ''),
+            (string)($data['message']),
             array_map(
                 static function ($data): string {
                     return (string)$data;
                 },
-                $data['path'] ?? [],
+                $data['path'],
             )
         );
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
-        };
     }
 
 }

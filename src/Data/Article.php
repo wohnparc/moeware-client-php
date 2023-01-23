@@ -87,32 +87,40 @@ final class Article {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     id: string,
+     *     ref: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     title: string,
+     *     description: string,
+     *     stock: array{
+     *         location: array{
+     *             code: string,
+     *             number: int,
+     *         },
+     *         quantity: int,
+     *         expectedAt: ?string,
+     *     }[],
+     *     calculatedInventoryPrice: ?int,
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            (string)($data['id'] ?? ""),
-            ArticleRef::fromArray($data['ref'] ?? []),
-            (string)($data['title'] ?? ""),
-            (string)($data['description'] ?? ""),
-            array_map(Stock::mapFromArray(), $data['stock'] ?? []),
+            (string)($data['id']),
+            ArticleRef::fromArray($data['ref']),
+            (string)($data['title']),
+            (string)($data['description']),
+            array_map([Stock::class, 'fromArray'], $data['stock']),
             (
                 isset($data['calculatedInventoryPrice'])
                     ? (int)$data['calculatedInventoryPrice']
                     : null
             ),
         );
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
-        };
     }
 
 }

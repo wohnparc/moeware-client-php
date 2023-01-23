@@ -56,29 +56,27 @@ final class Stock {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     location: array{
+     *         code: string,
+     *         number: int,
+     *     },
+     *     quantity: int,
+     *     expectedAt: ?string,
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            Location::fromArray($data['location'] ?? []),
-            (int)($data['quantity'] ?? 0),
+            Location::fromArray($data['location']),
+            (int)($data['quantity']),
             (
                 isset($data['expectedAt'])
                     ? Util::fromRawDate((string)$data['expectedAt'])
                     : null
             ),
         );
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
-        };
     }
 
 }
