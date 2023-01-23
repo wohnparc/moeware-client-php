@@ -55,8 +55,29 @@ final class SetArticleRef {
     public function toArray(): array {
         return [
             'set' => $this->set->toArray(),
-            'items' => array_map([SetArticleItem::class, 'toArray'], $this->items),
+            'items' => array_map(SetArticleItem::mapToArray(), $this->items),
         ];
+    }
+
+    /**
+     * @return callable(static): array{
+     *     set: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     items: array{
+     *         article: array{
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         numberOfPieces: int,
+     *     }[],
+     * }
+     */
+    public static function mapToArray(): callable {
+        return static function(self $self): array {
+            return $self->toArray();
+        };
     }
 
 }

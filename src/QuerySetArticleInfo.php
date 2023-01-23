@@ -192,7 +192,7 @@ final class QuerySetArticleInfo extends Query {
      */
     public static function variables(array $refs): array {
         return [
-            'refs' => array_map([SetArticleRef::class, 'toArray'], $refs),
+            'refs' => array_map(SetArticleRef::mapToArray(), $refs),
         ];
     }
 

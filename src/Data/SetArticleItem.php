@@ -77,4 +77,19 @@ final class SetArticleItem {
         );
     }
 
+    /**
+     * @return callable(static): array{
+     *     article: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     numberOfPieces: int,
+     * }
+     */
+    public static function mapToArray(): callable {
+        return static function(self $self): array {
+            return $self->toArray();
+        };
+    }
+
 }
