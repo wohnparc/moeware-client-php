@@ -1,0 +1,28 @@
+version: "3"
+
+tasks:
+
+  composer:
+    aliases: [ c ]
+    desc: "Install the composer dependencies."
+    cmds:
+      - composer install
+    sources:
+      - composer.json
+      - composer.lock
+    generates:
+      - ./vendor/**/*
+
+  scan:
+    aliases: [ s ]
+    desc: "Run the static code analysis."
+    deps: [ composer ]
+    cmds:
+      - ./vendor/bin/phpstan analyse --memory-limit 256M
+
+  test:
+    aliases: [ t ]
+    desc: "Run the unit tests."
+    deps: [ composer ]
+    cmds:
+      - ./vendor/bin/pest
