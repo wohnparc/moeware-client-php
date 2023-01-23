@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Util;
 
 use DateTime;
 use DateTimeInterface;
 
-class Util {
-
+class Util
+{
     /**
      * Returns the formatted string representation of the
      * given DateTime to be used in the GraphQL API.
@@ -15,7 +17,8 @@ class Util {
      *
      * @return string
      */
-    public static function toRawDate(DateTime $date): string {
+    public static function toRawDate(DateTime $date): string
+    {
         return $date->format(DateTimeInterface::RFC3339);
     }
 
@@ -27,8 +30,8 @@ class Util {
      *
      * @return DateTime
      */
-    public static function fromRawDate(string $raw): ?DateTime {
+    public static function fromRawDate(string $raw): ?DateTime
+    {
         return DateTime::createFromFormat(DateTimeInterface::RFC3339, $raw) ?: null;
     }
-
 }

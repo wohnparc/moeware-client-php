@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
 use Wohnparc\Moeware\Data\SetArticle;
 use Wohnparc\Moeware\Data\SetArticleRef;
 
-final class QuerySetArticleInfo extends Query {
-
+final class QuerySetArticleInfo extends Query
+{
     /**
      * GetSetArticleInfo constructor.
      *
@@ -32,7 +34,8 @@ final class QuerySetArticleInfo extends Query {
      *
      * @return static
      */
-    public static function withErrors(array $errors): self {
+    public static function withErrors(array $errors): self
+    {
         $self = new self('', null, [], []);
 
         $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
@@ -47,28 +50,32 @@ final class QuerySetArticleInfo extends Query {
     /**
      * @return string
      */
-    public function getStatus(): string {
+    public function getStatus(): string
+    {
         return $this->status;
     }
 
     /**
      * @return string|null
      */
-    public function getMessage(): ?string {
+    public function getMessage(): ?string
+    {
         return $this->message;
     }
 
     /**
      * @return SetArticle[]
      */
-    public function getSetArticles(): array {
+    public function getSetArticles(): array
+    {
         return $this->setArticles;
     }
 
     /**
      * @return SetArticle[]
      */
-    public function getInvalidSetArticles(): array {
+    public function getInvalidSetArticles(): array
+    {
         return $this->invalidSetArticles;
     }
 
@@ -114,7 +121,8 @@ final class QuerySetArticleInfo extends Query {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         $data = $data['setArticleInfo'];
 
         return new self(
@@ -132,7 +140,8 @@ final class QuerySetArticleInfo extends Query {
     /**
      * @return string
      */
-    public static function query(): string {
+    public static function query(): string
+    {
         return <<<'GQL'
         query querySetArticleInfo($refs: [InputSetArticleRef!]!) {
           setArticleInfo(refs: $refs) {
@@ -190,10 +199,10 @@ final class QuerySetArticleInfo extends Query {
      *     }[],
      * }
      */
-    public static function variables(array $refs): array {
+    public static function variables(array $refs): array
+    {
         return [
             'refs' => array_map(SetArticleRef::mapToArray(), $refs),
         ];
     }
-
 }

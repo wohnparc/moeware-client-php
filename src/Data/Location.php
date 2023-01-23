@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
-final class Location {
-
+final class Location
+{
     /**
      * Location constructor.
      *
@@ -13,7 +15,8 @@ final class Location {
     public function __construct(
         private string $code,
         private int $number,
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
@@ -22,14 +25,16 @@ final class Location {
     /**
      * @return string
      */
-    public function getCode(): string {
+    public function getCode(): string
+    {
         return $this->code;
     }
 
     /**
      * @return int
      */
-    public function getNumber(): int {
+    public function getNumber(): int
+    {
         return $this->number;
     }
 
@@ -45,11 +50,11 @@ final class Location {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         return new self(
             (string)($data['code']),
             (int)($data['number'])
         );
     }
-
 }

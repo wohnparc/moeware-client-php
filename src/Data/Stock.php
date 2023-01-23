@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
 use DateTime;
 use Wohnparc\Moeware\Util\Util;
 
-final class Stock {
-
+final class Stock
+{
     /**
      * Stock constructor.
      *
@@ -18,7 +20,8 @@ final class Stock {
         private Location $location,
         private int $quantity,
         private ?DateTime $expectedAt,
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
@@ -29,7 +32,8 @@ final class Stock {
      *
      * @return Location
      */
-    public function getLocation(): Location {
+    public function getLocation(): Location
+    {
         return $this->location;
     }
 
@@ -38,7 +42,8 @@ final class Stock {
      *
      * @return int
      */
-    public function getQuantity(): int {
+    public function getQuantity(): int
+    {
         return $this->quantity;
     }
 
@@ -47,7 +52,8 @@ final class Stock {
      *
      * @return DateTime|null
      */
-    public function getExpectedAt(): ?DateTime {
+    public function getExpectedAt(): ?DateTime
+    {
         return $this->expectedAt;
     }
 
@@ -67,7 +73,8 @@ final class Stock {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         return new self(
             Location::fromArray($data['location']),
             (int)($data['quantity']),
@@ -78,5 +85,4 @@ final class Stock {
             ),
         );
     }
-
 }

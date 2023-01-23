@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
-final class GraphQLError {
-
+final class GraphQLError
+{
     /**
      * Error constructor.
      *
@@ -13,7 +15,8 @@ final class GraphQLError {
     public function __construct(
         private string $message,
         private array $path
-    ) {}
+    ) {
+    }
 
     /**
      * @return string
@@ -43,7 +46,8 @@ final class GraphQLError {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         return new self(
             (string)($data['message']),
             array_map(
@@ -54,5 +58,4 @@ final class GraphQLError {
             )
         );
     }
-
 }

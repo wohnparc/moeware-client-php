@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
-final class Article {
-
+final class Article
+{
     /**
      * Article constructor.
      *
@@ -21,7 +23,8 @@ final class Article {
         private string $description,
         private array $stock,
         private ?int $calculatedInventoryPrice,
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
@@ -32,7 +35,8 @@ final class Article {
      *
      * @return string
      */
-    public function getId(): string {
+    public function getId(): string
+    {
         return $this->id;
     }
 
@@ -41,7 +45,8 @@ final class Article {
      *
      * @return ArticleRef
      */
-    public function getRef(): ArticleRef {
+    public function getRef(): ArticleRef
+    {
         return $this->ref;
     }
 
@@ -50,7 +55,8 @@ final class Article {
      *
      * @return string
      */
-    public function getTitle(): string {
+    public function getTitle(): string
+    {
         return $this->title;
     }
 
@@ -59,7 +65,8 @@ final class Article {
      *
      * @return string
      */
-    public function getDescription(): string {
+    public function getDescription(): string
+    {
         return $this->description;
     }
 
@@ -68,7 +75,8 @@ final class Article {
      *
      * @return Stock[]
      */
-    public function getStock(): array {
+    public function getStock(): array
+    {
         return $this->stock;
     }
 
@@ -78,7 +86,8 @@ final class Article {
      *
      * @return int|null
      */
-    public function getCalculatedInventoryPrice(): ?int {
+    public function getCalculatedInventoryPrice(): ?int
+    {
         return $this->calculatedInventoryPrice;
     }
 
@@ -108,7 +117,8 @@ final class Article {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         return new self(
             (string)($data['id']),
             ArticleRef::fromArray($data['ref']),
@@ -122,5 +132,4 @@ final class Article {
             ),
         );
     }
-
 }

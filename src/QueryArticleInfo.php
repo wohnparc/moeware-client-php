@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -7,8 +9,8 @@ use DateTimeInterface;
 use Wohnparc\Moeware\Data\Article;
 use Wohnparc\Moeware\Data\ArticleRef;
 
-final class QueryArticleInfo extends Query {
-
+final class QueryArticleInfo extends Query
+{
     /**
      * GetArticleInfo constructor.
      *
@@ -34,7 +36,8 @@ final class QueryArticleInfo extends Query {
      *
      * @return static
      */
-    public static function withErrors(array $errors): self {
+    public static function withErrors(array $errors): self
+    {
         $self = new self('', null, [], []);
 
         $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
@@ -49,28 +52,32 @@ final class QueryArticleInfo extends Query {
     /**
      * @return string
      */
-    public function getStatus(): string {
+    public function getStatus(): string
+    {
         return $this->status;
     }
 
     /**
      * @return string|null
      */
-    public function getMessage(): ?string {
+    public function getMessage(): ?string
+    {
         return $this->message;
     }
 
     /**
      * @return Article[]
      */
-    public function getArticles(): array {
+    public function getArticles(): array
+    {
         return $this->articles;
     }
 
     /**
      * @return ArticleRef[]
      */
-    public function getUnknownArticles(): array {
+    public function getUnknownArticles(): array
+    {
         return $this->unknownArticles;
     }
 
@@ -110,7 +117,8 @@ final class QueryArticleInfo extends Query {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         $data = $data['articleInfo'];
 
         return new self(
@@ -128,7 +136,8 @@ final class QueryArticleInfo extends Query {
     /**
      * @return string
      */
-    public static function query(): string {
+    public static function query(): string
+    {
         return <<<'GQL'
         query queryArticleInfo($refs: [InputArticleRef!]!) {
           articleInfo(refs: $refs) {
@@ -171,10 +180,10 @@ final class QueryArticleInfo extends Query {
      *     }[],
      * }
      */
-    public static function variables(array $refs): array {
+    public static function variables(array $refs): array
+    {
         return [
             'refs' => array_map(ArticleRef::mapToArray(), $refs),
         ];
     }
-
 }
