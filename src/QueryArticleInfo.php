@@ -13,13 +13,13 @@ final class QueryArticleInfo extends Query {
      * GetArticleInfo constructor.
      *
      * @param string $status
-     * @param string $message
+     * @param string|null $message
      * @param Article[] $articles
      * @param ArticleRef[] $unknownArticles
      */
     public function __construct(
         private string $status,
-        private string $message,
+        private ?string $message,
         private array $articles,
         private array $unknownArticles
     ) {
@@ -27,14 +27,17 @@ final class QueryArticleInfo extends Query {
     }
 
     /**
-     * @param array<string, mixed> $errors
+     * @param array<array{
+     *     message: string,
+     *     path: string[],
+     * }> $errors
      *
      * @return static
      */
     public static function withErrors(array $errors): self {
-        $self = self::fromArray([]);
+        $self = new self('', null, [], []);
 
-        $self->errors = array_map(GraphQLError::mapFromArray(), $errors);
+        $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
 
         return $self;
     }
@@ -51,9 +54,9 @@ final class QueryArticleInfo extends Query {
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMessage(): string {
+    public function getMessage(): ?string {
         return $this->message;
     }
 
@@ -76,7 +79,34 @@ final class QueryArticleInfo extends Query {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     articleInfo: array{
+     *         status: string,
+     *         message: ?string,
+     *         articles: array{
+     *             id: string,
+     *             ref: array{
+     *                 baseID: int,
+     *                 variantID: int,
+     *             },
+     *             title: string,
+     *             description: string,
+     *             stock: array{
+     *                 location: array{
+     *                     code: string,
+     *                     number: int,
+     *                 },
+     *                 quantity: int,
+     *                 expectedAt: ?string,
+     *             }[],
+     *             calculatedInventoryPrice: ?int,
+     *         }[],
+     *         unknownArticles: array{
+     *             baseID: int,
+     *             variantID: int,
+     *         }[],
+     *     },
+     * } $data
      *
      * @return static
      */
@@ -84,10 +114,14 @@ final class QueryArticleInfo extends Query {
         $data = $data['articleInfo'];
 
         return new self(
-            (string)($data['status'] ?? ''),
-            (string)($data['message'] ?? ''),
-            array_map(Article::mapFromArray(), $data['articles'] ?? []),
-            array_map(ArticleRef::mapFromArray(), $data['unknownArticles'] ?? []),
+            (string)($data['status']),
+            (
+                $data['message']
+                    ? (string)$data['message']
+                    : null
+            ),
+            array_map([Article::class, 'fromArray'], $data['articles']),
+            array_map([ArticleRef::class, 'fromArray'], $data['unknownArticles']),
         );
     }
 
@@ -130,7 +164,12 @@ final class QueryArticleInfo extends Query {
     /**
      * @param ArticleRef[] $refs
      *
-     * @return array<string, mixed>
+     * @return array{
+     *     refs: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     }[],
+     * }
      */
     public static function variables(array $refs): array {
         return [

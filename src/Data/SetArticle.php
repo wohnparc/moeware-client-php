@@ -47,29 +47,33 @@ final class SetArticle {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     set: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     items: array{
+     *         article: array{
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         numberOfPieces: int,
+     *     }[],
+     *     calculatedInventoryPrice: ?int,
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            SetRef::fromArray($data['set'] ?? []),
-            array_map(SetArticleItem::mapFromArray(), $data['items'] ?? []),
+            SetRef::fromArray($data['set']),
+            array_map([SetArticleItem::class, 'fromArray'], $data['items']),
             (
                 isset($data['calculatedInventoryPrice'])
                     ? (int)$data['calculatedInventoryPrice']
                     : null
             ),
         );
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
-        };
     }
 
 }

@@ -53,7 +53,10 @@ final class SetRef {
     //
 
     /**
-     * @return array<string, mixed>
+     * @return array{
+     *     baseID: int,
+     *     variantID: int,
+     * }
      */
     public function toArray(): array {
         return [
@@ -63,24 +66,18 @@ final class SetRef {
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     baseID: int,
+     *     variantID: int,
+     * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self {
         return new self(
-            (int)($data['baseID'] ?? 0),
-            (int)($data['variantID'] ?? 0),
+            (int)($data['baseID']),
+            (int)($data['variantID']),
         );
-    }
-
-    /**
-     * @return callable
-     */
-    public static function mapFromArray(): callable {
-        return static function(array $data): self {
-            return self::fromArray($data);
-        };
     }
 
 }

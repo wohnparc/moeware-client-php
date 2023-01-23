@@ -11,13 +11,13 @@ final class QuerySetArticleInfo extends Query {
      * GetSetArticleInfo constructor.
      *
      * @param string $status
-     * @param string $message
+     * @param string|null $message
      * @param SetArticle[] $setArticles
      * @param SetArticle[] $invalidSetArticles
      */
     public function __construct(
         private string $status,
-        private string $message,
+        private ?string $message,
         private array $setArticles,
         private array $invalidSetArticles
     ) {
@@ -25,14 +25,17 @@ final class QuerySetArticleInfo extends Query {
     }
 
     /**
-     * @param array<string, mixed> $errors
+     * @param array<array{
+     *     message: string,
+     *     path: string[],
+     * }> $errors
      *
      * @return static
      */
     public static function withErrors(array $errors): self {
-        $self = self::fromArray([]);
+        $self = new self('', null, [], []);
 
-        $self->errors = array_map(GraphQLError::mapFromArray(), $errors);
+        $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
 
         return $self;
     }
@@ -49,9 +52,9 @@ final class QuerySetArticleInfo extends Query {
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMessage(): string {
+    public function getMessage(): ?string {
         return $this->message;
     }
 
@@ -74,7 +77,40 @@ final class QuerySetArticleInfo extends Query {
     //
 
     /**
-     * @param array<string, mixed> $data
+     * @param array{
+     *     setArticleInfo: array{
+     *         status: string,
+     *         message: ?string,
+     *         setArticles: array{
+     *             set: array{
+     *                 baseID: int,
+     *                 variantID: int,
+     *             },
+     *             items: array{
+     *                 article: array{
+     *                     baseID: int,
+     *                     variantID: int,
+     *                 },
+     *                 numberOfPieces: int,
+     *             }[],
+     *             calculatedInventoryPrice: ?int,
+     *         }[],
+     *         invalidSetArticles: array{
+     *             set: array{
+     *                 baseID: int,
+     *                 variantID: int,
+     *             },
+     *             items: array{
+     *                 article: array{
+     *                     baseID: int,
+     *                     variantID: int,
+     *                 },
+     *                 numberOfPieces: int,
+     *             }[],
+     *             calculatedInventoryPrice: ?int,
+     *         }[],
+     *     },
+     * } $data
      *
      * @return static
      */
@@ -82,10 +118,14 @@ final class QuerySetArticleInfo extends Query {
         $data = $data['setArticleInfo'];
 
         return new self(
-            (string)($data['status'] ?? ''),
-            (string)($data['message'] ?? ''),
-            array_map(SetArticle::mapFromArray(), $data['setArticles'] ?? []),
-            array_map(SetArticle::mapFromArray(), $data['invalidSetArticles'] ?? []),
+            (string)($data['status']),
+            (
+                $data['message']
+                    ? (string)$data['message']
+                    : null
+            ),
+            array_map([SetArticle::class, 'fromArray'], $data['setArticles']),
+            array_map([SetArticle::class, 'fromArray'], $data['invalidSetArticles']),
         );
     }
 
@@ -134,7 +174,21 @@ final class QuerySetArticleInfo extends Query {
     /**
      * @param SetArticleRef[] $refs
      *
-     * @return array<string, mixed>
+     * @return array{
+     *     refs: array{
+     *         set: array{
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         items: array{
+     *             article: array{
+     *                 baseID: int,
+     *                 variantID: int,
+     *             },
+     *             numberOfPieces: int,
+     *         }[],
+     *     }[],
+     * }
      */
     public static function variables(array $refs): array {
         return [

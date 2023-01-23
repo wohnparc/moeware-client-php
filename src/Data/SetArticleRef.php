@@ -38,7 +38,19 @@ final class SetArticleRef {
     //
 
     /**
-     * @return array<string, mixed>
+     * @return array{
+     *     set: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     items: array{
+     *         article: array{
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         numberOfPieces: int,
+     *     }[],
+     * }
      */
     public function toArray(): array {
         return [
@@ -48,7 +60,19 @@ final class SetArticleRef {
     }
 
     /**
-     * @return callable
+     * @return callable(static): array{
+     *     set: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     items: array{
+     *         article: array{
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         numberOfPieces: int,
+     *     }[],
+     * }
      */
     public static function mapToArray(): callable {
         return static function(self $self): array {
