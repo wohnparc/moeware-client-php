@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -8,8 +10,8 @@ use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Data\SetRef;
 use Wohnparc\Moeware\Util\Util;
 
-final class QueryUpdatedArticleAndSetRefs extends Query {
-
+final class QueryUpdatedArticleAndSetRefs extends Query
+{
     /**
      * QueryUpdatedArticleAndSetRefs constructor.
      *
@@ -31,7 +33,8 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
      *
      * @return static
      */
-    public static function withErrors(array $errors): self {
+    public static function withErrors(array $errors): self
+    {
         $self = new self([], []);
 
         $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
@@ -46,14 +49,16 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
     /**
      * @return ArticleRef[]
      */
-    public function getArticleRefs(): array {
+    public function getArticleRefs(): array
+    {
         return $this->articleRefs;
     }
 
     /**
      * @return SetRef[]
      */
-    public function getSetRefs(): array {
+    public function getSetRefs(): array
+    {
         return $this->setRefs;
     }
 
@@ -75,7 +80,8 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         return new self(
             array_map([ArticleRef::class, 'fromArray'], $data['updatedArticleRefs']),
             array_map([SetRef::class, 'fromArray'], $data['updatedSetRefs']),
@@ -85,7 +91,8 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
     /**
      * @return string
      */
-    public static function query(): string {
+    public static function query(): string
+    {
         return <<<'GQL'
         query queryUpdatedArticleAndSetRefs($since: Time!) {
           updatedArticleRefs(since: $since) {
@@ -107,10 +114,10 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
      *     since: string,
      * }
      */
-    public static function variables(DateTime $since): array {
+    public static function variables(DateTime $since): array
+    {
         return [
             'since' => Util::toRawDate($since),
         ];
     }
-
 }

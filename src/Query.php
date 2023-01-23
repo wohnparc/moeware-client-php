@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
-abstract class Query {
-
+abstract class Query
+{
     /**
      * Query constructor.
      *
@@ -11,7 +13,8 @@ abstract class Query {
      */
     protected function __construct(
         protected array $errors
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
@@ -22,15 +25,16 @@ abstract class Query {
      *
      * @return GraphQLError[]
      */
-    final public function getErrors(): array {
+    final public function getErrors(): array
+    {
         return $this->errors;
     }
 
     /**
      * @return bool
      */
-    final public function hasErrors(): bool {
+    final public function hasErrors(): bool
+    {
         return count($this->errors) > 0;
     }
-
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -6,8 +8,8 @@ use DateTime;
 use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Util\Util;
 
-final class QueryUpdatedArticleRefs extends Query {
-
+final class QueryUpdatedArticleRefs extends Query
+{
     /**
      * @param ArticleRef[] $articleRefs
      */
@@ -25,7 +27,8 @@ final class QueryUpdatedArticleRefs extends Query {
      *
      * @return static
      */
-    public static function withErrors(array $errors): self {
+    public static function withErrors(array $errors): self
+    {
         $self = new self([]);
 
         $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
@@ -40,7 +43,8 @@ final class QueryUpdatedArticleRefs extends Query {
     /**
      * @return ArticleRef[]
      */
-    public function getArticleRefs(): array {
+    public function getArticleRefs(): array
+    {
         return $this->articleRefs;
     }
 
@@ -60,7 +64,8 @@ final class QueryUpdatedArticleRefs extends Query {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         $data = $data['queryUpdatedArticleRefs'];
 
         return new self(
@@ -71,7 +76,8 @@ final class QueryUpdatedArticleRefs extends Query {
     /**
      * @return string
      */
-    public static function query(): string {
+    public static function query(): string
+    {
         return <<<'GQL'
         query queryUpdatedArticleRefs($since: Time!) {
           updatedArticleRefs(since: $since) {
@@ -89,10 +95,10 @@ final class QueryUpdatedArticleRefs extends Query {
      *     since: string,
      * }
      */
-    public static function variables(DateTime $since): array {
+    public static function variables(DateTime $since): array
+    {
         return [
             'since' => Util::toRawDate($since),
         ];
     }
-
 }

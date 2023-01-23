@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
-final class ArticleRef {
-
+final class ArticleRef
+{
     /**
      * ArticleRef constructor.
      *
@@ -13,7 +15,8 @@ final class ArticleRef {
     public function __construct(
         private int $baseID,
         private int $variantID,
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
@@ -22,14 +25,16 @@ final class ArticleRef {
     /**
      * @return int
      */
-    public function getBaseID(): int {
+    public function getBaseID(): int
+    {
         return $this->baseID;
     }
 
     /**
      * @return int
      */
-    public function getVariantID(): int {
+    public function getVariantID(): int
+    {
         return $this->variantID;
     }
 
@@ -40,7 +45,8 @@ final class ArticleRef {
     /**
      * @return string
      */
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return "$this->baseID/" . str_pad((string)$this->variantID, 2, "0", STR_PAD_LEFT);
     }
 
@@ -50,7 +56,8 @@ final class ArticleRef {
      *     variantID: int,
      * }
      */
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
             'baseID' => $this->baseID,
             'variantID' => $this->variantID,
@@ -65,7 +72,8 @@ final class ArticleRef {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         return new self(
             (int) $data['baseID'],
             (int) $data['variantID']
@@ -78,10 +86,10 @@ final class ArticleRef {
      *     variantID: int,
      * }
      */
-    public static function mapToArray(): callable {
-        return static function(self $self): array {
+    public static function mapToArray(): callable
+    {
+        return static function (self $self): array {
             return $self->toArray();
         };
     }
-
 }

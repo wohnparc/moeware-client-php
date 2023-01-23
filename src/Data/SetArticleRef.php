@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
-final class SetArticleRef {
-
+final class SetArticleRef
+{
     /**
      * SetArticleRef constructor.
      *
@@ -13,7 +15,8 @@ final class SetArticleRef {
     public function __construct(
         private SetRef $set,
         private array $items,
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
@@ -22,14 +25,16 @@ final class SetArticleRef {
     /**
      * @return SetRef
      */
-    public function getSet(): SetRef {
+    public function getSet(): SetRef
+    {
         return $this->set;
     }
 
     /**
      * @return SetArticleItem[]
      */
-    public function getItems(): array {
+    public function getItems(): array
+    {
         return $this->items;
     }
 
@@ -52,7 +57,8 @@ final class SetArticleRef {
      *     }[],
      * }
      */
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
             'set' => $this->set->toArray(),
             'items' => array_map(SetArticleItem::mapToArray(), $this->items),
@@ -74,10 +80,10 @@ final class SetArticleRef {
      *     }[],
      * }
      */
-    public static function mapToArray(): callable {
-        return static function(self $self): array {
+    public static function mapToArray(): callable
+    {
+        return static function (self $self): array {
             return $self->toArray();
         };
     }
-
 }

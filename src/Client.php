@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -8,8 +10,8 @@ use Softonic\GraphQL\Client as GQLClient;
 use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Data\SetArticleRef;
 
-class Client {
-
+class Client
+{
     /**
      * @var GQLClient
      */
@@ -21,7 +23,8 @@ class Client {
      * @param string $endpoint
      * @param string $api_key
      */
-    public function __construct(string $endpoint, string $api_key) {
+    public function __construct(string $endpoint, string $api_key)
+    {
         $this->client = ClientBuilder::build($endpoint, [
             'timeout' => 0,
             'headers' => [
@@ -35,7 +38,8 @@ class Client {
      *
      * @return QueryUpdatedArticleRefs|null
      */
-    final public function queryUpdatedArticleRefs(DateTime $since): ?QueryUpdatedArticleRefs {
+    final public function queryUpdatedArticleRefs(DateTime $since): ?QueryUpdatedArticleRefs
+    {
         $response = $this->client->query(
             QueryUpdatedArticleRefs::query(),
             QueryUpdatedArticleRefs::variables($since),
@@ -65,7 +69,8 @@ class Client {
      *
      * @return QueryUpdatedSetRefs|null
      */
-    final public function queryUpdatedSetRefs(DateTime $since): ?QueryUpdatedSetRefs {
+    final public function queryUpdatedSetRefs(DateTime $since): ?QueryUpdatedSetRefs
+    {
         $response = $this->client->query(
             QueryUpdatedSetRefs::query(),
             QueryUpdatedSetRefs::variables($since),
@@ -95,7 +100,8 @@ class Client {
      *
      * @return QueryUpdatedArticleAndSetRefs|null
      */
-    final public function queryUpdatedArticleAndSetRefs(DateTime $since): ?QueryUpdatedArticleAndSetRefs {
+    final public function queryUpdatedArticleAndSetRefs(DateTime $since): ?QueryUpdatedArticleAndSetRefs
+    {
         $response = $this->client->query(
             QueryUpdatedArticleAndSetRefs::query(),
             QueryUpdatedArticleAndSetRefs::variables($since),
@@ -134,8 +140,9 @@ class Client {
      *
      * @return QueryArticleInfo|null
      */
-    final public function queryArticleInfo(array $refs): ?QueryArticleInfo {
-        $chunks = array_chunk($refs,1000);
+    final public function queryArticleInfo(array $refs): ?QueryArticleInfo
+    {
+        $chunks = array_chunk($refs, 1000);
 
         /** @var QueryArticleInfo $lastResponse */
         $lastResponse = [];
@@ -211,8 +218,9 @@ class Client {
      *
      * @return QuerySetArticleInfo|null
      */
-    final public function querySetArticleInfo(array $refs): ?QuerySetArticleInfo {
-        $chunks = array_chunk($refs,1000);
+    final public function querySetArticleInfo(array $refs): ?QuerySetArticleInfo
+    {
+        $chunks = array_chunk($refs, 1000);
 
         /** @var QuerySetArticleInfo $lastResponse */
         $lastResponse = [];
@@ -281,5 +289,4 @@ class Client {
             array_merge(...$invalidSetArticles),
         );
     }
-
 }

@@ -13,16 +13,23 @@ tasks:
     generates:
       - ./vendor/**/*
 
+  format:
+    aliases: [ f ]
+    desc: "Format the source code."
+    deps: [ composer ]
+    cmds:
+      - ./vendor/bin/php-cs-fixer fix src
+
   scan:
     aliases: [ s ]
     desc: "Run the static code analysis."
-    deps: [ composer ]
+    deps: [ format ]
     cmds:
       - ./vendor/bin/phpstan analyse --memory-limit 256M
 
   test:
     aliases: [ t ]
     desc: "Run the unit tests."
-    deps: [ composer ]
+    deps: [ scan ]
     cmds:
       - ./vendor/bin/pest

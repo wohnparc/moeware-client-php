@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
@@ -7,8 +9,8 @@ use DateTimeInterface;
 use Wohnparc\Moeware\Data\SetRef;
 use Wohnparc\Moeware\Util\Util;
 
-final class QueryUpdatedSetRefs extends Query {
-
+final class QueryUpdatedSetRefs extends Query
+{
     /**
      * QueryUpdatedSetRefs constructor.
      *
@@ -28,7 +30,8 @@ final class QueryUpdatedSetRefs extends Query {
      *
      * @return static
      */
-    public static function withErrors(array $errors): self {
+    public static function withErrors(array $errors): self
+    {
         $self = new self([]);
 
         $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
@@ -43,7 +46,8 @@ final class QueryUpdatedSetRefs extends Query {
     /**
      * @return SetRef[]
      */
-    public function getSetRefs(): array {
+    public function getSetRefs(): array
+    {
         return $this->setRefs;
     }
 
@@ -63,7 +67,8 @@ final class QueryUpdatedSetRefs extends Query {
      *
      * @return static
      */
-    public static function fromArray(array $data): self {
+    public static function fromArray(array $data): self
+    {
         $data = $data['queryUpdatedSetRefs'];
 
         return new self(
@@ -74,7 +79,8 @@ final class QueryUpdatedSetRefs extends Query {
     /**
      * @return string
      */
-    public static function query(): string {
+    public static function query(): string
+    {
         return <<<'GQL'
         query queryUpdatedSetRefs($since: Time!) {
           updatedSetRefs(since: $since) {
@@ -92,10 +98,10 @@ final class QueryUpdatedSetRefs extends Query {
      *     since: string,
      * }
      */
-    public static function variables(DateTime $since): array {
+    public static function variables(DateTime $since): array
+    {
         return [
             'since' => Util::toRawDate($since),
         ];
     }
-
 }
