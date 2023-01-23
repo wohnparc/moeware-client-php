@@ -1,5 +1,5 @@
 
-![php 7.4](https://img.shields.io/badge/php-7.4-informational)
+![php >= 8.0](https://img.shields.io/badge/php-%3E=_8.0-informational)
 
 # moeware-client-php
 
