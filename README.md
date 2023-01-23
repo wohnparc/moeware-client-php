@@ -1,7 +1,7 @@
 
-![library version](https://img.shields.io/packagist/v/wohnparc/moeware-client)
-![php version](https://img.shields.io/packagist/dependency-v/wohnparc/moeware-client/php)
-![license](https://img.shields.io/packagist/l/wohnparc/moeware-client)
+[![library version](https://img.shields.io/packagist/v/wohnparc/moeware-client)](https://packagist.org/packages/wohnparc/moeware-client)
+[![php version](https://img.shields.io/packagist/dependency-v/wohnparc/moeware-client/php)](https://www.php.net/releases/index.php)
+[![license](https://img.shields.io/packagist/l/wohnparc/moeware-client)](.)
 
 # moeware-client-php
 
