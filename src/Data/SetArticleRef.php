@@ -5,29 +5,15 @@ namespace Wohnparc\Moeware\Data;
 final class SetArticleRef {
 
     /**
-     * @var SetRef
-     */
-    private SetRef $set;
-
-    /**
-     * @var SetArticleItem[]
-     */
-    private array $items;
-
-    /**
      * SetArticleRef constructor.
      *
      * @param SetRef $set
      * @param SetArticleItem[] $items
      */
     public function __construct(
-        SetRef $set,
-        array $items
-    )
-    {
-        $this->set = $set;
-        $this->items = $items;
-    }
+        private SetRef $set,
+        private array $items,
+    ) {}
 
     //
     // -- GETTER
@@ -36,14 +22,14 @@ final class SetArticleRef {
     /**
      * @return SetRef
      */
-    final public function getSet(): SetRef {
+    public function getSet(): SetRef {
         return $this->set;
     }
 
     /**
      * @return SetArticleItem[]
      */
-    final public function getItems(): array {
+    public function getItems(): array {
         return $this->items;
     }
 
@@ -54,7 +40,7 @@ final class SetArticleRef {
     /**
      * @return array<string, mixed>
      */
-    final public function toArray(): array {
+    public function toArray(): array {
         return [
             'set' => $this->set->toArray(),
             'items' => array_map(SetArticleItem::mapToArray(), $this->items),

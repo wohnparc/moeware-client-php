@@ -5,34 +5,20 @@ namespace Wohnparc\Moeware;
 final class GraphQLError {
 
     /**
-     * @var string
-     */
-    private string $message;
-
-    /**
-     * @var string[]
-     */
-    private array $path;
-
-    /**
      * Error constructor.
      *
      * @param string $message
      * @param string[] $path
      */
     public function __construct(
-        string $message,
-        array $path
-    )
-    {
-        $this->message = $message;
-        $this->path = $path;
-    }
+        private string $message,
+        private array $path
+    ) {}
 
     /**
      * @return string
      */
-    final public function getMessage(): string
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -40,7 +26,7 @@ final class GraphQLError {
     /**
      * @return string[]
      */
-    final public function getPath(): array
+    public function getPath(): array
     {
         return $this->path;
     }

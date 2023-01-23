@@ -5,29 +5,15 @@ namespace Wohnparc\Moeware\Data;
 final class SetRef {
 
     /**
-     * @var int
-     */
-    private int $baseID;
-
-    /**
-     * @var int
-     */
-    private int $variantID;
-
-    /**
      * SetRef constructor.
      *
      * @param int $baseID
      * @param int $variantID
      */
     public function __construct(
-        int $baseID,
-        int $variantID
-    )
-    {
-        $this->baseID = $baseID;
-        $this->variantID = $variantID;
-    }
+        private int $baseID,
+        private int $variantID,
+    ) {}
 
     //
     // -- GETTER
@@ -38,7 +24,7 @@ final class SetRef {
      *
      * @return int
      */
-    final public function getBaseID(): int {
+    public function getBaseID(): int {
         return $this->baseID;
     }
 
@@ -47,7 +33,7 @@ final class SetRef {
      *
      * @return int
      */
-    final public function getVariantID(): int {
+    public function getVariantID(): int {
         return $this->variantID;
     }
 
@@ -69,7 +55,7 @@ final class SetRef {
     /**
      * @return array<string, mixed>
      */
-    final public function toArray(): array {
+    public function toArray(): array {
         return [
             'baseID' => $this->baseID,
             'variantID' => $this->variantID,

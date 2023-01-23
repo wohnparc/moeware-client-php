@@ -5,39 +5,37 @@ namespace Wohnparc\Moeware\Data;
 final class Location {
 
     /**
-     * @var string
-     */
-    private string $code;
-
-    /**
-     * @var int
-     */
-    private int $number;
-
-    /**
      * Location constructor.
      *
      * @param string $code
      * @param int $number
      */
-    public function __construct(string $code, int $number) {
-        $this->code = $code;
-        $this->number = $number;
-    }
+    public function __construct(
+        private string $code,
+        private int $number,
+    ) {}
+
+    //
+    // -- GETTER
+    //
 
     /**
      * @return string
      */
-    final public function getCode(): string {
+    public function getCode(): string {
         return $this->code;
     }
 
     /**
      * @return int
      */
-    final public function getNumber(): int {
+    public function getNumber(): int {
         return $this->number;
     }
+
+    //
+    // -- HELPER
+    //
 
     /**
      * @param array<string, mixed> $data

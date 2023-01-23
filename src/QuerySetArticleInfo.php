@@ -8,26 +8,6 @@ use Wohnparc\Moeware\Data\SetArticleRef;
 final class QuerySetArticleInfo extends Query {
 
     /**
-     * @var string
-     */
-    private string $status;
-
-    /**
-     * @var string
-     */
-    private string $message;
-
-    /**
-     * @var SetArticle[]
-     */
-    private array $setArticles;
-
-    /**
-     * @var SetArticle[]
-     */
-    private array $invalidSetArticles;
-
-    /**
      * GetSetArticleInfo constructor.
      *
      * @param string $status
@@ -36,18 +16,12 @@ final class QuerySetArticleInfo extends Query {
      * @param SetArticle[] $invalidSetArticles
      */
     public function __construct(
-        string $status,
-        string $message,
-        array $setArticles,
-        array $invalidSetArticles
-    )
-    {
+        private string $status,
+        private string $message,
+        private array $setArticles,
+        private array $invalidSetArticles
+    ) {
         parent::__construct([]);
-
-        $this->status = $status;
-        $this->message = $message;
-        $this->setArticles = $setArticles;
-        $this->invalidSetArticles = $invalidSetArticles;
     }
 
     /**
@@ -70,28 +44,28 @@ final class QuerySetArticleInfo extends Query {
     /**
      * @return string
      */
-    final public function getStatus(): string {
+    public function getStatus(): string {
         return $this->status;
     }
 
     /**
      * @return string
      */
-    final public function getMessage(): string {
+    public function getMessage(): string {
         return $this->message;
     }
 
     /**
      * @return SetArticle[]
      */
-    final public function getSetArticles(): array {
+    public function getSetArticles(): array {
         return $this->setArticles;
     }
 
     /**
      * @return SetArticle[]
      */
-    final public function getInvalidSetArticles(): array {
+    public function getInvalidSetArticles(): array {
         return $this->invalidSetArticles;
     }
 

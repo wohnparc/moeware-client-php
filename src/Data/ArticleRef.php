@@ -5,43 +5,37 @@ namespace Wohnparc\Moeware\Data;
 final class ArticleRef {
 
     /**
-     * @var int
-     */
-    private int $baseID;
-
-    /**
-     * @var int
-     */
-    private int $variantID;
-
-    /**
      * ArticleRef constructor.
      *
      * @param int $baseID
      * @param int $variantID
      */
     public function __construct(
-        int $baseID,
-        int $variantID
-    )
-    {
-        $this->baseID = $baseID;
-        $this->variantID = $variantID;
-    }
+        private int $baseID,
+        private int $variantID,
+    ) {}
+
+    //
+    // -- GETTER
+    //
 
     /**
      * @return int
      */
-    final public function getBaseID(): int {
+    public function getBaseID(): int {
         return $this->baseID;
     }
 
     /**
      * @return int
      */
-    final public function getVariantID(): int {
+    public function getVariantID(): int {
         return $this->variantID;
     }
+
+    //
+    // -- HELPER
+    //
 
     /**
      * @return string
@@ -53,7 +47,7 @@ final class ArticleRef {
     /**
      * @return array<string, mixed>
      */
-    final public function toArray(): array {
+    public function toArray(): array {
         return [
             'baseID' => $this->baseID,
             'variantID' => $this->variantID,

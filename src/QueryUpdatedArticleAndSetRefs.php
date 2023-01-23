@@ -11,30 +11,16 @@ use Wohnparc\Moeware\Util\Util;
 final class QueryUpdatedArticleAndSetRefs extends Query {
 
     /**
-     * @var ArticleRef[]
-     */
-    private array $articleRefs;
-
-    /**
-     * @var SetRef[]
-     */
-    private array $setRefs;
-
-    /**
      * QueryUpdatedArticleAndSetRefs constructor.
      *
      * @param ArticleRef[] $articleRefs
      * @param SetRef[] $setRefs
      */
     public function __construct(
-        array $articleRefs,
-        array $setRefs
-    )
-    {
+        private array $articleRefs,
+        private array $setRefs
+    ) {
         parent::__construct([]);
-
-        $this->articleRefs = $articleRefs;
-        $this->setRefs = $setRefs;
     }
 
     /**
@@ -57,14 +43,14 @@ final class QueryUpdatedArticleAndSetRefs extends Query {
     /**
      * @return ArticleRef[]
      */
-    final public function getArticleRefs(): array {
+    public function getArticleRefs(): array {
         return $this->articleRefs;
     }
 
     /**
      * @return SetRef[]
      */
-    final public function getSetRefs(): array {
+    public function getSetRefs(): array {
         return $this->setRefs;
     }
 

@@ -10,18 +10,12 @@ use Wohnparc\Moeware\Util\Util;
 final class QueryUpdatedArticleRefs extends Query {
 
     /**
-     * @var ArticleRef[]
-     */
-    private array $articleRefs;
-
-    /**
      * @param ArticleRef[] $articleRefs
      */
-    public function __construct(array $articleRefs)
-    {
+    public function __construct(
+        private array $articleRefs
+    ) {
         parent::__construct([]);
-
-        $this->articleRefs = $articleRefs;
     }
 
     /**
@@ -44,9 +38,13 @@ final class QueryUpdatedArticleRefs extends Query {
     /**
      * @return ArticleRef[]
      */
-    final public function getArticleRefs(): array {
+    public function getArticleRefs(): array {
         return $this->articleRefs;
     }
+
+    //
+    // -- HELPER
+    //
 
     /**
      * @param array<string, mixed> $data

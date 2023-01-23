@@ -5,29 +5,15 @@ namespace Wohnparc\Moeware\Data;
 final class SetArticleItem {
 
     /**
-     * @var ArticleRef
-     */
-    private ArticleRef $article;
-
-    /**
-     * @var int
-     */
-    private int $numberOfPieces;
-
-    /**
      * SetArticleItem constructor.
      *
      * @param ArticleRef $article
      * @param int $numberOfPieces
      */
     public function __construct(
-        ArticleRef $article,
-        int $numberOfPieces
-    )
-    {
-        $this->article = $article;
-        $this->numberOfPieces = $numberOfPieces;
-    }
+        private ArticleRef $article,
+        private int $numberOfPieces,
+    ) {}
 
     //
     // -- GETTER
@@ -38,7 +24,7 @@ final class SetArticleItem {
      *
      * @return ArticleRef
      */
-    final public function getArticle(): ArticleRef
+    public function getArticle(): ArticleRef
     {
         return $this->article;
     }
@@ -48,7 +34,7 @@ final class SetArticleItem {
      *
      * @return int
      */
-    final public function getNumberOfPieces(): int
+    public function getNumberOfPieces(): int
     {
         return $this->numberOfPieces;
     }
@@ -60,7 +46,7 @@ final class SetArticleItem {
     /**
      * @return array<string, mixed>
      */
-    final public function toArray(): array {
+    public function toArray(): array {
         return [
             'article' => $this->article->toArray(),
             'numberOfPieces' => $this->numberOfPieces,

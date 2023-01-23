@@ -8,39 +8,28 @@ use Wohnparc\Moeware\Util\Util;
 final class Stock {
 
     /**
-     * @var Location
-     */
-    private Location $location;
-
-    /**
-     * @var int
-     */
-    private int $quantity;
-
-    /**
-     * @var DateTime|null
-     */
-    private ?DateTime $expectedAt;
-
-    /**
      * Stock constructor.
      *
      * @param Location $location
      * @param int $quantity
      * @param DateTime|null $expectedAt
      */
-    private function __construct(Location $location, int $quantity, ?DateTime $expectedAt) {
-        $this->location = $location;
-        $this->quantity = $quantity;
-        $this->expectedAt = $expectedAt;
-    }
+    private function __construct(
+        private Location $location,
+        private int $quantity,
+        private ?DateTime $expectedAt,
+    ) {}
+
+    //
+    // -- GETTER
+    //
 
     /**
      * Returns the location of the stock element.
      *
      * @return Location
      */
-    final public function getLocation(): Location {
+    public function getLocation(): Location {
         return $this->location;
     }
 
@@ -49,7 +38,7 @@ final class Stock {
      *
      * @return int
      */
-    final public function getQuantity(): int {
+    public function getQuantity(): int {
         return $this->quantity;
     }
 
@@ -58,9 +47,13 @@ final class Stock {
      *
      * @return DateTime|null
      */
-    final public function getExpectedAt(): ?DateTime {
+    public function getExpectedAt(): ?DateTime {
         return $this->expectedAt;
     }
+
+    //
+    // -- HELPER
+    //
 
     /**
      * @param array<string, mixed> $data

@@ -5,36 +5,6 @@ namespace Wohnparc\Moeware\Data;
 final class Article {
 
     /**
-     * @var string
-     */
-    private string $id;
-
-    /**
-     * @var ArticleRef
-     */
-    private ArticleRef $ref;
-
-    /**
-     * @var string
-     */
-    private string $title;
-
-    /**
-     * @var string
-     */
-    private string $description;
-
-    /**
-     * @var Stock[]
-     */
-    private array $stock;
-
-    /**
-     * @var int|null
-     */
-    private ?int $calculatedInventoryPrice;
-
-    /**
      * Article constructor.
      *
      * @param string $id
@@ -45,29 +15,24 @@ final class Article {
      * @param int|null $calculatedInventoryPrice
      */
     public function __construct(
-        string $id,
-        ArticleRef $ref,
-        string $title,
-        string $description,
-        array $stock,
-        ?int $calculatedInventoryPrice
-    )
-    {
-        $this->id = $id;
-        $this->ref = $ref;
-        $this->title = $title;
-        $this->description = $description;
-        $this->stock = $stock;
-        $this->calculatedInventoryPrice = $calculatedInventoryPrice;
-    }
+        private string $id,
+        private ArticleRef $ref,
+        private string $title,
+        private string $description,
+        private array $stock,
+        private ?int $calculatedInventoryPrice,
+    ) {}
 
+    //
+    // -- GETTER
+    //
 
     /**
      * Returns the ID for the article.
      *
      * @return string
      */
-    final public function getId(): string {
+    public function getId(): string {
         return $this->id;
     }
 
@@ -76,7 +41,7 @@ final class Article {
      *
      * @return ArticleRef
      */
-    final public function getRef(): ArticleRef {
+    public function getRef(): ArticleRef {
         return $this->ref;
     }
 
@@ -85,7 +50,7 @@ final class Article {
      *
      * @return string
      */
-    final public function getTitle(): string {
+    public function getTitle(): string {
         return $this->title;
     }
 
@@ -94,7 +59,7 @@ final class Article {
      *
      * @return string
      */
-    final public function getDescription(): string {
+    public function getDescription(): string {
         return $this->description;
     }
 
@@ -103,7 +68,7 @@ final class Article {
      *
      * @return Stock[]
      */
-    final public function getStock(): array {
+    public function getStock(): array {
         return $this->stock;
     }
 
@@ -113,9 +78,13 @@ final class Article {
      *
      * @return int|null
      */
-    final public function getCalculatedInventoryPrice(): ?int {
+    public function getCalculatedInventoryPrice(): ?int {
         return $this->calculatedInventoryPrice;
     }
+
+    //
+    // -- HELPER
+    //
 
     /**
      * @param array<string, mixed> $data

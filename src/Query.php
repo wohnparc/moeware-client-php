@@ -5,19 +5,13 @@ namespace Wohnparc\Moeware;
 abstract class Query {
 
     /**
-     * @var GraphQLError[]
-     */
-    protected array $errors;
-
-    /**
      * Query constructor.
      *
      * @param GraphQLError[] $errors
      */
-    protected function __construct(array $errors)
-    {
-        $this->errors = $errors;
-    }
+    protected function __construct(
+        protected array $errors
+    ) {}
 
     //
     // -- GETTER
