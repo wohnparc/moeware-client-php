@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wohnparc\Moeware;
 
 use DateTime;
+use GuzzleHttp\RequestOptions;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Client as GQLClient;
 use Wohnparc\Moeware\Data\ArticleRef;
@@ -21,14 +22,16 @@ class Client
      * Client constructor.
      *
      * @param string $endpoint
-     * @param string $api_key
+     * @param string $uuid
+     * @param string $secret
      */
-    public function __construct(string $endpoint, string $api_key)
+    public function __construct(string $endpoint, string $uuid, string $secret)
     {
         $this->client = ClientBuilder::build($endpoint, [
-            'timeout' => 0,
-            'headers' => [
-                'Authorization' => "BEARER $api_key"
+            RequestOptions::TIMEOUT => 0,
+            RequestOptions::HEADERS => [
+                'X-API-Key' => $uuid,
+                'Authorization' => "BEARER $secret"
             ],
         ]);
     }
