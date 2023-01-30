@@ -22,15 +22,15 @@ class Client
      * Client constructor.
      *
      * @param string $endpoint
-     * @param string $uuid
+     * @param string $key
      * @param string $secret
      */
-    public function __construct(string $endpoint, string $uuid, string $secret)
+    public function __construct(string $endpoint, string $key, string $secret)
     {
         $this->client = ClientBuilder::build($endpoint, [
             RequestOptions::TIMEOUT => 0,
             RequestOptions::HEADERS => [
-                'X-API-Key' => $uuid,
+                'X-API-Key' => $key,
                 'Authorization' => "BEARER $secret"
             ],
         ]);
@@ -147,8 +147,8 @@ class Client
     {
         $chunks = array_chunk($refs, 1000);
 
-        /** @var QueryArticleInfo $lastResponse */
-        $lastResponse = [];
+        /** @var QueryArticleInfo|null $lastResponse */
+        $lastResponse = null;
 
         $articles = [];
         $unknownArticles = [];
@@ -202,8 +202,8 @@ class Client
         }
 
         return new QueryArticleInfo(
-            $lastResponse->getStatus(),
-            $lastResponse->getMessage(),
+            isset($lastResponse) ? $lastResponse->getStatus() : '',
+            isset($lastResponse) ? $lastResponse->getMessage() : '',
             array_merge(...$articles),
             array_merge(...$unknownArticles),
         );
@@ -223,10 +223,14 @@ class Client
      */
     final public function querySetArticleInfo(array $refs): ?QuerySetArticleInfo
     {
-        $chunks = array_chunk($refs, 1000);
+        $chunks = [$refs];
 
-        /** @var QuerySetArticleInfo $lastResponse */
-        $lastResponse = [];
+        if (count($refs) > 1000) {
+            $chunks = array_chunk($refs, 1000);
+        }
+
+        /** @var QuerySetArticleInfo|null $lastResponse */
+        $lastResponse = null;
 
         $setArticles = [];
         $invalidSetArticles = [];
@@ -286,8 +290,8 @@ class Client
         }
 
         return new QuerySetArticleInfo(
-            $lastResponse->getStatus(),
-            $lastResponse->getMessage(),
+            isset($lastResponse) ? $lastResponse->getStatus() : '',
+            isset($lastResponse) ? $lastResponse->getMessage() : '',
             array_merge(...$setArticles),
             array_merge(...$invalidSetArticles),
         );
