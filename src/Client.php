@@ -206,8 +206,8 @@ class Client
         }
 
         return new QueryArticleInfo(
-            isset($lastResponse) ? $lastResponse->getStatus() : '',
-            isset($lastResponse) ? $lastResponse->getMessage() : '',
+            $lastResponse->getStatus(),
+            $lastResponse->getMessage(),
             array_merge(...$articles),
             array_merge(...$unknownArticles),
         );
@@ -294,8 +294,8 @@ class Client
         }
 
         return new QuerySetArticleInfo(
-            isset($lastResponse) ? $lastResponse->getStatus() : '',
-            isset($lastResponse) ? $lastResponse->getMessage() : '',
+            $lastResponse->getStatus(),
+            $lastResponse->getMessage(),
             array_merge(...$setArticles),
             array_merge(...$invalidSetArticles),
         );
