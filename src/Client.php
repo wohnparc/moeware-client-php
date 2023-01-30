@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wohnparc\Moeware;
 
 use DateTime;
+use GuzzleHttp\RequestOptions;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Client as GQLClient;
 use Wohnparc\Moeware\Data\ArticleRef;
@@ -21,14 +22,16 @@ class Client
      * Client constructor.
      *
      * @param string $endpoint
-     * @param string $api_key
+     * @param string $key
+     * @param string $secret
      */
-    public function __construct(string $endpoint, string $api_key)
+    public function __construct(string $endpoint, string $key, string $secret)
     {
         $this->client = ClientBuilder::build($endpoint, [
-            'timeout' => 0,
-            'headers' => [
-                'Authorization' => "BEARER $api_key"
+            RequestOptions::TIMEOUT => 0,
+            RequestOptions::HEADERS => [
+                'X-API-Key' => $key,
+                'Authorization' => "BEARER $secret"
             ],
         ]);
     }
@@ -142,10 +145,14 @@ class Client
      */
     final public function queryArticleInfo(array $refs): ?QueryArticleInfo
     {
-        $chunks = array_chunk($refs, 1000);
+        $chunks = [$refs];
 
-        /** @var QueryArticleInfo $lastResponse */
-        $lastResponse = [];
+        if (count($refs) > 1000) {
+            $chunks = array_chunk($refs, 1000);
+        }
+
+        /** @var QueryArticleInfo|null $lastResponse */
+        $lastResponse = null;
 
         $articles = [];
         $unknownArticles = [];
@@ -220,10 +227,14 @@ class Client
      */
     final public function querySetArticleInfo(array $refs): ?QuerySetArticleInfo
     {
-        $chunks = array_chunk($refs, 1000);
+        $chunks = [$refs];
 
-        /** @var QuerySetArticleInfo $lastResponse */
-        $lastResponse = [];
+        if (count($refs) > 1000) {
+            $chunks = array_chunk($refs, 1000);
+        }
+
+        /** @var QuerySetArticleInfo|null $lastResponse */
+        $lastResponse = null;
 
         $setArticles = [];
         $invalidSetArticles = [];

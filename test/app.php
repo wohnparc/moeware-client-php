@@ -8,19 +8,30 @@ use Wohnparc\Moeware\Data\SetArticleItem;
 use Wohnparc\Moeware\Data\SetArticleRef;
 use Wohnparc\Moeware\Data\SetRef;
 
-$key = "";
+$key = '';
 
-$client = new Client("https://price2spy.mw.wohnparc.dev/$/graphql", $key);
+$secret = '';
+
+$client = new Client("http://localhost:8000/$/graphql", $key, $secret);
 
 $date = new DateTime("1970");
 
 $updatedRefs = $client->queryUpdatedArticleAndSetRefs($date);
 
-print_r($updatedRefs->getArticleRefs());
+if ($updatedRefs->hasErrors()) {
+    print_r($updatedRefs->getErrors());
+    return;
+}
 
+print_r($updatedRefs->getArticleRefs());
 print_r($updatedRefs->getSetRefs());
 
 $articleInfo = $client->queryArticleInfo($updatedRefs->getArticleRefs());
+
+if ($articleInfo->hasErrors()) {
+    print_r($articleInfo->getErrors());
+    return;
+}
 
 print_r($articleInfo);
 
@@ -35,5 +46,10 @@ $setArticleInfo = $client->querySetArticleInfo([
         ],
     ),
 ]);
+
+if ($setArticleInfo->hasErrors()) {
+    print_r($setArticleInfo->getErrors());
+    return;
+}
 
 print_r($setArticleInfo);
