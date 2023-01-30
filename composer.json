@@ -2,7 +2,7 @@
   "name": "wohnparc/moeware-client",
   "description": "The PHP client library for the Moeware GraphQL API",
   "type": "library",
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "Wohnparc Dev Team",
@@ -25,7 +25,9 @@
     "phpunit/phpunit": "^9.5",
     "pestphp/pest": "^v1.22",
     "phpstan/phpstan": "^1.9",
-    "friendsofphp/php-cs-fixer": "^3.13"
+    "friendsofphp/php-cs-fixer": "^3.13",
+    "dominikb/composer-license-checker": "^2.4",
+    "comcast/php-legal-licenses": "^1.2"
   },
   "autoload": {
     "psr-4": {
