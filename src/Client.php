@@ -145,7 +145,11 @@ class Client
      */
     final public function queryArticleInfo(array $refs): ?QueryArticleInfo
     {
-        $chunks = array_chunk($refs, 1000);
+        $chunks = [$refs];
+
+        if (count($refs) > 1000) {
+            $chunks = array_chunk($refs, 1000);
+        }
 
         /** @var QueryArticleInfo|null $lastResponse */
         $lastResponse = null;
