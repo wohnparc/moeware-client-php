@@ -11,8 +11,13 @@ This repository holds the official PHP client library for the Moeware GraphQL AP
 
 ### Install
 
-During development, this library can be added to your project by directly referencing this repository.
-In the future this library will be available via [packagist](https://packagist.org/).
+The library is available via [packagist](https://packagist.org/packages/wohnparc/moeware-client).
+
+You can install it by simply running the following command in your project:
+
+`composer install wohnparc/moeware-client`
+
+During development, this library can be added to your project by directly referencing this repository:
 
 ```composer
 {
@@ -23,6 +28,7 @@ In the future this library will be available via [packagist](https://packagist.o
             "url": "https://github.com/wohnparc/moeware-client-php.git"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         ...
         "wohnparc/moeware-client": "dev-main"
@@ -36,11 +42,18 @@ A simple example:
 
 ```php
 
-$client = new Client("http://endpoint", "my_key");
+$client = new Client("<endpoint>", "<api_key>", "<api_secret>");
 
 $date = new DateTime("now - 1 day");
 
 $result = $client->queryUpdatedArticleAndSetRefs($date);
+
+if ($result->hasErrors()) {
+    // handle errors appropriately
+}
+
+$result->getArticleRefs();
+$result->getSetRefs();
 
 ```
 
