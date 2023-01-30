@@ -7,13 +7,6 @@
 
 This repository holds the official PHP client library for the Moeware GraphQL API.
 
-## License
-
-This project is licensed under the terms of the MIT license.
-
-For further details, please take a look at the [LICENSE](LICENSE) file.
-A list of all dependencies and its licenses can be found at [docs/licenses.md](docs/licenses.md).
-
 ## Getting started
 
 ### Install
@@ -63,6 +56,13 @@ $result->getArticleRefs();
 $result->getSetRefs();
 
 ```
+
+## License
+
+This project is licensed under the terms of the MIT license.
+
+For further details, please take a look at the [LICENSE](LICENSE) file.
+A list of all dependencies and its licenses can be found at [docs/licenses.md](docs/licenses.md).
 
 ## Maintainers
 
