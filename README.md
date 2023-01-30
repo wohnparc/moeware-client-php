@@ -15,7 +15,7 @@ The library is available via [packagist](https://packagist.org/packages/wohnparc
 
 You can install it by simply running the following command in your project:
 
-`composer install wohnparc/moeware-client`
+`composer require wohnparc/moeware-client`
 
 During development, this library can be added to your project by directly referencing this repository:
 
