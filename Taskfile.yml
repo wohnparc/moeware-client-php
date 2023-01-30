@@ -33,3 +33,11 @@ tasks:
     deps: [ scan ]
     cmds:
       - ./vendor/bin/pest
+
+  licenses:
+    aliases: [ l ]
+    desc: "Generate the license overview file."
+    deps: [ composer ]
+    cmds:
+      - ./vendor/bin/php-legal-licenses generate
+      - mv licenses.md ./docs
