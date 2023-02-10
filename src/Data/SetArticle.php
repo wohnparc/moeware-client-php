@@ -11,12 +11,12 @@ final class SetArticle
      *
      * @param SetRef $set
      * @param SetArticleItem[] $items
-     * @param int|null $calculatedInventoryPrice
+     * @param ArticlePrices $prices
      */
     public function __construct(
         private SetRef $set,
         private array $items,
-        private ?int $calculatedInventoryPrice,
+        private ArticlePrices $prices,
     ) {
     }
 
@@ -41,11 +41,11 @@ final class SetArticle
     }
 
     /**
-     * @return int|null
+     * @return ArticlePrices
      */
-    public function getCalculatedInventoryPrice(): ?int
+    public function getPrices(): ArticlePrices
     {
-        return $this->calculatedInventoryPrice;
+        return $this->prices;
     }
 
     //
@@ -65,7 +65,11 @@ final class SetArticle
      *         },
      *         numberOfPieces: int,
      *     }[],
-     *     calculatedInventoryPrice: ?int,
+     *     prices: array{
+     *         recommendedRetailPrice: ?int,
+     *         advertisingPrice: ?int,
+     *         calculationPrice: ?int,
+     *     },
      * } $data
      *
      * @return static
@@ -75,11 +79,7 @@ final class SetArticle
         return new self(
             SetRef::fromArray($data['set']),
             array_map([SetArticleItem::class, 'fromArray'], $data['items']),
-            (
-                isset($data['calculatedInventoryPrice'])
-                    ? (int)$data['calculatedInventoryPrice']
-                    : null
-            ),
+            ArticlePrices::fromArray($data['prices']),
         );
     }
 }
