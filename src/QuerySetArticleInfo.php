@@ -15,7 +15,7 @@ final class QuerySetArticleInfo extends Query
      * @param string $status
      * @param string|null $message
      * @param SetArticle[] $setArticles
-     * @param SetArticle[] $invalidSetArticles
+     * @param SetArticleRef[] $invalidSetArticles
      */
     public function __construct(
         private string $status,
@@ -72,7 +72,7 @@ final class QuerySetArticleInfo extends Query
     }
 
     /**
-     * @return SetArticle[]
+     * @return SetArticleRef[]
      */
     public function getInvalidSetArticles(): array
     {
@@ -136,7 +136,7 @@ final class QuerySetArticleInfo extends Query
                     : null
             ),
             array_map([SetArticle::class, 'fromArray'], $data['setArticles']),
-            array_map([SetArticle::class, 'fromArray'], $data['invalidSetArticles']),
+            array_map([SetArticleRef::class, 'fromArray'], $data['invalidSetArticles']),
         );
     }
 

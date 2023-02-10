@@ -86,4 +86,29 @@ final class SetArticleRef
             return $self->toArray();
         };
     }
+
+    /**
+     * @param array{
+     *     set: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     },
+     *     items: array{
+     *         article: array{
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         numberOfPieces: int,
+     *     }[],
+     * } $data
+     *
+     * @return static
+     */
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            SetRef::fromArray($data['set']),
+            array_map([SetArticleItem::class, 'fromArray'], $data['items']),
+        );
+    }
 }
