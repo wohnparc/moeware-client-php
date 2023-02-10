@@ -188,7 +188,11 @@ class Client
              *                 quantity: int,
              *                 expectedAt: ?string,
              *             }[],
-             *             calculatedInventoryPrice: ?int,
+             *             prices: array{
+             *                 recommendedRetailPrice: ?int,
+             *                 advertisingPrice: ?int,
+             *                 calculationPrice: ?int,
+             *             },
              *         }[],
              *         unknownArticles: array{
              *             baseID: int,
@@ -266,7 +270,11 @@ class Client
              *                 },
              *                 numberOfPieces: int,
              *             }[],
-             *             calculatedInventoryPrice: ?int,
+             *             prices: array{
+             *                 recommendedRetailPrice: ?int,
+             *                 advertisingPrice: ?int,
+             *                 calculationPrice: ?int,
+             *             },
              *         }[],
              *         invalidSetArticles: array{
              *             set: array{
@@ -280,7 +288,6 @@ class Client
              *                 },
              *                 numberOfPieces: int,
              *             }[],
-             *             calculatedInventoryPrice: ?int,
              *         }[],
              *     },
              * } $data
