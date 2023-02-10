@@ -14,7 +14,7 @@ final class Article
      * @param string $title
      * @param string $description
      * @param Stock[] $stock
-     * @param int|null $calculatedInventoryPrice
+     * @param ArticlePrices $prices
      */
     public function __construct(
         private string $id,
@@ -22,7 +22,7 @@ final class Article
         private string $title,
         private string $description,
         private array $stock,
-        private ?int $calculatedInventoryPrice,
+        private ArticlePrices $prices,
     ) {
     }
 
@@ -81,14 +81,11 @@ final class Article
     }
 
     /**
-     * Returns the calculated inventory price for the article.
-     * If no price could be calculated, null is returned.
-     *
-     * @return int|null
+     * @return ArticlePrices
      */
-    public function getCalculatedInventoryPrice(): ?int
+    public function getPrices(): ArticlePrices
     {
-        return $this->calculatedInventoryPrice;
+        return $this->prices;
     }
 
     //
@@ -112,7 +109,11 @@ final class Article
      *         quantity: int,
      *         expectedAt: ?string,
      *     }[],
-     *     calculatedInventoryPrice: ?int,
+     *     prices: array{
+     *         recommendedRetailPrice: ?int,
+     *         advertisingPrice: ?int,
+     *         calculationPrice: ?int,
+     *     },
      * } $data
      *
      * @return static
@@ -125,11 +126,7 @@ final class Article
             (string)($data['title']),
             (string)($data['description']),
             array_map([Stock::class, 'fromArray'], $data['stock']),
-            (
-                isset($data['calculatedInventoryPrice'])
-                    ? (int)$data['calculatedInventoryPrice']
-                    : null
-            ),
+            ArticlePrices::fromArray($data['prices']),
         );
     }
 }

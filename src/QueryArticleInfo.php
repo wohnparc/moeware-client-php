@@ -106,7 +106,11 @@ final class QueryArticleInfo extends Query
      *                 quantity: int,
      *                 expectedAt: ?string,
      *             }[],
-     *             calculatedInventoryPrice: ?int,
+     *             prices: array{
+     *                 recommendedRetailPrice: ?int,
+     *                 advertisingPrice: ?int,
+     *                 calculationPrice: ?int,
+     *             },
      *         }[],
      *         unknownArticles: array{
      *             baseID: int,
@@ -159,7 +163,11 @@ final class QueryArticleInfo extends Query
                     quantity
                     expectedAt
                 }
-                calculatedInventoryPrice
+                prices {
+                    recommendedRetailPrice
+                    advertisingPrice
+                    calculationPrice
+                }
             }
             unknownArticles {
                 baseID

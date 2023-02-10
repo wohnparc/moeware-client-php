@@ -100,7 +100,11 @@ final class QuerySetArticleInfo extends Query
      *                 },
      *                 numberOfPieces: int,
      *             }[],
-     *             calculatedInventoryPrice: ?int,
+     *             prices: array{
+     *                 recommendedRetailPrice: ?int,
+     *                 advertisingPrice: ?int,
+     *                 calculationPrice: ?int,
+     *             },
      *         }[],
      *         invalidSetArticles: array{
      *             set: array{
@@ -114,7 +118,6 @@ final class QuerySetArticleInfo extends Query
      *                 },
      *                 numberOfPieces: int,
      *             }[],
-     *             calculatedInventoryPrice: ?int,
      *         }[],
      *     },
      * } $data
@@ -159,7 +162,11 @@ final class QuerySetArticleInfo extends Query
                     }
                     numberOfPieces
                 }
-                calculatedInventoryPrice
+                prices {
+                    recommendedRetailPrice
+                    advertisingPrice
+                    calculationPrice
+                }
             }
             invalidSetArticles {
                 set {
@@ -173,7 +180,6 @@ final class QuerySetArticleInfo extends Query
                     }
                     numberOfPieces
                 }
-                calculatedInventoryPrice
             }
           }
         }
