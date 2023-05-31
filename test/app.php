@@ -8,9 +8,9 @@ use Wohnparc\Moeware\Data\SetArticleItem;
 use Wohnparc\Moeware\Data\SetArticleRef;
 use Wohnparc\Moeware\Data\SetRef;
 
-$key = 'de99465e-74b2-4c02-a774-0d9ce5b3f18a';
+$key = '';
 
-$secret = 'j$=6"E\V02?xH9n31{A5Bp7/w4T#8]a)';
+$secret = '';
 
 $client = new Client("http://localhost:8000/$/graphql", $key, $secret);
 
