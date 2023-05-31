@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wohnparc\Moeware\Data;
 
 class Language // TODO: refactor to actual enum when shops make use of php 8.1
@@ -17,11 +19,13 @@ class Language // TODO: refactor to actual enum when shops make use of php 8.1
     ) {
     }
 
-    public static function DE(): self {
+    public static function DE(): self
+    {
         return new self(self::DE);
     }
 
-    public static function EN(): self {
+    public static function EN(): self
+    {
         return new self(self::EN);
     }
 
@@ -30,11 +34,13 @@ class Language // TODO: refactor to actual enum when shops make use of php 8.1
      *
      * @return bool
      */
-    final public function equals(self $other): bool {
+    final public function equals(self $other): bool
+    {
         return $this->value === $other->value;
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->value;
     }
 
@@ -42,7 +48,8 @@ class Language // TODO: refactor to actual enum when shops make use of php 8.1
     // -- HELPER
     //
 
-    public static function unsafeCreate(string $value): self {
+    public static function unsafeCreate(string $value): self
+    {
         return new self($value);
     }
 }

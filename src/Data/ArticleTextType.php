@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wohnparc\Moeware\Data;
 
 class ArticleTextType // TODO: refactor to actual enum when shops make use of php 8.1
@@ -21,7 +23,8 @@ class ArticleTextType // TODO: refactor to actual enum when shops make use of ph
      *
      * @return self
      */
-    public static function MAIN(): self {
+    public static function MAIN(): self
+    {
         return new self(self::MAIN);
     }
 
@@ -32,7 +35,8 @@ class ArticleTextType // TODO: refactor to actual enum when shops make use of ph
      *
      * @return bool
      */
-    final public function equals(self $other): bool {
+    final public function equals(self $other): bool
+    {
         return $this->value === $other->value;
     }
 
@@ -41,7 +45,8 @@ class ArticleTextType // TODO: refactor to actual enum when shops make use of ph
      *
      * @return string
      */
-    final public function __toString(): string {
+    final public function __toString(): string
+    {
         return $this->value;
     }
 
@@ -57,7 +62,8 @@ class ArticleTextType // TODO: refactor to actual enum when shops make use of ph
      *
      * @return self
      */
-    public static function unsafeCreate(string $value): self {
+    public static function unsafeCreate(string $value): self
+    {
         return new self($value);
     }
 }

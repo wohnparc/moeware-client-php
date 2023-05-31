@@ -47,8 +47,8 @@ final class ArticleText
      */
     public function getLocalizedText(Language $lang): ?LocalizedText
     {
-        foreach($this->text as $text) {
-            if($text->getLang()->equals($lang)) {
+        foreach ($this->text as $text) {
+            if ($text->getLang()->equals($lang)) {
                 return $text;
             }
         }
