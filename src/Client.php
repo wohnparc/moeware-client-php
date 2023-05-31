@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
+use Composer\InstalledVersions;
 use DateTime;
 use GuzzleHttp\RequestOptions;
 use Softonic\GraphQL\ClientBuilder;
@@ -27,11 +28,15 @@ class Client
      */
     public function __construct(string $endpoint, string $key, string $secret)
     {
+        $package = InstalledVersions::getRootPackage();
+        $version = $package['version'];
+
         $this->client = ClientBuilder::build($endpoint, [
             RequestOptions::TIMEOUT => 0,
             RequestOptions::HEADERS => [
                 'X-API-Key' => $key,
-                'Authorization' => "BEARER $secret"
+                'Authorization' => "BEARER $secret",
+                'User-Agent' => "Moeware PHP Client v$version",
             ],
         ]);
     }

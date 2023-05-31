@@ -11,16 +11,20 @@ final class Article
      *
      * @param string $id
      * @param ArticleRef $ref
-     * @param string $title
-     * @param string $description
+     * @param LocalizedText[] $title1
+     * @param LocalizedText[] $title2
+     * @param LocalizedText[] $title3
+     * @param ArticleText[] $texts
      * @param Stock[] $stock
      * @param ArticlePrices $prices
      */
     public function __construct(
         private string $id,
         private ArticleRef $ref,
-        private string $title,
-        private string $description,
+        private array $title1,
+        private array $title2,
+        private array $title3,
+        private array $texts,
         private array $stock,
         private ArticlePrices $prices,
     ) {
@@ -51,23 +55,51 @@ final class Article
     }
 
     /**
-     * Returns the title of the article.
-     *
-     * @return string
+     * @return LocalizedText[]
      */
-    public function getTitle(): string
+    public function getTitle1(): array
     {
-        return $this->title;
+        return $this->title1;
     }
 
     /**
-     * Returns the description of the article.
-     *
-     * @return string
+     * @return LocalizedText[]
      */
-    public function getDescription(): string
+    public function getTitle2(): array
     {
-        return $this->description;
+        return $this->title2;
+    }
+
+    /**
+     * @return LocalizedText[]
+     */
+    public function getTitle3(): array
+    {
+        return $this->title3;
+    }
+
+    /**
+     * @return ArticleText[]
+     */
+    public function getTexts(): array
+    {
+        return $this->texts;
+    }
+
+    /**
+     * @param ArticleTextType $type
+     *
+     * @return ArticleText|null
+     */
+    public function getTextForType(ArticleTextType $type): ?ArticleText
+    {
+        foreach($this->texts as $text) {
+            if($text->getType()->equals($type)) {
+                return $text;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -99,8 +131,25 @@ final class Article
      *         baseID: int,
      *         variantID: int,
      *     },
-     *     title: string,
-     *     description: string,
+     *     title1: array{
+     *         lang: string,
+     *         value: string,
+     *     },
+     *     title2: array{
+     *         lang: string,
+     *         value: string,
+     *     },
+     *     title3: array{
+     *         lang: string,
+     *         value: string,
+     *     },
+     *     texts: array{
+     *         type: string,
+     *         text: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *     },
      *     stock: array{
      *         location: array{
      *             code: string,
@@ -123,8 +172,10 @@ final class Article
         return new self(
             (string)($data['id']),
             ArticleRef::fromArray($data['ref']),
-            (string)($data['title']),
-            (string)($data['description']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title1']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title2']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title3']),
+            array_map([ArticleText::class, 'fromArray'], $data['texts']),
             array_map([Stock::class, 'fromArray'], $data['stock']),
             ArticlePrices::fromArray($data['prices']),
         );
