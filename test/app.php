@@ -8,16 +8,16 @@ use Wohnparc\Moeware\Data\SetArticleItem;
 use Wohnparc\Moeware\Data\SetArticleRef;
 use Wohnparc\Moeware\Data\SetRef;
 
-$key = '';
+$key = 'de99465e-74b2-4c02-a774-0d9ce5b3f18a';
 
-$secret = '';
+$secret = 'j$=6"E\V02?xH9n31{A5Bp7/w4T#8]a)';
 
 $client = new Client("http://localhost:8000/$/graphql", $key, $secret);
 
 $date = new DateTime("1970");
 
 $articleInfo = $client->queryArticleInfo([
-    new ArticleRef(1701234, 0),
+    new ArticleRef(1151017,50),
 ]);
 
 if ($articleInfo->hasErrors()) {
@@ -26,22 +26,3 @@ if ($articleInfo->hasErrors()) {
 }
 
 print_r($articleInfo);
-
-$setArticleInfo = $client->querySetArticleInfo([
-    new SetArticleRef(
-        new SetRef(1701234,0),
-        [
-            new SetArticleItem(
-                new ArticleRef(1701234,0),
-                1
-            )
-        ],
-    ),
-]);
-
-if ($setArticleInfo->hasErrors()) {
-    print_r($setArticleInfo->getErrors());
-    return;
-}
-
-print_r($setArticleInfo);

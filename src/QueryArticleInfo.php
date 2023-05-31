@@ -96,8 +96,25 @@ final class QueryArticleInfo extends Query
      *                 baseID: int,
      *                 variantID: int,
      *             },
-     *             title: string,
-     *             description: string,
+     *     title1: array{
+     *         lang: string,
+     *         value: string,
+     *     },
+     *     title2: array{
+     *         lang: string,
+     *         value: string,
+     *     },
+     *     title3: array{
+     *         lang: string,
+     *         value: string,
+     *     },
+     *     texts: array{
+     *         type: string,
+     *         text: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *     },
      *             stock: array{
      *                 location: array{
      *                     code: string,
@@ -153,8 +170,25 @@ final class QueryArticleInfo extends Query
                     baseID
                     variantID
                 }
-                title
-                description
+                title1 {
+                lang
+                value
+            }
+            title2 {
+                lang
+                value
+            }
+            title3 {
+                lang
+                value
+            }
+            texts {
+                type
+                text {
+                    lang
+                    value
+                }
+            }
                 stock {
                     location {
                         code

@@ -93,8 +93,8 @@ final class Article
      */
     public function getTextForType(ArticleTextType $type): ?ArticleText
     {
-        foreach($this->texts as $text) {
-            if($text->getType()->equals($type)) {
+        foreach ($this->texts as $text) {
+            if ($text->getType()->equals($type)) {
                 return $text;
             }
         }

@@ -31,7 +31,7 @@ final class ArticleText
     /**
      * Returns a list of texts for all available languages.
      *
-     * @return array
+     * @return LocalizedText[]
      */
     public function getText(): array
     {
@@ -47,8 +47,8 @@ final class ArticleText
      */
     public function getLocalizedText(Language $lang): ?LocalizedText
     {
-        foreach($this->text as $text) {
-            if($text->getLang()->equals($lang)) {
+        foreach ($this->text as $text) {
+            if ($text->getLang()->equals($lang)) {
                 return $text;
             }
         }
