@@ -14,7 +14,16 @@ $secret = '';
 
 $client = new Client("http://localhost:8000/$/graphql", $key, $secret);
 
-$date = new DateTime("1970");
+$res = $client->queryIsMoeveAvailable();
+
+if ($res->hasErrors()) {
+    print_r($res->getErrors());
+    return;
+}
+
+print_r($res->isMoeveAvailable());
+
+$date = new DateTime("2023-07-01");
 
 $updatedRefs = $client->queryUpdatedArticleAndSetRefs($date);
 

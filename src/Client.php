@@ -307,4 +307,24 @@ class Client
             array_merge(...$invalidSetArticles),
         );
     }
+
+    final public function queryIsMoeveAvailable(): ?QueryIsMoeveAvailable {
+        $response = $this->client->query(
+            QueryIsMoeveAvailable::query(),
+            QueryIsMoeveAvailable::variables(),
+        );
+
+        if ($response->hasErrors()) {
+            return QueryIsMoeveAvailable::withErrors($response->getErrors());
+        }
+
+        /**
+         * @var array{
+         *     isMoeveAvailable: bool,
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryIsMoeveAvailable::fromArray($data);
+    }
 }
