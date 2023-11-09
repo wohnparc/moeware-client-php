@@ -308,7 +308,8 @@ class Client
         );
     }
 
-    final public function queryIsMoeveAvailable(): ?QueryIsMoeveAvailable {
+    final public function queryIsMoeveAvailable(): ?QueryIsMoeveAvailable
+    {
         $response = $this->client->query(
             QueryIsMoeveAvailable::query(),
             QueryIsMoeveAvailable::variables(),
