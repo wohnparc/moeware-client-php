@@ -54,11 +54,9 @@ final class QueryUpdatedArticleRefs extends Query
 
     /**
      * @param array{
-     *     queryUpdatedArticleRefs: array{
-     *         updatedArticleRefs: array{
-     *             baseID: int,
-     *             variantID: int,
-     *         },
+     *     updatedArticleRefs: array{
+     *         baseID: int,
+     *         variantID: int,
      *     }[],
      * } $data
      *
@@ -66,8 +64,6 @@ final class QueryUpdatedArticleRefs extends Query
      */
     public static function fromArray(array $data): self
     {
-        $data = $data['queryUpdatedArticleRefs'];
-
         return new self(
             array_map([ArticleRef::class, 'fromArray'], $data['updatedArticleRefs'])
         );

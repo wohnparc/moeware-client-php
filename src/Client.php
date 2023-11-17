@@ -54,11 +54,9 @@ class Client
 
         /**
          * @var array{
-         *     queryUpdatedArticleRefs: array{
-         *         updatedArticleRefs: array{
-         *             baseID: int,
-         *             variantID: int,
-         *         },
+         *     updatedArticleRefs: array{
+         *         baseID: int,
+         *         variantID: int,
          *     }[],
          * } $data
          */
@@ -68,6 +66,9 @@ class Client
     }
 
     /**
+     * NOTE: This does currently not work correctly for the GACO domain,
+     * due to deleted main set articles in Moeve.
+     *
      * @param DateTime $since
      *
      * @return QueryUpdatedSetRefs|null
@@ -85,12 +86,10 @@ class Client
 
         /**
          * @var array{
-         *     queryUpdatedSetRefs: array{
-         *         updatedSetRefs: array{
-         *             baseID: int,
-         *             variantID: int,
-         *         }[],
-         *     },
+         *     updatedSetRefs: array{
+         *         baseID: int,
+         *         variantID: int,
+         *     }[],
          * } $data
          */
         $data = $response->getData();
@@ -102,6 +101,9 @@ class Client
      * @param DateTime $since
      *
      * @return QueryUpdatedArticleAndSetRefs|null
+     *
+     * @deprecated updated set refs does not work correctly for GACO. Please use
+     * updated article refs via the queryUpdatedArticleRefs call instead.
      */
     final public function queryUpdatedArticleAndSetRefs(DateTime $since): ?QueryUpdatedArticleAndSetRefs
     {

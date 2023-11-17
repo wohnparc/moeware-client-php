@@ -57,20 +57,16 @@ final class QueryUpdatedSetRefs extends Query
 
     /**
      * @param array{
-     *     queryUpdatedSetRefs: array{
-     *         updatedSetRefs: array{
-     *             baseID: int,
-     *             variantID: int,
-     *         }[],
-     *     },
+     *     updatedSetRefs: array{
+     *         baseID: int,
+     *         variantID: int,
+     *     }[],
      * } $data
      *
      * @return static
      */
     public static function fromArray(array $data): self
     {
-        $data = $data['queryUpdatedSetRefs'];
-
         return new self(
             array_map([SetRef::class, 'fromArray'], $data['updatedSetRefs'])
         );
