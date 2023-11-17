@@ -14,9 +14,9 @@ $secret = '';
 
 $client = new Client("http://localhost:8000/$/graphql", $key, $secret);
 
-$date = new DateTime("1970");
+$date = new DateTime("2023-07-01");
 
-$updatedRefs = $client->queryUpdatedArticleAndSetRefs($date);
+$updatedRefs = $client->queryUpdatedArticleRefs($date);
 
 if ($updatedRefs->hasErrors()) {
     print_r($updatedRefs->getErrors());
@@ -24,7 +24,6 @@ if ($updatedRefs->hasErrors()) {
 }
 
 print_r($updatedRefs->getArticleRefs());
-print_r($updatedRefs->getSetRefs());
 
 $articleInfo = $client->queryArticleInfo($updatedRefs->getArticleRefs());
 
