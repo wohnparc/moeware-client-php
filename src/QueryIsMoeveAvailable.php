@@ -66,17 +66,17 @@ final class QueryIsMoeveAvailable extends Query
     public static function query(): string
     {
         return <<<'GQL'
-        query isMoeveAvailable() {
+        query isMoeveAvailable {
           isMoeveAvailable
         }
         GQL;
     }
 
     /**
-     * @return array{}
+     * @return array|null
      */
-    public static function variables(): array
+    public static function variables(): ?array
     {
-        return [];
+        return null;
     }
 }
