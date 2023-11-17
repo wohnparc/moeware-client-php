@@ -73,7 +73,7 @@ final class QueryIsMoeveAvailable extends Query
     }
 
     /**
-     * @return array|null
+     * @return array{}|null
      */
     public static function variables(): ?array
     {
