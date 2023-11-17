@@ -9,12 +9,20 @@ use Wohnparc\Moeware\Data\SetArticleRef;
 use Wohnparc\Moeware\Data\SetRef;
 
 $key = '';
-
 $secret = '';
 
 $client = new Client("http://localhost:8000/$/graphql", $key, $secret);
 
-$date = new DateTime("2023-07-01");
+$res = $client->queryIsMoeveAvailable();
+
+if ($res->hasErrors()) {
+    print_r($res->getErrors());
+    return;
+}
+
+print_r($res->isMoeveAvailable());
+
+$date = new DateTime("2023-11-17");
 
 $updatedRefs = $client->queryUpdatedArticleRefs($date);
 
