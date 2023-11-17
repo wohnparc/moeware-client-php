@@ -45,7 +45,7 @@ jobs:
         run: vendor/bin/php-cs-fixer fix src
 
       - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         if: always()
         with:
           commit_message: "Apply php-cs-fixer changes"
