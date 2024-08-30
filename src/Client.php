@@ -349,7 +349,22 @@ class Client
 
         /**
          * @var array{
-         *     productLinkRelationStatus: bool,
+         *     productLinkRelationStatus: array{
+         *         stockWarehouse: int | null,
+         *         stockWithInbound: int| null,
+         *         stockSyncActive: bool,
+         *         stockUpdatedAt: string| null,
+         *         stockSyncedAt: string| null,
+         *         suggestedPrice: int| null,
+         *         suggestedPriceUpdatedAt: string| null,
+         *         suggestedPriceSyncedAt: string| null,
+         *         moewareURL: string| null,
+         *         otherChannels: array{
+         *             channelID: string,
+         *             domainIconURL: string,
+         *             platformIconURL: string,
+         *         },
+         *     },
          * } $data
          */
         $data = $response->getData();

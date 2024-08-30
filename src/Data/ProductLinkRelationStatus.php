@@ -67,17 +67,17 @@ final class ProductLinkRelationStatus
     }
 
     /**
-     * @return ?string
+     * @return ?DateTimeImmutable
      */
-    public function getStockUpdatedAt(): ?string
+    public function getStockUpdatedAt(): ?DateTimeImmutable
     {
         return $this->stockUpdatedAt;
     }
 
     /**
-     * @return ?string
+     * @return ?DateTimeImmutable
      */
-    public function getStockSyncedAt(): ?string
+    public function getStockSyncedAt(): ?DateTimeImmutable
     {
         return $this->stockSyncedAt;
     }
@@ -91,17 +91,17 @@ final class ProductLinkRelationStatus
     }
 
     /**
-     * @return ?string
+     * @return ?DateTimeImmutable
      */
-    public function getSuggestedPriceUpdatedAt(): ?string
+    public function getSuggestedPriceUpdatedAt(): ?DateTimeImmutable
     {
         return $this->suggestedPriceUpdatedAt;
     }
 
     /**
-     * @return ?string
+     * @return ?DateTimeImmutable
      */
-    public function getSuggestedPriceSyncedAt(): ?string
+    public function getSuggestedPriceSyncedAt(): ?DateTimeImmutable
     {
         return $this->suggestedPriceSyncedAt;
     }
@@ -156,23 +156,23 @@ final class ProductLinkRelationStatus
                 DateTimeInterface::RFC3339,
                 $data['stockUpdatedAt'],
                 new DateTimeZone('UTC'),
-            ),
+            ) ?: null,
             DateTimeImmutable::createFromFormat(
                 DateTimeInterface::RFC3339,
                 $data['stockSyncedAt'],
                 new DateTimeZone('UTC'),
-            ),
+            ) ?: null,
             $data['suggestedPrice'],
             DateTimeImmutable::createFromFormat(
                 DateTimeInterface::RFC3339,
                 $data['suggestedPriceUpdatedAt'],
                 new DateTimeZone('UTC'),
-            ),
+            ) ?: null,
             DateTimeImmutable::createFromFormat(
                 DateTimeInterface::RFC3339,
                 $data['suggestedPriceSyncedAt'],
                 new DateTimeZone('UTC'),
-            ),
+            ) ?: null,
             $data['moewareURL'] ?? null,
             array_map(
                 [ProductLinkRelationStatusChannel::class, 'fromArray'],
