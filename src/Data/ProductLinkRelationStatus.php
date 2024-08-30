@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+use Closure;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
@@ -154,28 +155,28 @@ final class ProductLinkRelationStatus
             ((bool)$data['stockSyncActive']),
             DateTimeImmutable::createFromFormat(
                 DateTimeInterface::RFC3339,
-                $data['stockUpdatedAt'],
+                $data['stockUpdatedAt'] ?? '',
                 new DateTimeZone('UTC'),
             ) ?: null,
             DateTimeImmutable::createFromFormat(
                 DateTimeInterface::RFC3339,
-                $data['stockSyncedAt'],
+                $data['stockSyncedAt'] ?? '',
                 new DateTimeZone('UTC'),
             ) ?: null,
             $data['suggestedPrice'],
             DateTimeImmutable::createFromFormat(
                 DateTimeInterface::RFC3339,
-                $data['suggestedPriceUpdatedAt'],
+                $data['suggestedPriceUpdatedAt'] ?? '',
                 new DateTimeZone('UTC'),
             ) ?: null,
             DateTimeImmutable::createFromFormat(
                 DateTimeInterface::RFC3339,
-                $data['suggestedPriceSyncedAt'],
+                $data['suggestedPriceSyncedAt'] ?? '',
                 new DateTimeZone('UTC'),
             ) ?: null,
             $data['moewareURL'] ?? null,
             array_map(
-                [ProductLinkRelationStatusChannel::class, 'fromArray'],
+                Closure::fromCallable([ProductLinkRelationStatusChannel::class, 'fromArray']),
                 $data['otherChannels']
             )
         );
