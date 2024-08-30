@@ -29,7 +29,7 @@ final class QueryProductLinkRelationStatus extends Query
      */
     public static function withErrors(array $errors): self
     {
-        $self = new self('', null, [], []);
+        $self = new self(null);
 
         $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
 
@@ -69,7 +69,7 @@ final class QueryProductLinkRelationStatus extends Query
      *             domainIconURL: string,
      *             platformIconURL: string,
      *         },
-     *     },
+     *     } | null,
      * } $data
      *
      * @return static

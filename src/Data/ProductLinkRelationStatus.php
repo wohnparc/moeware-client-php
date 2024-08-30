@@ -176,7 +176,7 @@ final class ProductLinkRelationStatus
             ) ?: null,
             $data['moewareURL'] ?? null,
             array_map(
-                Closure::fromCallable([ProductLinkRelationStatusChannel::class, 'fromArray']),
+                static fn (array $data) => ProductLinkRelationStatusChannel::fromArray($data),
                 $data['otherChannels']
             )
         );
