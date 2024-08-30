@@ -35,7 +35,8 @@ final class ProductLinkRelationStatus
         private ?string $suggestedPriceSyncedAt,
         private ?string $moewareURL,
         private array $otherChannels,
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
@@ -153,24 +154,32 @@ final class ProductLinkRelationStatus
             ((bool)$data['stockSyncActive']),
             isset($data['stockUpdatedAt'])
                 ? DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339, $data['stockUpdatedAt'], DateTimeZone::UTC,
+                    DateTimeInterface::RFC3339,
+                    $data['stockUpdatedAt'],
+                    DateTimeZone::UTC,
                 )
                 : null,
             isset($data['stockSyncedAt'])
                 ? DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339, $data['stockSyncedAt'], DateTimeZone::UTC,
-            )
+                    DateTimeInterface::RFC3339,
+                    $data['stockSyncedAt'],
+                    DateTimeZone::UTC,
+                )
                 : null,
             $data['suggestedPrice'],
             isset($data['suggestedPriceUpdatedAt'])
                 ? DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339, $data['suggestedPriceUpdatedAt'], DateTimeZone::UTC,
-            )
+                    DateTimeInterface::RFC3339,
+                    $data['suggestedPriceUpdatedAt'],
+                    DateTimeZone::UTC,
+                )
                 : null,
             isset($data['suggestedPriceSyncedAt'])
                 ? DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339, $data['suggestedPriceSyncedAt'], DateTimeZone::UTC,
-            )
+                    DateTimeInterface::RFC3339,
+                    $data['suggestedPriceSyncedAt'],
+                    DateTimeZone::UTC,
+                )
                 : null,
             $data['moewareURL'] ?? null,
             array_map(

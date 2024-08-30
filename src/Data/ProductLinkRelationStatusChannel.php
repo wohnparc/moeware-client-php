@@ -17,7 +17,8 @@ final class ProductLinkRelationStatusChannel
         private string $channelID,
         private string $domainIconURL,
         private string $platformIconURL,
-    ) {}
+    ) {
+    }
 
     //
     // -- GETTER
