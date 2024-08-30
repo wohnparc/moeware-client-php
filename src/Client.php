@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
+use Composer\InstalledVersions;
 use DateTime;
 use GuzzleHttp\RequestOptions;
 use Softonic\GraphQL\ClientBuilder;
@@ -27,11 +28,15 @@ class Client
      */
     public function __construct(string $endpoint, string $key, string $secret)
     {
+        $package = InstalledVersions::getRootPackage();
+        $version = $package['version'];
+
         $this->client = ClientBuilder::build($endpoint, [
             RequestOptions::TIMEOUT => 0,
             RequestOptions::HEADERS => [
                 'X-API-Key' => $key,
-                'Authorization' => "BEARER $secret"
+                'Authorization' => "BEARER $secret",
+                'User-Agent' => "Moeware PHP Client v$version",
             ],
         ]);
     }
@@ -329,5 +334,26 @@ class Client
         $data = $response->getData();
 
         return QueryIsMoeveAvailable::fromArray($data);
+    }
+
+    final public function queryProductLinkRelationStatus(string $externalProductRef): ?QueryProductLinkRelationStatus
+    {
+        $response = $this->client->query(
+            QueryProductLinkRelationStatus::query(),
+            QueryProductLinkRelationStatus::variables($externalProductRef),
+        );
+
+        if ($response->hasErrors()) {
+            return QueryProductLinkRelationStatus::withErrors($response->getErrors());
+        }
+
+        /**
+         * @var array{
+         *     productLinkRelationStatus: bool,
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryProductLinkRelationStatus::fromArray($data);
     }
 }
