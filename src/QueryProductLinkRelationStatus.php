@@ -68,7 +68,7 @@ final class QueryProductLinkRelationStatus extends Query
      *             channelID: string,
      *             domainIconURL: string,
      *             platformIconURL: string,
-     *         },
+     *         }[],
      *     } | null,
      * } $data
      *

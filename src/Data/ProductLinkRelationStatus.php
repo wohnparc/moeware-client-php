@@ -142,7 +142,7 @@ final class ProductLinkRelationStatus
      *         channelID: string,
      *         domainIconURL: string,
      *         platformIconURL: string,
-     *     }
+     *     }[],
      * } $data
      *
      * @return static
@@ -176,7 +176,7 @@ final class ProductLinkRelationStatus
             ) ?: null,
             $data['moewareURL'] ?? null,
             array_map(
-                static fn (array $data) => ProductLinkRelationStatusChannel::fromArray($data),
+                [ProductLinkRelationStatusChannel::class, 'fromArray'],
                 $data['otherChannels']
             )
         );
