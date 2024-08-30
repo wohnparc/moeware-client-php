@@ -363,7 +363,7 @@ class Client
          *             channelID: string,
          *             domainIconURL: string,
          *             platformIconURL: string,
-         *         },
+         *         }[],
          *     },
          * } $data
          */
