@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
+use Composer\InstalledVersions;
 use DateTime;
 use GuzzleHttp\RequestOptions;
 use Softonic\GraphQL\ClientBuilder;
@@ -27,11 +28,15 @@ class Client
      */
     public function __construct(string $endpoint, string $key, string $secret)
     {
+        $package = InstalledVersions::getRootPackage();
+        $version = $package['version'];
+
         $this->client = ClientBuilder::build($endpoint, [
             RequestOptions::TIMEOUT => 0,
             RequestOptions::HEADERS => [
                 'X-API-Key' => $key,
-                'Authorization' => "BEARER $secret"
+                'Authorization' => "BEARER $secret",
+                'User-Agent' => "Moeware PHP Client v$version",
             ],
         ]);
     }
@@ -180,8 +185,21 @@ class Client
              *                 baseID: int,
              *                 variantID: int,
              *             },
-             *             title: string,
-             *             description: string,
+             *             title1: array{
+             *                 lang: string,
+             *                 value: string,
+             *             },
+             *             title2: array{
+             *                 lang: string,
+             *                 value: string,
+             *             },
+             *             title3: array{
+             *                 lang: string,
+             *                 value: string,
+             *             },
+             *             manufacturer: string,
+             *             pseudoStockEnabled: bool,
+             *             pseudoStockCount: int,
              *             stock: array{
              *                 location: array{
              *                     code: string,
@@ -329,5 +347,106 @@ class Client
         $data = $response->getData();
 
         return QueryIsMoeveAvailable::fromArray($data);
+    }
+
+    final public function queryProductLinkRelationStatus(string $externalProductRef): ?QueryProductLinkRelationStatus
+    {
+        $response = $this->client->query(
+            QueryProductLinkRelationStatus::query(),
+            QueryProductLinkRelationStatus::variables($externalProductRef),
+        );
+
+        if ($response->hasErrors()) {
+            return QueryProductLinkRelationStatus::withErrors($response->getErrors());
+        }
+
+        /**
+         * @var array{
+         *     productLinkRelationStatus: array{
+         *         stockWarehouse: int | null,
+         *         stockWithInbound: int| null,
+         *         stockSyncActive: bool,
+         *         stockUpdatedAt: string| null,
+         *         stockSyncedAt: string| null,
+         *         suggestedPrice: int| null,
+         *         suggestedPriceUpdatedAt: string| null,
+         *         suggestedPriceSyncedAt: string| null,
+         *         moewareURL: string| null,
+         *         shopSyncActive: bool,
+         *         shopSyncedAt: string | null,
+         *         info: array{
+         *             productNotFound: bool,
+         *             productDisabled: bool,
+         *             invalidSetConfig: bool,
+         *             invalidSetItems: bool,
+         *         },
+         *         article: array{
+         *             id: string,
+         *             ref: array{
+         *                 baseID: int,
+         *                 variantID: int,
+         *             },
+         *             title1: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title2: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title3: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             manufacturer: string,
+         *             pseudoStockEnabled: bool,
+         *             pseudoStockCount: int,
+         *             stock: array{
+         *                 location: array{
+         *                     code: string,
+         *                     number: int,
+         *                 },
+         *                 quantity: int,
+         *                 expectedAt: ?string,
+         *             }[],
+         *             prices: array{
+         *                 recommendedRetailPrice: ?int,
+         *                 advertisingPrice: ?int,
+         *                 calculationPrice: ?int,
+         *             },
+         *         } | null,
+         *         set: array{
+         *             id: string,
+         *             ref: array{
+         *                 baseID: int,
+         *                 variantID: int,
+         *             },
+         *             title1: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title2: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title3: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             manufacturer: string,
+         *             pseudoStockEnabled: bool,
+         *             pseudoStockCount: int,
+         *         } | null,
+         *         otherChannels: array{
+         *             channelID: string,
+         *             domainIconURL: string,
+         *             platformIconURL: string,
+         *         }[],
+         *     } | null,
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryProductLinkRelationStatus::fromArray($data);
     }
 }
