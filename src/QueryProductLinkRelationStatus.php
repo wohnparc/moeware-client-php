@@ -74,7 +74,7 @@ final class QueryProductLinkRelationStatus extends Query
      *         },
      *         article: array{
      *             id: string,
-     *             ref: array {
+     *             ref: array{
      *                 baseID: int,
      *                 variantID: int,
      *             },
@@ -107,9 +107,9 @@ final class QueryProductLinkRelationStatus extends Query
      *                 calculationPrice: ?int,
      *             },
      *         } | null,
-     *         set : array{
+     *         set: array{
      *             id: string,
-     *             ref: array {
+     *             ref: array{
      *                 baseID: int,
      *                 variantID: int,
      *             },
