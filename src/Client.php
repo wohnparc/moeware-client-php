@@ -449,4 +449,105 @@ class Client
 
         return QueryProductLinkRelationStatus::fromArray($data);
     }
+
+    final public function queryProductLinkRelationStatuses(string $externalParentProductRef): ?QueryProductLinkRelationStatuses
+    {
+        $response = $this->client->query(
+            QueryProductLinkRelationStatuses::query(),
+            QueryProductLinkRelationStatuses::variables($externalParentProductRef),
+        );
+
+        if ($response->hasErrors()) {
+            return QueryProductLinkRelationStatuses::withErrors($response->getErrors());
+        }
+
+        /**
+         * @var array{
+         *     productLinkRelationStatuses: array{
+         *         stockWarehouse: int | null,
+         *         stockWithInbound: int| null,
+         *         stockSyncActive: bool,
+         *         stockUpdatedAt: string| null,
+         *         stockSyncedAt: string| null,
+         *         suggestedPrice: int| null,
+         *         suggestedPriceUpdatedAt: string| null,
+         *         suggestedPriceSyncedAt: string| null,
+         *         moewareURL: string| null,
+         *         shopSyncActive: bool,
+         *         shopSyncedAt: string | null,
+         *         info: array{
+         *             productNotFound: bool,
+         *             productDisabled: bool,
+         *             invalidSetConfig: bool,
+         *             invalidSetItems: bool,
+         *         },
+         *         article: array{
+         *             id: string,
+         *             ref: array{
+         *                 baseID: int,
+         *                 variantID: int,
+         *             },
+         *             title1: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title2: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title3: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             manufacturer: string,
+         *             pseudoStockEnabled: bool,
+         *             pseudoStockCount: int,
+         *             stock: array{
+         *                 location: array{
+         *                     code: string,
+         *                     number: int,
+         *                 },
+         *                 quantity: int,
+         *                 expectedAt: ?string,
+         *             }[],
+         *             prices: array{
+         *                 recommendedRetailPrice: ?int,
+         *                 advertisingPrice: ?int,
+         *                 calculationPrice: ?int,
+         *             },
+         *         } | null,
+         *         set: array{
+         *             id: string,
+         *             ref: array{
+         *                 baseID: int,
+         *                 variantID: int,
+         *             },
+         *             title1: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title2: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             title3: array{
+         *                 lang: string,
+         *                 value: string,
+         *             },
+         *             manufacturer: string,
+         *             pseudoStockEnabled: bool,
+         *             pseudoStockCount: int,
+         *         } | null,
+         *         otherChannels: array{
+         *             channelID: string,
+         *             domainIconURL: string,
+         *             platformIconURL: string,
+         *         }[],
+         *     } | null,
+         * }[] $data
+         */
+        $data = $response->getData();
+
+        return QueryProductLinkRelationStatuses::fromArray($data);
+    }
 }
