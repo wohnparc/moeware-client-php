@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98312ce6f7983e41565e81c0f31bf7f2",
+    "content-hash": "1bf4c33fdb61d5a5ff9b4e7e524fd552",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -759,16 +759,16 @@
         },
         {
             "name": "softonic/graphql-client",
-            "version": "2.2.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/softonic/graphql-client.git",
-                "reference": "462cfc5e301a417da3abbf237f6dee2e6d73b99e"
+                "reference": "0692fe81afeae11fb17cce735b12f52c92f95892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/softonic/graphql-client/zipball/462cfc5e301a417da3abbf237f6dee2e6d73b99e",
-                "reference": "462cfc5e301a417da3abbf237f6dee2e6d73b99e",
+                "url": "https://api.github.com/repos/softonic/graphql-client/zipball/0692fe81afeae11fb17cce735b12f52c92f95892",
+                "reference": "0692fe81afeae11fb17cce735b12f52c92f95892",
                 "shasum": ""
             },
             "require": {
@@ -776,7 +776,7 @@
                 "guzzlehttp/guzzle": "^6.3 || ^7.0",
                 "php": "^8.0",
                 "softonic/guzzle-oauth2-middleware": "^2.1",
-                "symfony/console": "^5.0 || ^6.0"
+                "symfony/console": "^6.0 || ^7.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.9",
@@ -808,9 +808,9 @@
             ],
             "support": {
                 "issues": "https://github.com/softonic/graphql-client/issues",
-                "source": "https://github.com/softonic/graphql-client/tree/2.2.0"
+                "source": "https://github.com/softonic/graphql-client/tree/3.0.0"
             },
-            "time": "2022-10-04T15:56:13+00:00"
+            "time": "2024-03-01T09:31:49+00:00"
         },
         {
             "name": "softonic/guzzle-oauth2-middleware",
