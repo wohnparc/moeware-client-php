@@ -64,6 +64,71 @@ final class QueryProductLinkRelationStatus extends Query
      *         suggestedPriceUpdatedAt: string| null,
      *         suggestedPriceSyncedAt: string| null,
      *         moewareURL: string| null,
+     *         shopSyncActive: bool,
+     *         shopSyncedAt: string | null,
+     *         info: array{
+     *             productNotFound: bool,
+     *             productDisabled: bool,
+     *             invalidSetConfig: bool,
+     *             invalidSetItems: bool,
+     *         },
+     *         article: array{
+     *             id: string,
+     *             ref: array {
+     *                 baseID: int,
+     *                 variantID: int,
+     *             },
+     *             title1: array{
+     *                 lang: string,
+     *                 value: string,
+     *             },
+     *             title2: array{
+     *                 lang: string,
+     *                 value: string,
+     *             },
+     *             title3: array{
+     *                 lang: string,
+     *                 value: string,
+     *             },
+     *             manufacturer: string,
+     *             pseudoStockEnabled: bool,
+     *             pseudoStockCount: int,
+     *             stock: array{
+     *                 location: array{
+     *                     code: string,
+     *                     number: int,
+     *                 },
+     *                 quantity: int,
+     *                 expectedAt: ?string,
+     *             }[],
+     *             prices: array{
+     *                 recommendedRetailPrice: ?int,
+     *                 advertisingPrice: ?int,
+     *                 calculationPrice: ?int,
+     *             },
+     *         } | null,
+     *         set : array{
+     *             id: string,
+     *             ref: array {
+     *                 baseID: int,
+     *                 variantID: int,
+     *             },
+     *             title1: array{
+     *                 lang: string,
+     *                 value: string,
+     *             },
+     *             title2: array{
+     *                 lang: string,
+     *                 value: string,
+     *             },
+     *             title3: array{
+     *                 lang: string,
+     *                 value: string,
+     *             },
+     *             manufacturer: string,
+     *             pseudoStockEnabled: bool,
+     *             pseudoStockCount: int,
+     *         } | null,
      *         otherChannels: array{
      *             channelID: string,
      *             domainIconURL: string,
@@ -100,6 +165,71 @@ final class QueryProductLinkRelationStatus extends Query
             suggestedPriceUpdatedAt
             suggestedPriceSyncedAt
             moewareURL
+            shopSyncActive
+            shopSyncedAt
+            info {
+              productNotFound
+              productDisabled
+              invalidSetConfig
+              invalidSetItems
+            }
+            article {
+              id
+              ref {
+                baseID
+                variantID
+              }
+              title1 {
+                lang
+                value
+              }
+              title2 {
+                lang
+                value
+              }
+              title3 {
+                lang
+                value
+              }
+              manufacturer
+              pseudoStockEnabled
+              pseudoStockCount
+              stock {
+                location {
+                  code
+                  number
+                }
+                quantity
+                expectedAt
+              }
+              prices {
+                recommendedRetailPrice
+                advertisingPrice
+                calculationPrice
+              }
+            }
+            set {
+              id
+              ref {
+                baseID
+                variantID
+              }
+              title1 {
+                lang
+                value
+              }
+              title2 {
+                lang
+                value
+              }
+              title3 {
+                lang
+                value
+              }
+              manufacturer
+              pseudoStockEnabled
+              pseudoStockCount
+            }
             otherChannels {
               channelID
               domainIconURL

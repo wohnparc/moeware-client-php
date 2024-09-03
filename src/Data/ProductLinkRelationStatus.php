@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
-use Closure;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
@@ -23,6 +22,11 @@ final class ProductLinkRelationStatus
      * @param ?DateTimeImmutable $suggestedPriceUpdatedAt
      * @param ?DateTimeImmutable $suggestedPriceSyncedAt
      * @param ?string $moewareURL
+     * @param bool $shopSyncActive
+     * @param ?DateTimeImmutable $shopSyncedAt
+     * @param ProductLinkInfo $info
+     * @param ?Article $article
+     * @param ?Set $set
      * @param ProductLinkRelationStatusChannel[] $otherChannels
      */
     public function __construct(
@@ -35,6 +39,11 @@ final class ProductLinkRelationStatus
         private ?DateTimeImmutable $suggestedPriceUpdatedAt,
         private ?DateTimeImmutable $suggestedPriceSyncedAt,
         private ?string $moewareURL,
+        private bool $shopSyncActive,
+        private ?DateTimeImmutable $shopSyncedAt,
+        private ProductLinkInfo $info,
+        private ?Article $article,
+        private ?Set $set,
         private array $otherChannels,
     ) {
     }
@@ -116,6 +125,46 @@ final class ProductLinkRelationStatus
     }
 
     /**
+     * @return bool
+     */
+    public function isShopSyncActive(): bool
+    {
+        return $this->shopSyncActive;
+    }
+
+    /**
+     * @return ?DateTimeImmutable
+     */
+    public function getShopSyncedAt(): ?DateTimeImmutable
+    {
+        return $this->shopSyncedAt;
+    }
+
+    /**
+     * @return ProductLinkInfo
+     */
+    public function getInfo(): ProductLinkInfo
+    {
+        return $this->info;
+    }
+
+    /**
+     * @return ?Article
+     */
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    /**
+     * @return ?Set
+     */
+    public function getSet(): ?Set
+    {
+        return $this->set;
+    }
+
+    /**
      * @return ProductLinkRelationStatusChannel[]
      */
     public function getOtherChannels(): array
@@ -138,6 +187,71 @@ final class ProductLinkRelationStatus
      *     suggestedPriceUpdatedAt: string| null,
      *     suggestedPriceSyncedAt: string| null,
      *     moewareURL: string| null,
+     *     shopSyncActive: bool,
+     *     shopSyncedAt: string | null,
+     *     info: array{
+     *         productNotFound: bool,
+     *         productDisabled: bool,
+     *         invalidSetConfig: bool,
+     *         invalidSetItems: bool,
+     *     },
+     *     article: array{
+     *         id: string,
+     *         ref: array {
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         title1: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *         title2: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *         title3: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *         manufacturer: string,
+     *         pseudoStockEnabled: bool,
+     *         pseudoStockCount: int,
+     *         stock: array{
+     *             location: array{
+     *                 code: string,
+     *                 number: int,
+     *             },
+     *             quantity: int,
+     *             expectedAt: ?string,
+     *         }[],
+     *         prices: array{
+     *             recommendedRetailPrice: ?int,
+     *             advertisingPrice: ?int,
+     *             calculationPrice: ?int,
+     *         },
+     *     } | null,
+     *     set : array{
+     *         id: string,
+     *         ref: array {
+     *             baseID: int,
+     *             variantID: int,
+     *         },
+     *         title1: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *         title2: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *         title3: array{
+     *             lang: string,
+     *             value: string,
+     *         },
+     *         manufacturer: string,
+     *         pseudoStockEnabled: bool,
+     *         pseudoStockCount: int,
+     *     } | null,
      *     otherChannels: array{
      *         channelID: string,
      *         domainIconURL: string,
@@ -175,6 +289,15 @@ final class ProductLinkRelationStatus
                 new DateTimeZone('UTC'),
             ) ?: null,
             $data['moewareURL'] ?? null,
+            ((bool)$data['shopSyncActive']),
+            DateTimeImmutable::createFromFormat(
+                DateTimeInterface::RFC3339,
+                $data['shopSyncedAt'] ?? '',
+                new DateTimeZone('UTC'),
+            ) ?: null,
+            ProductLinkInfo::fromArray($data['info']),
+            $data['article'] ? Article::fromArray($data['article']) : null,
+            $data['set'] ? Set::fromArray($data['set']) : null,
             array_map(
                 [ProductLinkRelationStatusChannel::class, 'fromArray'],
                 $data['otherChannels']
