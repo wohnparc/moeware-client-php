@@ -543,8 +543,8 @@ class Client
          *             domainIconURL: string,
          *             platformIconURL: string,
          *         }[],
-         *     } | null,
-         * }[] $data
+         *     }[],
+         * } $data
          */
         $data = $response->getData();
 

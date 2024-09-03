@@ -142,9 +142,7 @@ final class QueryProductLinkRelationStatuses extends Query
     public static function fromArray(array $data): self
     {
         return new self(
-            isset($data['productLinkRelationStatuses'])
-                ? array_map([ProductLinkRelationStatus::class, 'fromArray'], $data['productLinkRelationStatuses'])
-                : null,
+            array_map([ProductLinkRelationStatus::class, 'fromArray'], $data['productLinkRelationStatuses'])
         );
     }
 
