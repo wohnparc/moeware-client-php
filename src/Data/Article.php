@@ -143,7 +143,7 @@ final class Article
     /**
      * @param array{
      *     id: string,
-     *     ref: array {
+     *     ref: array{
      *         baseID: int,
      *         variantID: int,
      *     },

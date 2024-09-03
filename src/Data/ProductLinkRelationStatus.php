@@ -197,7 +197,7 @@ final class ProductLinkRelationStatus
      *     },
      *     article: array{
      *         id: string,
-     *         ref: array {
+     *         ref: array{
      *             baseID: int,
      *             variantID: int,
      *         },
@@ -230,9 +230,9 @@ final class ProductLinkRelationStatus
      *             calculationPrice: ?int,
      *         },
      *     } | null,
-     *     set : array{
+     *     set: array{
      *         id: string,
-     *         ref: array {
+     *         ref: array{
      *             baseID: int,
      *             variantID: int,
      *         },
