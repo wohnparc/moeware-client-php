@@ -185,8 +185,21 @@ class Client
              *                 baseID: int,
              *                 variantID: int,
              *             },
-             *             title: string,
-             *             description: string,
+             *             title1: array{
+             *                 lang: string,
+             *                 value: string,
+             *             },
+             *             title2: array{
+             *                 lang: string,
+             *                 value: string,
+             *             },
+             *             title3: array{
+             *                 lang: string,
+             *                 value: string,
+             *             },
+             *             manufacturer: string,
+             *             pseudoStockEnabled: bool,
+             *             pseudoStockCount: int,
              *             stock: array{
              *                 location: array{
              *                     code: string,
