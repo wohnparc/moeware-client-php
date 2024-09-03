@@ -134,7 +134,7 @@ final class QueryProductLinkRelationStatuses extends Query
      *             domainIconURL: string,
      *             platformIconURL: string,
      *         }[],
-     *     } | null,
+     *     }[],
      * } $data
      *
      * @return static
