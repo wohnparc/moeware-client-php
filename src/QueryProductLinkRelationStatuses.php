@@ -175,6 +175,7 @@ final class QueryProductLinkRelationStatuses extends Query
             stockSyncedAt
             priceWatch {
               enabled
+              externalID
               suggestedPrice
               suggestedPriceUpdatedAt
               suggestedPriceSyncedAt
