@@ -139,7 +139,8 @@ class Client
     }
 
     /**
-     * Executes a QueryArticleInfo request to the GraphQL API and returns a mapped object.
+     * Executes a QueryArticleInfo request to the GraphQL API and returns a
+     * mapped object.
      *
      * Note: It automatically splits the ArticleRef array input into chunks
      * and performs multiple requests if necessary to prevent the response
@@ -238,7 +239,8 @@ class Client
     }
 
     /**
-     * Executes a QuerySetArticleInfo request to the GraphQL API and returns a mapped object.
+     * Executes a QuerySetArticleInfo request to the GraphQL API and returns a
+     * mapped object.
      *
      * Note: It automatically splits the SetArticleRef array input into chunks
      * and performs multiple requests if necessary to prevent the response
@@ -368,9 +370,13 @@ class Client
          *         stockSyncActive: bool,
          *         stockUpdatedAt: string| null,
          *         stockSyncedAt: string| null,
-         *         suggestedPrice: int| null,
-         *         suggestedPriceUpdatedAt: string| null,
-         *         suggestedPriceSyncedAt: string| null,
+         *         priceWatch: array{
+         *          enabled: bool,
+         *          externalID: string|null,
+         *          suggestedPrice: int| null,
+         *          suggestedPriceUpdatedAt: string| null,
+         *          suggestedPriceSyncedAt: string| null,
+         *         },
          *         moewareURL: string| null,
          *         shopSyncActive: bool,
          *         shopSyncedAt: string | null,
@@ -421,6 +427,13 @@ class Client
          *                 baseID: int,
          *                 variantID: int,
          *             },
+         *          items: array{
+         *            article: array{
+         *           baseID: int,
+         *        variantID: int,
+         *   },
+         *   numberOfPieces: int,
+         *          }[],
          *             title1: array{
          *                 lang: string,
          *                 value: string,
@@ -469,9 +482,13 @@ class Client
          *         stockSyncActive: bool,
          *         stockUpdatedAt: string| null,
          *         stockSyncedAt: string| null,
-         *         suggestedPrice: int| null,
-         *         suggestedPriceUpdatedAt: string| null,
-         *         suggestedPriceSyncedAt: string| null,
+         *          priceWatch: array{
+         *            enabled: bool,
+         *         externalID: string|null,
+         *      suggestedPrice: int| null,
+         *   suggestedPriceUpdatedAt: string| null,
+         *   suggestedPriceSyncedAt: string| null,
+         *          },
          *         moewareURL: string| null,
          *         shopSyncActive: bool,
          *         shopSyncedAt: string | null,
@@ -522,6 +539,13 @@ class Client
          *                 baseID: int,
          *                 variantID: int,
          *             },
+         *          items: array{
+         *            article: array{
+         *        baseID: int,
+         *     variantID: int,
+         *   },
+         *   numberOfPieces: int,
+         *          }[],
          *             title1: array{
          *                 lang: string,
          *                 value: string,
@@ -550,4 +574,5 @@ class Client
 
         return QueryProductLinkRelationStatuses::fromArray($data);
     }
+
 }

@@ -17,6 +17,7 @@ final class Set
      * @param string $manufacturer
      * @param bool $pseudoStockEnabled
      * @param int $pseudoStockCount
+     * @param SetArticleItem[] $items
      */
     public function __construct(
         private string $id,
@@ -27,12 +28,23 @@ final class Set
         private string $manufacturer,
         private bool $pseudoStockEnabled,
         private int $pseudoStockCount,
+        private array $items,
     ) {
     }
+
+
 
     //
     // -- GETTER
     //
+
+    /**
+     * @return SetArticleItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
 
     /**
      * @return string
@@ -109,6 +121,13 @@ final class Set
      *         baseID: int,
      *         variantID: int,
      *     },
+     *     items: array{
+     *            article: array{
+     *              baseID: int,
+     *              variantID: int,
+     *            },
+     *            numberOfPieces: int,
+     *     }[],
      *     title1: array{
      *         lang: string,
      *         value: string,
@@ -131,14 +150,19 @@ final class Set
     public static function fromArray(array $data): self
     {
         return new self(
-            (string)$data['id'],
+            (string) $data['id'],
             SetRef::fromArray($data['ref']),
             LocalizedText::fromArray($data['title1']),
             LocalizedText::fromArray($data['title2']),
             LocalizedText::fromArray($data['title3']),
-            (string)$data['manufacturer'],
-            (bool)$data['pseudoStockEnabled'],
-            (int)$data['pseudoStockCount'],
+            (string) $data['manufacturer'],
+            (bool) $data['pseudoStockEnabled'],
+            (int) $data['pseudoStockCount'],
+            array_map(
+                [SetArticleItem::class, 'fromArray'],
+                $data['items'],
+            ),
         );
     }
+
 }
