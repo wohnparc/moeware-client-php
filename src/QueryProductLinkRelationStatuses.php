@@ -6,152 +6,161 @@ namespace Wohnparc\Moeware;
 
 use Wohnparc\Moeware\Data\ProductLinkRelationStatus;
 
-final class QueryProductLinkRelationStatuses extends Query
-{
-    /**
-     * QueryProductLinkRelationStatuses constructor.
-     *
-     * @param ProductLinkRelationStatus[] $statuses
-     */
-    public function __construct(
-        private array $statuses = [],
-    ) {
-        parent::__construct([]);
-    }
+final class QueryProductLinkRelationStatuses extends Query {
 
-    /**
-     * @param array<array{
-     *     message: string,
-     *     path: string[],
-     * }> $errors
-     *
-     * @return static
-     */
-    public static function withErrors(array $errors): self
-    {
-        $self = new self();
+  /**
+   * QueryProductLinkRelationStatuses constructor.
+   *
+   * @param ProductLinkRelationStatus[] $statuses
+   */
+  public function __construct(
+    private array $statuses = [],
+  ) {
+    parent::__construct([]);
+  }
 
-        $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
+  /**
+   * @param array<array{
+   *     message: string,
+   *     path: string[],
+   * }> $errors
+   *
+   * @return static
+   */
+  public static function withErrors(array $errors): self {
+    $self = new self();
 
-        return $self;
-    }
+    $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
 
-    //
-    // -- GETTER
-    //
+    return $self;
+  }
 
-    /**
-     * @return ProductLinkRelationStatus[]
-     */
-    public function getStatuses(): array
-    {
-        return $this->statuses;
-    }
+  //
+  // -- GETTER
+  //
 
-    //
-    // -- HELPER
-    //
+  /**
+   * @return ProductLinkRelationStatus[]
+   */
+  public function getStatuses(): array {
+    return $this->statuses;
+  }
 
-    /**
-     * @param array{
-     *     productLinkRelationStatuses: array{
-     *         stockWarehouse: int | null,
-     *         stockWithInbound: int| null,
-     *         stockSyncActive: bool,
-     *         stockUpdatedAt: string| null,
-     *         stockSyncedAt: string| null,
-     *         suggestedPrice: int| null,
-     *         suggestedPriceUpdatedAt: string| null,
-     *         suggestedPriceSyncedAt: string| null,
-     *         moewareURL: string| null,
-     *         shopSyncActive: bool,
-     *         shopSyncedAt: string | null,
-     *         info: array{
-     *             productNotFound: bool,
-     *             productDisabled: bool,
-     *             invalidSetConfig: bool,
-     *             invalidSetItems: bool,
-     *         },
-     *         article: array{
-     *             id: string,
-     *             ref: array{
-     *                 baseID: int,
-     *                 variantID: int,
-     *             },
-     *             title1: array{
-     *                 lang: string,
-     *                 value: string,
-     *             },
-     *             title2: array{
-     *                 lang: string,
-     *                 value: string,
-     *             },
-     *             title3: array{
-     *                 lang: string,
-     *                 value: string,
-     *             },
-     *             manufacturer: string,
-     *             pseudoStockEnabled: bool,
-     *             pseudoStockCount: int,
-     *             stock: array{
-     *                 location: array{
-     *                     code: string,
-     *                     number: int,
-     *                 },
-     *                 quantity: int,
-     *                 expectedAt: ?string,
-     *             }[],
-     *             prices: array{
-     *                 recommendedRetailPrice: ?int,
-     *                 advertisingPrice: ?int,
-     *                 calculationPrice: ?int,
-     *             },
-     *         } | null,
-     *         set: array{
-     *             id: string,
-     *             ref: array{
-     *                 baseID: int,
-     *                 variantID: int,
-     *             },
-     *             title1: array{
-     *                 lang: string,
-     *                 value: string,
-     *             },
-     *             title2: array{
-     *                 lang: string,
-     *                 value: string,
-     *             },
-     *             title3: array{
-     *                 lang: string,
-     *                 value: string,
-     *             },
-     *             manufacturer: string,
-     *             pseudoStockEnabled: bool,
-     *             pseudoStockCount: int,
-     *         } | null,
-     *         otherChannels: array{
-     *             channelID: string,
-     *             domainIconURL: string,
-     *             platformIconURL: string,
-     *         }[],
-     *     }[],
-     * } $data
-     *
-     * @return static
-     */
-    public static function fromArray(array $data): self
-    {
-        return new self(
-            array_map([ProductLinkRelationStatus::class, 'fromArray'], $data['productLinkRelationStatuses'])
-        );
-    }
+  //
+  // -- HELPER
+  //
 
-    /**
-     * @return string
-     */
-    public static function query(): string
-    {
-        return <<<'GQL'
+  /**
+   * @param array{
+   *     productLinkRelationStatuses: array{
+   *         stockWarehouse: int | null,
+   *         stockWithInbound: int| null,
+   *         stockSyncActive: bool,
+   *         stockUpdatedAt: string| null,
+   *         stockSyncedAt: string| null,
+   *         priceWatch: array{
+   *           enabled: bool,
+   *           suggestedPrice: int| null,
+   *           suggestedPriceUpdatedAt: string| null,
+   *           suggestedPriceSyncedAt: string| null,
+   *          },
+   *         moewareURL: string| null,
+   *         shopSyncActive: bool,
+   *         shopSyncedAt: string | null,
+   *         info: array{
+   *             productNotFound: bool,
+   *             productDisabled: bool,
+   *             invalidSetConfig: bool,
+   *             invalidSetItems: bool,
+   *         },
+   *         article: array{
+   *             id: string,
+   *             ref: array{
+   *                 baseID: int,
+   *                 variantID: int,
+   *             },
+   *             title1: array{
+   *                 lang: string,
+   *                 value: string,
+   *             },
+   *             title2: array{
+   *                 lang: string,
+   *                 value: string,
+   *             },
+   *             title3: array{
+   *                 lang: string,
+   *                 value: string,
+   *             },
+   *             manufacturer: string,
+   *             pseudoStockEnabled: bool,
+   *             pseudoStockCount: int,
+   *             stock: array{
+   *                 location: array{
+   *                     code: string,
+   *                     number: int,
+   *                 },
+   *                 quantity: int,
+   *                 expectedAt: ?string,
+   *             }[],
+   *             prices: array{
+   *                 recommendedRetailPrice: ?int,
+   *                 advertisingPrice: ?int,
+   *                 calculationPrice: ?int,
+   *             },
+   *         } | null,
+   *         set: array{
+   *             id: string,
+   *             ref: array{
+   *                 baseID: int,
+   *                 variantID: int,
+   *             },
+   *            items: array {
+   *               article: array {
+   *                  baseID: int,
+   *                  variantID: int,
+   *                },
+   *               numberOfPieces: int,
+   *             }[],
+   *             title1: array{
+   *                 lang: string,
+   *                 value: string,
+   *             },
+   *             title2: array{
+   *                 lang: string,
+   *                 value: string,
+   *             },
+   *             title3: array{
+   *                 lang: string,
+   *                 value: string,
+   *             },
+   *             manufacturer: string,
+   *             pseudoStockEnabled: bool,
+   *             pseudoStockCount: int,
+   *         } | null,
+   *         otherChannels: array{
+   *             channelID: string,
+   *             domainIconURL: string,
+   *             platformIconURL: string,
+   *         }[],
+   *     }[],
+   * } $data
+   *
+   * @return static
+   */
+  public static function fromArray(array $data): self {
+    return new self(
+      array_map([
+        ProductLinkRelationStatus::class,
+        'fromArray',
+      ], $data['productLinkRelationStatuses'])
+    );
+  }
+
+  /**
+   * @return string
+   */
+  public static function query(): string {
+    return <<<'GQL'
         query queryProductLinkRelationStatuses($externalParentProductRef: String!) {
           productLinkRelationStatuses(externalParentProductRef: $externalParentProductRef) {
             stockWarehouse
@@ -159,9 +168,12 @@ final class QueryProductLinkRelationStatuses extends Query
             stockSyncActive
             stockUpdatedAt
             stockSyncedAt
-            suggestedPrice
-            suggestedPriceUpdatedAt
-            suggestedPriceSyncedAt
+            priceWatch {
+              enabled
+              suggestedPrice
+              suggestedPriceUpdatedAt
+              suggestedPriceSyncedAt
+            } 
             moewareURL
             shopSyncActive
             shopSyncedAt
@@ -212,6 +224,13 @@ final class QueryProductLinkRelationStatuses extends Query
                 baseID
                 variantID
               }
+              items {
+                article {
+                  baseID
+                  variantID
+                }
+                numberOfPieces
+              }
               title1 {
                 lang
                 value
@@ -236,19 +255,19 @@ final class QueryProductLinkRelationStatuses extends Query
           }
         }
         GQL;
-    }
+  }
 
-    /**
-     * @param string $externalParentProductRef
-     *
-     * @return array{
-     *     externalParentProductRef: string,
-     * }
-     */
-    public static function variables(string $externalParentProductRef): array
-    {
-        return [
-            'externalParentProductRef' => $externalParentProductRef,
-        ];
-    }
+  /**
+   * @param string $externalParentProductRef
+   *
+   * @return array{
+   *     externalParentProductRef: string,
+   * }
+   */
+  public static function variables(string $externalParentProductRef): array {
+    return [
+      'externalParentProductRef' => $externalParentProductRef,
+    ];
+  }
+
 }
