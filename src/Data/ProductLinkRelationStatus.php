@@ -18,9 +18,7 @@ final class ProductLinkRelationStatus
      * @param bool $stockSyncActive
      * @param ?DateTimeImmutable $stockUpdatedAt
      * @param ?DateTimeImmutable $stockSyncedAt
-     * @param ?int $suggestedPrice
-     * @param ?DateTimeImmutable $suggestedPriceUpdatedAt
-     * @param ?DateTimeImmutable $suggestedPriceSyncedAt
+     * @param PriceWatch $priceWatch
      * @param ?string $moewareURL
      * @param bool $shopSyncActive
      * @param ?DateTimeImmutable $shopSyncedAt
@@ -35,9 +33,7 @@ final class ProductLinkRelationStatus
         private bool $stockSyncActive,
         private ?DateTimeImmutable $stockUpdatedAt,
         private ?DateTimeImmutable $stockSyncedAt,
-        private ?int $suggestedPrice,
-        private ?DateTimeImmutable $suggestedPriceUpdatedAt,
-        private ?DateTimeImmutable $suggestedPriceSyncedAt,
+        private PriceWatch $priceWatch,
         private ?string $moewareURL,
         private bool $shopSyncActive,
         private ?DateTimeImmutable $shopSyncedAt,
@@ -92,28 +88,14 @@ final class ProductLinkRelationStatus
         return $this->stockSyncedAt;
     }
 
-    /**
-     * @return ?int
-     */
-    public function getSuggestedPrice(): ?int
+    public function getPriceWatch(): PriceWatch
     {
-        return $this->suggestedPrice;
+        return $this->priceWatch;
     }
 
-    /**
-     * @return ?DateTimeImmutable
-     */
-    public function getSuggestedPriceUpdatedAt(): ?DateTimeImmutable
+    public function setPriceWatch(PriceWatch $priceWatch): void
     {
-        return $this->suggestedPriceUpdatedAt;
-    }
-
-    /**
-     * @return ?DateTimeImmutable
-     */
-    public function getSuggestedPriceSyncedAt(): ?DateTimeImmutable
-    {
-        return $this->suggestedPriceSyncedAt;
+        $this->priceWatch = $priceWatch;
     }
 
     /**
@@ -183,9 +165,13 @@ final class ProductLinkRelationStatus
      *     stockSyncActive: bool,
      *     stockUpdatedAt: string| null,
      *     stockSyncedAt: string| null,
-     *     suggestedPrice: int| null,
-     *     suggestedPriceUpdatedAt: string| null,
-     *     suggestedPriceSyncedAt: string| null,
+     *     priceWatch: array{
+     *      enabled: bool,
+     *      externalID: string|null,
+     *      suggestedPrice: int| null,
+     *      suggestedPriceUpdatedAt: string| null,
+     *      suggestedPriceSyncedAt: string| null,
+     *     },
      *     moewareURL: string| null,
      *     shopSyncActive: bool,
      *     shopSyncedAt: string | null,
@@ -236,6 +222,13 @@ final class ProductLinkRelationStatus
      *             baseID: int,
      *             variantID: int,
      *         },
+     *         items: array{
+     *           article: array{
+     *             baseID: int,
+     *             variantID: int,
+     *           },
+     *           numberOfPieces: int,
+     *         }[],
      *         title1: array{
      *             lang: string,
      *             value: string,
@@ -277,17 +270,7 @@ final class ProductLinkRelationStatus
                 $data['stockSyncedAt'] ?? '',
                 new DateTimeZone('UTC'),
             ) ?: null,
-            $data['suggestedPrice'],
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['suggestedPriceUpdatedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['suggestedPriceSyncedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
+            PriceWatch::fromArray($data['priceWatch']),
             $data['moewareURL'] ?? null,
             ((bool) $data['shopSyncActive']),
             DateTimeImmutable::createFromFormat(

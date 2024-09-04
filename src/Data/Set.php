@@ -6,16 +6,6 @@ namespace Wohnparc\Moeware\Data;
 
 final class Set
 {
-    public function getItems(): SetArticleItem
-    {
-        return $this->items;
-    }
-
-    public function setItems(SetArticleItem $items): void
-    {
-        $this->items = $items;
-    }
-
     /**
      * Set constructor.
      *
@@ -27,7 +17,7 @@ final class Set
      * @param string $manufacturer
      * @param bool $pseudoStockEnabled
      * @param int $pseudoStockCount
-     * @param SetArticleItem $items
+     * @param SetArticleItem[] $items
      */
     public function __construct(
         private string $id,
@@ -38,13 +28,23 @@ final class Set
         private string $manufacturer,
         private bool $pseudoStockEnabled,
         private int $pseudoStockCount,
-        private SetArticleItem $items,
+        private array $items,
     ) {
     }
+
+
 
     //
     // -- GETTER
     //
+
+    /**
+     * @return SetArticleItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
 
     /**
      * @return string
@@ -121,6 +121,13 @@ final class Set
      *         baseID: int,
      *         variantID: int,
      *     },
+     *     items: array{
+     *            article: array{
+     *              baseID: int,
+     *              variantID: int,
+     *            },
+     *            numberOfPieces: int,
+     *     }[],
      *     title1: array{
      *         lang: string,
      *         value: string,
@@ -136,13 +143,6 @@ final class Set
      *     manufacturer: string,
      *     pseudoStockEnabled: bool,
      *     pseudoStockCount: int,
-     *   items: array{
-     *   article: array{
-     *   baseID: int,
-     *   variantID: int,
-     *   },
-     *   numberOfQuantity: int,
-     *    },
      * } $data
      *
      * @return static
@@ -158,7 +158,10 @@ final class Set
             (string) $data['manufacturer'],
             (bool) $data['pseudoStockEnabled'],
             (int) $data['pseudoStockCount'],
-            SetArticleItem::fromArray($data['items']),
+            array_map(
+                [SetArticleItem::class, 'fromArray'],
+                $data['items'],
+            ),
         );
     }
 
