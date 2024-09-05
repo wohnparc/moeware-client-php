@@ -13,6 +13,7 @@ final class ProductLinkRelationStatus
     /**
      * ProductLinkRelationStatus constructor.
      *
+     * @paramt string $externalID
      * @param ?int $stockWarehouse
      * @param ?int $stockWithInbound
      * @param bool $stockSyncActive
@@ -28,6 +29,7 @@ final class ProductLinkRelationStatus
      * @param ProductLinkRelationStatusChannel[] $otherChannels
      */
     public function __construct(
+        private string $externalID,
         private ?int $stockWarehouse,
         private ?int $stockWithInbound,
         private bool $stockSyncActive,
@@ -44,9 +46,19 @@ final class ProductLinkRelationStatus
     ) {
     }
 
+
+
     //
     // -- GETTER
     //
+
+    /**
+     * @return string
+     */
+    public function getExternalID(): string
+    {
+        return $this->externalID;
+    }
 
     /**
      * @return ?int
@@ -160,6 +172,7 @@ final class ProductLinkRelationStatus
 
     /**
      * @param array{
+     *     externalID: string,
      *     stockWarehouse: int | null,
      *     stockWithInbound: int| null,
      *     stockSyncActive: bool,
@@ -269,6 +282,7 @@ final class ProductLinkRelationStatus
     public static function fromArray(array $data): self
     {
         return new self(
+            $data['externalID'],
             $data['stockWarehouse'] ?? null,
             $data['stockWithInbound'] ?? null,
             ((bool) $data['stockSyncActive']),

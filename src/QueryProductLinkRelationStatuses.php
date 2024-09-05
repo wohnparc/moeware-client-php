@@ -55,6 +55,7 @@ final class QueryProductLinkRelationStatuses extends Query
     /**
      * @param array{
      *     productLinkRelationStatuses: array{
+     *         externalID: string,
      *         stockWarehouse: int|null,
      *         stockWithInbound: int|null,
      *         stockSyncActive: bool,
@@ -180,6 +181,7 @@ final class QueryProductLinkRelationStatuses extends Query
         return <<<'GQL'
         query queryProductLinkRelationStatuses($externalParentProductRef: String!) {
           productLinkRelationStatuses(externalParentProductRef: $externalParentProductRef) {
+            externalID
             stockWarehouse
             stockWithInbound
             stockSyncActive

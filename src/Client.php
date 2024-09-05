@@ -371,6 +371,7 @@ class Client
         /**
          * @var array{
          *     productLinkRelationStatus: array{
+         *         externalID: string,
          *         stockWarehouse: int | null,
          *         stockWithInbound: int| null,
          *         stockSyncActive: bool,
@@ -495,6 +496,7 @@ class Client
         /**
          * @var array{
          *     productLinkRelationStatuses: array{
+         *         externalID: string,
          *         stockWarehouse: int | null,
          *         stockWithInbound: int| null,
          *         stockSyncActive: bool,
