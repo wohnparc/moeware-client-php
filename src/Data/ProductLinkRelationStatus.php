@@ -7,6 +7,7 @@ namespace Wohnparc\Moeware\Data;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
+use Wohnparc\Moeware\Util\Util;
 
 final class ProductLinkRelationStatus
 {
@@ -286,24 +287,12 @@ final class ProductLinkRelationStatus
             $data['stockWarehouse'] ?? null,
             $data['stockWithInbound'] ?? null,
             ((bool) $data['stockSyncActive']),
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['stockUpdatedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['stockSyncedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
+            Util::fromRawDate($data['stockUpdatedAt'] ?? ''),
+            Util::fromRawDate($data['stockSyncedAt'] ?? ''),
             PriceWatch::fromArray($data['priceWatch']),
             $data['moewareURL'] ?? null,
             ((bool) $data['shopSyncActive']),
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['shopSyncedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
+            Util::fromRawDate($data['shopSyncedAt'] ?? ''),
             ProductLinkInfo::fromArray($data['info']),
             $data['article'] ? Article::fromArray($data['article']) : null,
             $data['set'] ? Set::fromArray($data['set']) : null,
