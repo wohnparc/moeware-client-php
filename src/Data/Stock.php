@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wohnparc\Moeware\Data;
 
 use DateTime;
+use DateTimeImmutable;
 use Wohnparc\Moeware\Util\Util;
 
 final class Stock
@@ -14,12 +15,12 @@ final class Stock
      *
      * @param Location $location
      * @param int $quantity
-     * @param DateTime|null $expectedAt
+     * @param DateTimeImmutable|null $expectedAt
      */
     private function __construct(
         private Location $location,
         private int $quantity,
-        private ?DateTime $expectedAt,
+        private ?DateTimeImmutable $expectedAt,
     ) {
     }
 
@@ -50,9 +51,9 @@ final class Stock
     /**
      * Returns the expected arrival (at warehouse) date of the stock element.
      *
-     * @return DateTime|null
+     * @return DateTimeImmutable|null
      */
-    public function getExpectedAt(): ?DateTime
+    public function getExpectedAt(): ?DateTimeImmutable
     {
         return $this->expectedAt;
     }
@@ -77,12 +78,13 @@ final class Stock
     {
         return new self(
             Location::fromArray($data['location']),
-            (int)($data['quantity']),
+            (int) ($data['quantity']),
             (
                 isset($data['expectedAt'])
-                    ? Util::fromRawDate((string)$data['expectedAt'])
-                    : null
+        ? Util::fromRawDate((string) $data['expectedAt'])
+        : null
             ),
         );
     }
+
 }

@@ -7,6 +7,7 @@ namespace Wohnparc\Moeware\Data;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
+use Wohnparc\Moeware\Util\Util;
 
 final class PriceWatch
 {
@@ -80,16 +81,8 @@ final class PriceWatch
     ): self {
         return new self(
             $data['suggestedPrice'],
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['suggestedPriceUpdatedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['suggestedPriceSyncedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
+            Util::fromRawDate($data['suggestedPriceUpdatedAt'] ?? ''),
+            Util::fromRawDate($data['suggestedPriceSyncedAt'] ?? ''),
             ((bool) $data['enabled']),
             $data['externalID'] ?: null,
         );
