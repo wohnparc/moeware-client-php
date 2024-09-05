@@ -122,30 +122,30 @@ final class Set
      *         variantID: int,
      *     },
      *     items: array{
-     *            article: array{
-     *              baseID: int,
-     *              variantID: int,
-     *            },
-     *            numberOfPieces: int,
+     *      article: array{
+     *        baseID: int,
+     *        variantID: int,
+     *      },
+     *     numberOfPieces: int,
      *     }[],
-     *      title1: array{
-     *    array{
+     *     title1: array{
+     *        array{
      *          lang: string,
      *          value: string,
+     *        },
      *      },
-     *    },
      *      title2: array{
-     *    array{
+     *        array{
      *          lang: string,
      *          value: string,
-     *      },
-     *    },
-     *      title3: array{
-     *    array{
+     *        },
+     *       },
+     *       title3: array{
+     *        array{
      *          lang: string,
      *          value: string,
-     *      },
-     *    },
+     *        },
+     *     },
      *     manufacturer: string,
      *     pseudoStockEnabled: bool,
      *     pseudoStockCount: int,
