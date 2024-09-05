@@ -187,16 +187,22 @@ class Client
              *                 variantID: int,
              *             },
              *             title1: array{
-             *                 lang: string,
-             *                 value: string,
+             *              array{
+             *                lang: string,
+             *                value: string,
+             *              },
              *             },
              *             title2: array{
+             *               array{
              *                 lang: string,
              *                 value: string,
+             *               },
              *             },
              *             title3: array{
+             *               array{
              *                 lang: string,
              *                 value: string,
+             *               },
              *             },
              *             manufacturer: string,
              *             pseudoStockEnabled: bool,
@@ -393,16 +399,22 @@ class Client
          *                 variantID: int,
          *             },
          *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *              },
          *             },
          *             title2: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
@@ -429,22 +441,28 @@ class Client
          *             },
          *          items: array{
          *            article: array{
-         *           baseID: int,
-         *        variantID: int,
-         *   },
-         *   numberOfPieces: int,
+         *              baseID: int,
+         *              variantID: int,
+         *          },
+         *          numberOfPieces: int,
          *          }[],
          *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *              },
          *             },
          *             title2: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
@@ -505,16 +523,22 @@ class Client
          *                 variantID: int,
          *             },
          *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *              },
          *             },
          *             title2: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
@@ -541,23 +565,29 @@ class Client
          *             },
          *          items: array{
          *            article: array{
-         *        baseID: int,
-         *     variantID: int,
-         *   },
-         *   numberOfPieces: int,
+         *              baseID: int,
+         *              variantID: int,
+         *            },
+         *            numberOfPieces: int,
          *          }[],
-         *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *         title1: array{
+         *            array{
+         *              lang: string,
+         *               value: string,
          *             },
-         *             title2: array{
-         *                 lang: string,
-         *                 value: string,
+         *            },
+         *            title2: array{
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
-         *             },
+         *               },
+         *              },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
          *             pseudoStockCount: int,

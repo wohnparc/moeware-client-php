@@ -83,16 +83,22 @@ final class QueryProductLinkRelationStatus extends Query
      *                 variantID: int
      *             },
      *             title1: array{
-     *                 lang: string,
-     *                 value: string
+     *              array{
+     *                lang: string,
+     *                value: string,
+     *              },
      *             },
      *             title2: array{
+     *               array{
      *                 lang: string,
-     *                 value: string
+     *                 value: string,
+     *               },
      *             },
      *             title3: array{
+     *               array{
      *                 lang: string,
-     *                 value: string
+     *                 value: string,
+     *               },
      *             },
      *             manufacturer: string,
      *             pseudoStockEnabled: bool,
@@ -125,16 +131,22 @@ final class QueryProductLinkRelationStatus extends Query
      *                 numberOfPieces: int
      *             }[],
      *             title1: array{
-     *                 lang: string,
-     *                 value: string
+     *              array{
+     *                lang: string,
+     *                value: string,
+     *              },
      *             },
      *             title2: array{
+     *               array{
      *                 lang: string,
-     *                 value: string
+     *                 value: string,
+     *               },
      *             },
      *             title3: array{
+     *               array{
      *                 lang: string,
-     *                 value: string
+     *                 value: string,
+     *               },
      *             },
      *             manufacturer: string,
      *             pseudoStockEnabled: bool,

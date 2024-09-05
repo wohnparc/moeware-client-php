@@ -188,16 +188,22 @@ final class ProductLinkRelationStatus
      *             variantID: int,
      *         },
      *         title1: array{
-     *             lang: string,
-     *             value: string,
+     *          array{
+     *            lang: string,
+     *            value: string,
+     *          },
      *         },
      *         title2: array{
+     *           array{
      *             lang: string,
      *             value: string,
+     *           },
      *         },
      *         title3: array{
+     *           array{
      *             lang: string,
      *             value: string,
+     *            },
      *         },
      *         manufacturer: string,
      *         pseudoStockEnabled: bool,
@@ -229,17 +235,23 @@ final class ProductLinkRelationStatus
      *           },
      *           numberOfPieces: int,
      *         }[],
-     *         title1: array{
-     *             lang: string,
+     *          title1: array{
+     *             array{
+     *               lang: string,
      *             value: string,
-     *         },
-     *         title2: array{
-     *             lang: string,
-     *             value: string,
+     *             },
+     *        },
+     *        title2: array{
+     *          array{
+     *            lang: string,
+     *            value: string,
+     *          },
      *         },
      *         title3: array{
-     *             lang: string,
-     *             value: string,
+     *          array{
+     *            lang: string,
+     *            value: string,
+     *           },
      *         },
      *         manufacturer: string,
      *         pseudoStockEnabled: bool,

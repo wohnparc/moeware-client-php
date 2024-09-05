@@ -97,16 +97,22 @@ final class QueryArticleInfo extends Query
      *                 variantID: int,
      *             },
      *             title1: array{
-     *                 lang: string,
-     *                 value: string,
+     *              array{
+     *                lang: string,
+     *                value: string,
+     *              },
      *             },
      *             title2: array{
+     *               array{
      *                 lang: string,
      *                 value: string,
+     *               },
      *             },
      *             title3: array{
+     *               array{
      *                 lang: string,
      *                 value: string,
+     *               },
      *             },
      *             manufacturer: string,
      *             pseudoStockEnabled: bool,
@@ -139,11 +145,11 @@ final class QueryArticleInfo extends Query
         $data = $data['articleInfo'];
 
         return new self(
-            (string)($data['status']),
+            (string) ($data['status']),
             (
                 $data['message']
-                    ? (string)$data['message']
-                    : null
+        ? (string) $data['message']
+        : null
             ),
             array_map([Article::class, 'fromArray'], $data['articles']),
             array_map([ArticleRef::class, 'fromArray'], $data['unknownArticles']),
@@ -217,4 +223,5 @@ final class QueryArticleInfo extends Query
             'refs' => array_map(ArticleRef::mapToArray(), $refs),
         ];
     }
+
 }
