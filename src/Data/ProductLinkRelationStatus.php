@@ -187,18 +187,24 @@ final class ProductLinkRelationStatus
      *             baseID: int,
      *             variantID: int,
      *         },
-     *         title1: array{
-     *             lang: string,
-     *             value: string,
-     *         },
-     *         title2: array{
-     *             lang: string,
-     *             value: string,
-     *         },
-     *         title3: array{
-     *             lang: string,
-     *             value: string,
-     *         },
+     *       title1: array{
+     *     array{
+     *           lang: string,
+     *           value: string,
+     *       },
+     *     },
+     *       title2: array{
+     *     array{
+     *           lang: string,
+     *           value: string,
+     *       },
+     *     },
+     *       title3: array{
+     *     array{
+     *           lang: string,
+     *           value: string,
+     *       },
+     *     },
      *         manufacturer: string,
      *         pseudoStockEnabled: bool,
      *         pseudoStockCount: int,
@@ -229,18 +235,24 @@ final class ProductLinkRelationStatus
      *           },
      *           numberOfPieces: int,
      *         }[],
-     *         title1: array{
-     *             lang: string,
-     *             value: string,
-     *         },
-     *         title2: array{
-     *             lang: string,
-     *             value: string,
-     *         },
-     *         title3: array{
-     *             lang: string,
-     *             value: string,
-     *         },
+     *      title1: array{
+     *    array{
+     *          lang: string,
+     *          value: string,
+     *      },
+     *    },
+     *      title2: array{
+     *    array{
+     *          lang: string,
+     *          value: string,
+     *      },
+     *    },
+     *      title3: array{
+     *    array{
+     *          lang: string,
+     *          value: string,
+     *      },
+     *    },
      *         manufacturer: string,
      *         pseudoStockEnabled: bool,
      *         pseudoStockCount: int,
