@@ -182,6 +182,9 @@ final class ProductLinkRelationStatus
      *     priceWatch: array{
      *      enabled: bool,
      *      externalID: string|null,
+     *      externalURL: string|null,
+     *      enabledAt: string|null,
+     *      disabledAt: string|null,
      *      suggestedPrice: int| null,
      *      suggestedPriceUpdatedAt: string| null,
      *      suggestedPriceSyncedAt: string| null,

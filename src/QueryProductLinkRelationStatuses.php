@@ -64,6 +64,9 @@ final class QueryProductLinkRelationStatuses extends Query
      *         priceWatch: array{
      *             enabled: bool,
      *             externalID: string|null,
+     *             externalURL: string|null,
+     *             enabledAt: string|null,
+     *             disabledAt: string|null,
      *             suggestedPrice: int|null,
      *             suggestedPriceUpdatedAt: string|null,
      *             suggestedPriceSyncedAt: string|null,
@@ -190,6 +193,9 @@ final class QueryProductLinkRelationStatuses extends Query
             priceWatch {
               enabled
               externalID
+              externalURL
+              enabledAt
+              disabledAt
               suggestedPrice
               suggestedPriceUpdatedAt
               suggestedPriceSyncedAt
