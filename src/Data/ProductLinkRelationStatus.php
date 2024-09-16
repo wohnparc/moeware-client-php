@@ -20,7 +20,7 @@ final class ProductLinkRelationStatus
      * @param bool $stockSyncActive
      * @param ?DateTimeImmutable $stockUpdatedAt
      * @param ?DateTimeImmutable $stockSyncedAt
-     * @param PriceWatch $priceWatch
+     * @param ?PriceWatch $priceWatch
      * @param ?string $moewareURL
      * @param bool $shopSyncActive
      * @param ?DateTimeImmutable $shopSyncedAt
@@ -36,7 +36,7 @@ final class ProductLinkRelationStatus
         private bool $stockSyncActive,
         private ?DateTimeImmutable $stockUpdatedAt,
         private ?DateTimeImmutable $stockSyncedAt,
-        private PriceWatch $priceWatch,
+        private ?PriceWatch $priceWatch,
         private ?string $moewareURL,
         private bool $shopSyncActive,
         private ?DateTimeImmutable $shopSyncedAt,
@@ -101,14 +101,12 @@ final class ProductLinkRelationStatus
         return $this->stockSyncedAt;
     }
 
-    public function getPriceWatch(): PriceWatch
+    /**
+     * @return ?PriceWatch
+     */
+    public function getPriceWatch(): ?PriceWatch
     {
         return $this->priceWatch;
-    }
-
-    public function setPriceWatch(PriceWatch $priceWatch): void
-    {
-        $this->priceWatch = $priceWatch;
     }
 
     /**
@@ -188,7 +186,7 @@ final class ProductLinkRelationStatus
      *      suggestedPrice: int| null,
      *      suggestedPriceUpdatedAt: string| null,
      *      suggestedPriceSyncedAt: string| null,
-     *     },
+     *     }| null,
      *     moewareURL: string| null,
      *     shopSyncActive: bool,
      *     shopSyncedAt: string | null,
@@ -292,7 +290,7 @@ final class ProductLinkRelationStatus
             ((bool) $data['stockSyncActive']),
             Util::fromRawDate($data['stockUpdatedAt'] ?? ''),
             Util::fromRawDate($data['stockSyncedAt'] ?? ''),
-            PriceWatch::fromArray($data['priceWatch']),
+            $data['priceWatch'] ? PriceWatch::fromArray($data['priceWatch']) : null,
             $data['moewareURL'] ?? null,
             ((bool) $data['shopSyncActive']),
             Util::fromRawDate($data['shopSyncedAt'] ?? ''),

@@ -70,7 +70,7 @@ final class QueryProductLinkRelationStatus extends Query
      *             suggestedPrice: int|null,
      *             suggestedPriceUpdatedAt: string|null,
      *             suggestedPriceSyncedAt: string|null
-     *         },
+     *         } | null,
      *         moewareURL: string|null,
      *         shopSyncActive: bool,
      *         shopSyncedAt: string|null,
