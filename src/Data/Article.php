@@ -11,9 +11,9 @@ final class Article
      *
      * @param string $id
      * @param ArticleRef $ref
-     * @param LocalizedText $title1
-     * @param LocalizedText $title2
-     * @param LocalizedText $title3
+     * @param LocalizedText[] $title1
+     * @param LocalizedText[] $title2
+     * @param LocalizedText[] $title3
      * @param string $manufacturer
      * @param bool $pseudoStockEnabled
      * @param int $pseudoStockCount
@@ -23,9 +23,9 @@ final class Article
     public function __construct(
         private string $id,
         private ArticleRef $ref,
-        private LocalizedText $title1,
-        private LocalizedText $title2,
-        private LocalizedText $title3,
+        private array $title1,
+        private array $title2,
+        private array $title3,
         private string $manufacturer,
         private bool $pseudoStockEnabled,
         private int $pseudoStockCount,
@@ -61,9 +61,9 @@ final class Article
     /**
      * Returns the first title of the article.
      *
-     * @return LocalizedText
+     * @return LocalizedText[]
      */
-    public function getTitle1(): LocalizedText
+    public function getTitle1(): array
     {
         return $this->title1;
     }
@@ -71,9 +71,9 @@ final class Article
     /**
      * Returns the second title of the article.
      *
-     * @return LocalizedText
+     * @return LocalizedText[]
      */
-    public function getTitle2(): LocalizedText
+    public function getTitle2(): array
     {
         return $this->title2;
     }
@@ -81,9 +81,9 @@ final class Article
     /**
      * Returns the third title of the article.
      *
-     * @return LocalizedText
+     * @return LocalizedText[]
      */
-    public function getTitle3(): LocalizedText
+    public function getTitle3(): array
     {
         return $this->title3;
     }
@@ -147,18 +147,24 @@ final class Article
      *         baseID: int,
      *         variantID: int,
      *     },
-     *     title1: array{
-     *         lang: string,
-     *         value: string,
-     *     },
-     *     title2: array{
-     *         lang: string,
-     *         value: string,
-     *     },
-     *     title3: array{
-     *         lang: string,
-     *         value: string,
-     *     },
+     *             title1: array{
+     *              array{
+     *                lang: string,
+     *                value: string,
+     *              },
+     *             },
+     *             title2: array{
+     *               array{
+     *                 lang: string,
+     *                 value: string,
+     *               },
+     *             },
+     *             title3: array{
+     *               array{
+     *                 lang: string,
+     *                 value: string,
+     *               },
+     *             },
      *     manufacturer: string,
      *     pseudoStockEnabled: bool,
      *     pseudoStockCount: int,
@@ -182,16 +188,17 @@ final class Article
     public static function fromArray(array $data): self
     {
         return new self(
-            (string)($data['id']),
+            (string) ($data['id']),
             ArticleRef::fromArray($data['ref']),
-            LocalizedText::fromArray($data['title1']),
-            LocalizedText::fromArray($data['title2']),
-            LocalizedText::fromArray($data['title3']),
-            (string)($data['manufacturer']),
-            (bool)($data['pseudoStockEnabled']),
-            (int)($data['pseudoStockCount']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title1']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title2']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title3']),
+            (string) ($data['manufacturer']),
+            (bool) ($data['pseudoStockEnabled']),
+            (int) ($data['pseudoStockCount']),
             array_map([Stock::class, 'fromArray'], $data['stock']),
             ArticlePrices::fromArray($data['prices']),
         );
     }
+
 }

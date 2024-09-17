@@ -55,40 +55,54 @@ final class QueryProductLinkRelationStatus extends Query
     /**
      * @param array{
      *     productLinkRelationStatus: array{
-     *         stockWarehouse: int | null,
-     *         stockWithInbound: int| null,
+     *         externalID: string,
+     *         stockWarehouse: int|null,
+     *         stockWithInbound: int|null,
      *         stockSyncActive: bool,
-     *         stockUpdatedAt: string| null,
-     *         stockSyncedAt: string| null,
-     *         suggestedPrice: int| null,
-     *         suggestedPriceUpdatedAt: string| null,
-     *         suggestedPriceSyncedAt: string| null,
-     *         moewareURL: string| null,
+     *         stockUpdatedAt: string|null,
+     *         stockSyncedAt: string|null,
+     *         priceWatch: array{
+     *             enabled: bool,
+     *             externalID: string|null,
+     *             externalURL: string|null,
+     *             enabledAt: string|null,
+     *             disabledAt: string|null,
+     *             suggestedPrice: int|null,
+     *             suggestedPriceUpdatedAt: string|null,
+     *             suggestedPriceSyncedAt: string|null
+     *         } | null,
+     *         moewareURL: string|null,
      *         shopSyncActive: bool,
-     *         shopSyncedAt: string | null,
+     *         shopSyncedAt: string|null,
      *         info: array{
      *             productNotFound: bool,
      *             productDisabled: bool,
      *             invalidSetConfig: bool,
-     *             invalidSetItems: bool,
+     *             invalidSetItems: bool
      *         },
      *         article: array{
      *             id: string,
      *             ref: array{
      *                 baseID: int,
-     *                 variantID: int,
+     *                 variantID: int
      *             },
      *             title1: array{
-     *                 lang: string,
-     *                 value: string,
+     *              array{
+     *                lang: string,
+     *                value: string,
+     *              },
      *             },
      *             title2: array{
+     *               array{
      *                 lang: string,
      *                 value: string,
+     *               },
      *             },
      *             title3: array{
+     *               array{
      *                 lang: string,
      *                 value: string,
+     *               },
      *             },
      *             manufacturer: string,
      *             pseudoStockEnabled: bool,
@@ -96,45 +110,58 @@ final class QueryProductLinkRelationStatus extends Query
      *             stock: array{
      *                 location: array{
      *                     code: string,
-     *                     number: int,
+     *                     number: int
      *                 },
      *                 quantity: int,
-     *                 expectedAt: ?string,
+     *                 expectedAt: ?string
      *             }[],
      *             prices: array{
      *                 recommendedRetailPrice: ?int,
      *                 advertisingPrice: ?int,
-     *                 calculationPrice: ?int,
-     *             },
-     *         } | null,
+     *                 calculationPrice: ?int
+     *             }
+     *         }|null,
      *         set: array{
      *             id: string,
      *             ref: array{
      *                 baseID: int,
-     *                 variantID: int,
+     *                 variantID: int
      *             },
+     *             items: array{
+     *                 article: array{
+     *                     baseID: int,
+     *                     variantID: int
+     *                 },
+     *                 numberOfPieces: int
+     *             }[],
      *             title1: array{
-     *                 lang: string,
-     *                 value: string,
+     *              array{
+     *                lang: string,
+     *                value: string,
+     *              },
      *             },
      *             title2: array{
+     *               array{
      *                 lang: string,
      *                 value: string,
+     *               },
      *             },
      *             title3: array{
+     *               array{
      *                 lang: string,
      *                 value: string,
+     *               },
      *             },
      *             manufacturer: string,
      *             pseudoStockEnabled: bool,
-     *             pseudoStockCount: int,
-     *         } | null,
+     *             pseudoStockCount: int
+     *         }|null,
      *         otherChannels: array{
      *             channelID: string,
      *             domainIconURL: string,
-     *             platformIconURL: string,
-     *         }[],
-     *     } | null,
+     *             platformIconURL: string
+     *         }[]
+     *     }|null
      * } $data
      *
      * @return static
@@ -143,8 +170,8 @@ final class QueryProductLinkRelationStatus extends Query
     {
         return new self(
             isset($data['productLinkRelationStatus'])
-                ? ProductLinkRelationStatus::fromArray($data['productLinkRelationStatus'])
-                : null,
+            ? ProductLinkRelationStatus::fromArray($data['productLinkRelationStatus'])
+            : null,
         );
     }
 
@@ -156,14 +183,22 @@ final class QueryProductLinkRelationStatus extends Query
         return <<<'GQL'
         query queryProductLinkRelationStatus($externalProductRef: String!) {
           productLinkRelationStatus(externalProductRef: $externalProductRef) {
+            externalID
             stockWarehouse
             stockWithInbound
             stockSyncActive
             stockUpdatedAt
             stockSyncedAt
-            suggestedPrice
-            suggestedPriceUpdatedAt
-            suggestedPriceSyncedAt
+            priceWatch {
+              enabled
+              externalID
+              externalURL
+              enabledAt
+              disabledAt
+              suggestedPrice
+              suggestedPriceUpdatedAt
+              suggestedPriceSyncedAt
+            }          
             moewareURL
             shopSyncActive
             shopSyncedAt
@@ -214,6 +249,13 @@ final class QueryProductLinkRelationStatus extends Query
                 baseID
                 variantID
               }
+              items {
+                article {
+                  baseID
+                  variantID
+                }
+                numberOfPieces
+              }
               title1 {
                 lang
                 value
@@ -253,4 +295,5 @@ final class QueryProductLinkRelationStatus extends Query
             'externalProductRef' => $externalProductRef,
         ];
     }
+
 }

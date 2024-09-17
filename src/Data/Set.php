@@ -11,28 +11,40 @@ final class Set
      *
      * @param string $id
      * @param SetRef $ref
-     * @param LocalizedText $title1
-     * @param LocalizedText $title2
-     * @param LocalizedText $title3
+     * @param LocalizedText[] $title1
+     * @param LocalizedText[] $title2
+     * @param LocalizedText[] $title3
      * @param string $manufacturer
      * @param bool $pseudoStockEnabled
      * @param int $pseudoStockCount
+     * @param SetArticleItem[] $items
      */
     public function __construct(
         private string $id,
         private SetRef $ref,
-        private LocalizedText $title1,
-        private LocalizedText $title2,
-        private LocalizedText $title3,
+        private array $title1,
+        private array $title2,
+        private array $title3,
         private string $manufacturer,
         private bool $pseudoStockEnabled,
         private int $pseudoStockCount,
+        private array $items,
     ) {
     }
+
+
 
     //
     // -- GETTER
     //
+
+    /**
+     * @return SetArticleItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
 
     /**
      * @return string
@@ -51,25 +63,25 @@ final class Set
     }
 
     /**
-     * @return LocalizedText
+     * @return LocalizedText[]
      */
-    public function getTitle1(): LocalizedText
+    public function getTitle1(): array
     {
         return $this->title1;
     }
 
     /**
-     * @return LocalizedText
+     * @return LocalizedText[]
      */
-    public function getTitle2(): LocalizedText
+    public function getTitle2(): array
     {
         return $this->title2;
     }
 
     /**
-     * @return LocalizedText
+     * @return LocalizedText[]
      */
-    public function getTitle3(): LocalizedText
+    public function getTitle3(): array
     {
         return $this->title3;
     }
@@ -109,17 +121,30 @@ final class Set
      *         baseID: int,
      *         variantID: int,
      *     },
+     *     items: array{
+     *      article: array{
+     *        baseID: int,
+     *        variantID: int,
+     *      },
+     *     numberOfPieces: int,
+     *     }[],
      *     title1: array{
-     *         lang: string,
-     *         value: string,
-     *     },
-     *     title2: array{
-     *         lang: string,
-     *         value: string,
-     *     },
-     *     title3: array{
-     *         lang: string,
-     *         value: string,
+     *        array{
+     *          lang: string,
+     *          value: string,
+     *        },
+     *      },
+     *      title2: array{
+     *        array{
+     *          lang: string,
+     *          value: string,
+     *        },
+     *       },
+     *       title3: array{
+     *        array{
+     *          lang: string,
+     *          value: string,
+     *        },
      *     },
      *     manufacturer: string,
      *     pseudoStockEnabled: bool,
@@ -131,14 +156,19 @@ final class Set
     public static function fromArray(array $data): self
     {
         return new self(
-            (string)$data['id'],
+            (string) $data['id'],
             SetRef::fromArray($data['ref']),
-            LocalizedText::fromArray($data['title1']),
-            LocalizedText::fromArray($data['title2']),
-            LocalizedText::fromArray($data['title3']),
-            (string)$data['manufacturer'],
-            (bool)$data['pseudoStockEnabled'],
-            (int)$data['pseudoStockCount'],
+            array_map([LocalizedText::class, 'fromArray'], $data['title1']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title2']),
+            array_map([LocalizedText::class, 'fromArray'], $data['title3']),
+            (string) $data['manufacturer'],
+            (bool) $data['pseudoStockEnabled'],
+            (int) $data['pseudoStockCount'],
+            array_map(
+                [SetArticleItem::class, 'fromArray'],
+                $data['items'],
+            ),
         );
     }
+
 }

@@ -7,20 +7,20 @@ namespace Wohnparc\Moeware\Data;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
+use Wohnparc\Moeware\Util\Util;
 
 final class ProductLinkRelationStatus
 {
     /**
      * ProductLinkRelationStatus constructor.
      *
+     * @paramt string $externalID
      * @param ?int $stockWarehouse
      * @param ?int $stockWithInbound
      * @param bool $stockSyncActive
      * @param ?DateTimeImmutable $stockUpdatedAt
      * @param ?DateTimeImmutable $stockSyncedAt
-     * @param ?int $suggestedPrice
-     * @param ?DateTimeImmutable $suggestedPriceUpdatedAt
-     * @param ?DateTimeImmutable $suggestedPriceSyncedAt
+     * @param ?PriceWatch $priceWatch
      * @param ?string $moewareURL
      * @param bool $shopSyncActive
      * @param ?DateTimeImmutable $shopSyncedAt
@@ -30,14 +30,13 @@ final class ProductLinkRelationStatus
      * @param ProductLinkRelationStatusChannel[] $otherChannels
      */
     public function __construct(
+        private string $externalID,
         private ?int $stockWarehouse,
         private ?int $stockWithInbound,
         private bool $stockSyncActive,
         private ?DateTimeImmutable $stockUpdatedAt,
         private ?DateTimeImmutable $stockSyncedAt,
-        private ?int $suggestedPrice,
-        private ?DateTimeImmutable $suggestedPriceUpdatedAt,
-        private ?DateTimeImmutable $suggestedPriceSyncedAt,
+        private ?PriceWatch $priceWatch,
         private ?string $moewareURL,
         private bool $shopSyncActive,
         private ?DateTimeImmutable $shopSyncedAt,
@@ -48,9 +47,19 @@ final class ProductLinkRelationStatus
     ) {
     }
 
+
+
     //
     // -- GETTER
     //
+
+    /**
+     * @return string
+     */
+    public function getExternalID(): string
+    {
+        return $this->externalID;
+    }
 
     /**
      * @return ?int
@@ -93,27 +102,11 @@ final class ProductLinkRelationStatus
     }
 
     /**
-     * @return ?int
+     * @return ?PriceWatch
      */
-    public function getSuggestedPrice(): ?int
+    public function getPriceWatch(): ?PriceWatch
     {
-        return $this->suggestedPrice;
-    }
-
-    /**
-     * @return ?DateTimeImmutable
-     */
-    public function getSuggestedPriceUpdatedAt(): ?DateTimeImmutable
-    {
-        return $this->suggestedPriceUpdatedAt;
-    }
-
-    /**
-     * @return ?DateTimeImmutable
-     */
-    public function getSuggestedPriceSyncedAt(): ?DateTimeImmutable
-    {
-        return $this->suggestedPriceSyncedAt;
+        return $this->priceWatch;
     }
 
     /**
@@ -178,14 +171,22 @@ final class ProductLinkRelationStatus
 
     /**
      * @param array{
+     *     externalID: string,
      *     stockWarehouse: int | null,
      *     stockWithInbound: int| null,
      *     stockSyncActive: bool,
      *     stockUpdatedAt: string| null,
      *     stockSyncedAt: string| null,
-     *     suggestedPrice: int| null,
-     *     suggestedPriceUpdatedAt: string| null,
-     *     suggestedPriceSyncedAt: string| null,
+     *     priceWatch: array{
+     *      enabled: bool,
+     *      externalID: string|null,
+     *      externalURL: string|null,
+     *      enabledAt: string|null,
+     *      disabledAt: string|null,
+     *      suggestedPrice: int| null,
+     *      suggestedPriceUpdatedAt: string| null,
+     *      suggestedPriceSyncedAt: string| null,
+     *     }| null,
      *     moewareURL: string| null,
      *     shopSyncActive: bool,
      *     shopSyncedAt: string | null,
@@ -202,16 +203,22 @@ final class ProductLinkRelationStatus
      *             variantID: int,
      *         },
      *         title1: array{
-     *             lang: string,
-     *             value: string,
+     *          array{
+     *            lang: string,
+     *            value: string,
+     *          },
      *         },
      *         title2: array{
+     *           array{
      *             lang: string,
      *             value: string,
+     *           },
      *         },
      *         title3: array{
+     *           array{
      *             lang: string,
      *             value: string,
+     *            },
      *         },
      *         manufacturer: string,
      *         pseudoStockEnabled: bool,
@@ -236,17 +243,30 @@ final class ProductLinkRelationStatus
      *             baseID: int,
      *             variantID: int,
      *         },
-     *         title1: array{
-     *             lang: string,
+     *         items: array{
+     *           article: array{
+     *             baseID: int,
+     *             variantID: int,
+     *           },
+     *           numberOfPieces: int,
+     *         }[],
+     *          title1: array{
+     *             array{
+     *               lang: string,
      *             value: string,
-     *         },
-     *         title2: array{
-     *             lang: string,
-     *             value: string,
+     *             },
+     *        },
+     *        title2: array{
+     *          array{
+     *            lang: string,
+     *            value: string,
+     *          },
      *         },
      *         title3: array{
-     *             lang: string,
-     *             value: string,
+     *          array{
+     *            lang: string,
+     *            value: string,
+     *           },
      *         },
      *         manufacturer: string,
      *         pseudoStockEnabled: bool,
@@ -264,37 +284,16 @@ final class ProductLinkRelationStatus
     public static function fromArray(array $data): self
     {
         return new self(
+            $data['externalID'],
             $data['stockWarehouse'] ?? null,
             $data['stockWithInbound'] ?? null,
-            ((bool)$data['stockSyncActive']),
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['stockUpdatedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['stockSyncedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
-            $data['suggestedPrice'],
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['suggestedPriceUpdatedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['suggestedPriceSyncedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
+            ((bool) $data['stockSyncActive']),
+            Util::fromRawDate($data['stockUpdatedAt'] ?? ''),
+            Util::fromRawDate($data['stockSyncedAt'] ?? ''),
+            $data['priceWatch'] ? PriceWatch::fromArray($data['priceWatch']) : null,
             $data['moewareURL'] ?? null,
-            ((bool)$data['shopSyncActive']),
-            DateTimeImmutable::createFromFormat(
-                DateTimeInterface::RFC3339,
-                $data['shopSyncedAt'] ?? '',
-                new DateTimeZone('UTC'),
-            ) ?: null,
+            ((bool) $data['shopSyncActive']),
+            Util::fromRawDate($data['shopSyncedAt'] ?? ''),
             ProductLinkInfo::fromArray($data['info']),
             $data['article'] ? Article::fromArray($data['article']) : null,
             $data['set'] ? Set::fromArray($data['set']) : null,
@@ -304,4 +303,5 @@ final class ProductLinkRelationStatus
             )
         );
     }
+
 }

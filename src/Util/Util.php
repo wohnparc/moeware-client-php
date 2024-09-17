@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Wohnparc\Moeware\Util;
 
 use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
+use DateTimeZone;
 
 class Util
 {
+    public const  DATE_FORMAT = 'Y-m-d\TH:i:s.v\Z';
+
     /**
      * Returns the formatted string representation of the
      * given DateTime to be used in the GraphQL API.
@@ -28,10 +32,11 @@ class Util
      *
      * @param string $raw
      *
-     * @return DateTime
+     * @return DateTimeImmutable|null
      */
-    public static function fromRawDate(string $raw): ?DateTime
+    public static function fromRawDate(string $raw): ?DateTimeImmutable
     {
-        return DateTime::createFromFormat(DateTimeInterface::RFC3339, $raw) ?: null;
+        return DateTimeImmutable::createFromFormat(Util::DATE_FORMAT, $raw) ?: null;
     }
+
 }

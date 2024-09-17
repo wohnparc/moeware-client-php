@@ -140,7 +140,8 @@ class Client
     }
 
     /**
-     * Executes a QueryArticleInfo request to the GraphQL API and returns a mapped object.
+     * Executes a QueryArticleInfo request to the GraphQL API and returns a
+     * mapped object.
      *
      * Note: It automatically splits the ArticleRef array input into chunks
      * and performs multiple requests if necessary to prevent the response
@@ -187,16 +188,22 @@ class Client
              *                 variantID: int,
              *             },
              *             title1: array{
-             *                 lang: string,
-             *                 value: string,
+             *              array{
+             *                lang: string,
+             *                value: string,
+             *              },
              *             },
              *             title2: array{
+             *               array{
              *                 lang: string,
              *                 value: string,
+             *               },
              *             },
              *             title3: array{
+             *               array{
              *                 lang: string,
              *                 value: string,
+             *               },
              *             },
              *             manufacturer: string,
              *             pseudoStockEnabled: bool,
@@ -239,7 +246,8 @@ class Client
     }
 
     /**
-     * Executes a QuerySetArticleInfo request to the GraphQL API and returns a mapped object.
+     * Executes a QuerySetArticleInfo request to the GraphQL API and returns a
+     * mapped object.
      *
      * Note: It automatically splits the SetArticleRef array input into chunks
      * and performs multiple requests if necessary to prevent the response
@@ -364,14 +372,22 @@ class Client
         /**
          * @var array{
          *     productLinkRelationStatus: array{
+         *         externalID: string,
          *         stockWarehouse: int | null,
          *         stockWithInbound: int| null,
          *         stockSyncActive: bool,
          *         stockUpdatedAt: string| null,
          *         stockSyncedAt: string| null,
-         *         suggestedPrice: int| null,
-         *         suggestedPriceUpdatedAt: string| null,
-         *         suggestedPriceSyncedAt: string| null,
+         *         priceWatch: array{
+         *          enabled: bool,
+         *          externalID: string|null,
+         *          externalURL: string|null,
+         *          enabledAt: string|null,
+         *          disabledAt: string|null,
+         *          suggestedPrice: int| null,
+         *          suggestedPriceUpdatedAt: string| null,
+         *          suggestedPriceSyncedAt: string| null,
+         *         },
          *         moewareURL: string| null,
          *         shopSyncActive: bool,
          *         shopSyncedAt: string | null,
@@ -388,16 +404,22 @@ class Client
          *                 variantID: int,
          *             },
          *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *              },
          *             },
          *             title2: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
@@ -422,17 +444,30 @@ class Client
          *                 baseID: int,
          *                 variantID: int,
          *             },
+         *          items: array{
+         *            article: array{
+         *              baseID: int,
+         *              variantID: int,
+         *          },
+         *          numberOfPieces: int,
+         *          }[],
          *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *              },
          *             },
          *             title2: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
@@ -465,14 +500,22 @@ class Client
         /**
          * @var array{
          *     productLinkRelationStatuses: array{
+         *         externalID: string,
          *         stockWarehouse: int | null,
          *         stockWithInbound: int| null,
          *         stockSyncActive: bool,
          *         stockUpdatedAt: string| null,
          *         stockSyncedAt: string| null,
-         *         suggestedPrice: int| null,
-         *         suggestedPriceUpdatedAt: string| null,
-         *         suggestedPriceSyncedAt: string| null,
+         *          priceWatch: array{
+         *            enabled: bool,
+         *            externalID: string|null,
+         *            externalURL: string|null,
+         *            enabledAt: string|null,
+         *            disabledAt: string|null,
+         *            suggestedPrice: int| null,
+         *            suggestedPriceUpdatedAt: string| null,
+         *            suggestedPriceSyncedAt: string| null,
+         *          },
          *         moewareURL: string| null,
          *         shopSyncActive: bool,
          *         shopSyncedAt: string | null,
@@ -489,16 +532,22 @@ class Client
          *                 variantID: int,
          *             },
          *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *              },
          *             },
          *             title2: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
+         *               },
          *             },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
@@ -523,18 +572,31 @@ class Client
          *                 baseID: int,
          *                 variantID: int,
          *             },
-         *             title1: array{
-         *                 lang: string,
-         *                 value: string,
+         *          items: array{
+         *            article: array{
+         *              baseID: int,
+         *              variantID: int,
+         *            },
+         *            numberOfPieces: int,
+         *          }[],
+         *         title1: array{
+         *            array{
+         *              lang: string,
+         *               value: string,
          *             },
-         *             title2: array{
-         *                 lang: string,
-         *                 value: string,
+         *            },
+         *            title2: array{
+         *              array{
+         *                lang: string,
+         *                value: string,
+         *               },
          *             },
          *             title3: array{
+         *               array{
          *                 lang: string,
          *                 value: string,
-         *             },
+         *               },
+         *              },
          *             manufacturer: string,
          *             pseudoStockEnabled: bool,
          *             pseudoStockCount: int,
