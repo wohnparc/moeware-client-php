@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wohnparc\Moeware\Data;
 
 final class ShopOrderInfo extends Query
