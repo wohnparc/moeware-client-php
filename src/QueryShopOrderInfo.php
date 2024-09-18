@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wohnparc\Moeware;
 
 use Wohnparc\Moeware\Data\ShopOrderData;
