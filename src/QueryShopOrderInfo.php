@@ -227,6 +227,7 @@ final class QueryShopOrderInfo extends Query
                 deliveryDayTimeCode
                 deliveryTimeFrom
                 deliveryTimeUntil
+                invoiceAmount
                 payment
                 complaintCode
                 status
