@@ -1,18 +1,20 @@
 <?php
 
-namespace Wohnparc\Moeware\Data;
+namespace Wohnparc\Moeware;
 
-final class ShopOrderInfo extends Query
+use Wohnparc\Moeware\Data\ShopOrderData;
+
+final class QueryShopOrderInfo extends Query
 {
     /**
      * ShopOrderInfo constructor.
      *
-     * @param Status $status
+     * @param string $status
      * @param ?string $message
      * @param ?ShopOrderData $data
      */
     public function __construct(
-        private Status $status,
+        private string $status,
         private ?string $message = null,
         private ?ShopOrderData $data = null,
     ) {
@@ -29,7 +31,7 @@ final class ShopOrderInfo extends Query
      */
     public static function withErrors(array $errors): self
     {
-        $self = new self(Status::ERROR);
+        $self = new self("");
 
         $self->errors = array_map([GraphQLError::class, 'fromArray'], $errors);
 
@@ -37,9 +39,9 @@ final class ShopOrderInfo extends Query
     }
 
     /**
-     * @return Status
+     * @return string
      */
-    public function getStatus(): Status
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -102,7 +104,7 @@ final class ShopOrderInfo extends Query
      *             deliveryYear: int | null,
      *             deliveryWeek: int | null,
      *             deliveryCode: string,
-     *             typeOfDelivery: string,
+     *             typeOfDelivery: string | null,
      *             deliveryBlock: string | null,
      *             deliveryBeginningDate: string | null,
      *             deliveryEndDate: string | null,
@@ -132,7 +134,7 @@ final class ShopOrderInfo extends Query
      *             invoiceNumber: string,
      *             dateOfComplaint: string | null,
      *             deliveryNotification: int,
-     *             typeOfDelivery: string,
+     *             typeOfDelivery: string | null,
      *             deliveryCode: string,
      *             partialDeliveryCode: int,
      *             planningCode: string,
@@ -158,9 +160,134 @@ final class ShopOrderInfo extends Query
     public static function fromArray(array $data): self
     {
         return new self(
-            Status::from($data['status']),
-            $data['message'] ?? null,
-            $data['data'] ? ShopOrderData::fromArray($data['data']) : null
+            (string)$data['status'],
+            isset($data['message']) ? (string)$data['message'] : null,
+            isset($data['data']) ? ShopOrderData::fromArray($data['data']) : null
         );
+    }
+
+    /**
+     * Returns the GraphQL query string for fetching complete shop order info.
+     *
+     * @return string
+     */
+    public static function query(): string
+    {
+        return <<<'GQL'
+        query ShopOrderInfo($orderID: Int!, $lastName: String!, $postCode: String!) {
+          shopOrderInfo(orderID: $orderID, lastName: $lastName, postCode: $postCode) {
+            status
+            message
+            data {
+              head {
+                orderID
+                customerID
+                dateOfContract
+                billingAddress {
+                  salutation
+                  title
+                  firstName
+                  lastName
+                  additionalName
+                  email
+                  country
+                  postCode
+                  city
+                  street
+                  houseNumber
+                  floor
+                }
+                deliveryAddress {
+                  salutation
+                  title
+                  firstName
+                  lastName
+                  additionalName
+                  email
+                  country
+                  postCode
+                  city
+                  street
+                  houseNumber
+                  floor
+                }
+                delivery
+                deliveryDate
+                deliveryYear
+                deliveryWeek
+                deliveryCode
+                typeOfDelivery
+                deliveryBlock
+                deliveryBeginningDate
+                deliveryEndDate
+                deliveryDayTimeCode
+                deliveryTimeFrom
+                deliveryTimeUntil
+                payment
+                complaintCode
+                status
+              }
+              positions {
+                positionNumber
+                uniquePositionNumber
+                baseID
+                variantID
+                quantity
+                unitPrice
+                status
+                dateOfStatus
+                dateOfContract
+                dateOfDispatch
+                dateOfExpectedDelivery
+                timeOfExpectedDelivery
+                dateOfExpectedDeliveryAccording
+                dateOfGoodsReturnedFromCustomer
+                dateOfPickup
+                timeOfPickup
+                invoiceNumber
+                dateOfComplaint
+                deliveryNotification
+                typeOfDelivery
+                deliveryCode
+                partialDeliveryCode
+                planningCode
+                deliveryDateOfContractOfSale
+                dateOfReceipt
+                scheduledDeliveryDate
+                itemText1
+                itemText2
+                itemText3
+                itemTextShop1
+                itemTextShop2
+                itemTextShop3
+                positionText123
+                trackingNumber1
+                trackingNumber2
+                trackingURL
+              }
+            }
+          }
+        }
+        GQL;
+    }
+
+    /**
+     * @param int $orderID
+     * @param string $lastName
+     * @param string $postCode
+     *
+     * @return array{
+     *     orderID: int,
+     *     lastName: string,
+     *     postCode: string,
+     * }
+     */
+    public static function variables(int $orderID, string $lastName, string $postCode): array
+    {
+        return [
+            'orderID' => $orderID,
+            'lastName' => $lastName,
+            'postCode' => $postCode,
+        ];
     }
 }

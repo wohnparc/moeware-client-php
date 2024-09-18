@@ -26,7 +26,7 @@ final class ShopOrderPosition
      * @param string $invoiceNumber
      * @param ?string $dateOfComplaint
      * @param int $deliveryNotification
-     * @param string $typeOfDelivery
+     * @param ?string $typeOfDelivery
      * @param string $deliveryCode
      * @param int $partialDeliveryCode
      * @param string $planningCode
@@ -64,7 +64,7 @@ final class ShopOrderPosition
         private string $invoiceNumber,
         private ?string $dateOfComplaint,
         private int $deliveryNotification,
-        private string $typeOfDelivery,
+        private ?string $typeOfDelivery,
         private string $deliveryCode,
         private int $partialDeliveryCode,
         private string $planningCode,
@@ -237,9 +237,9 @@ final class ShopOrderPosition
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTypeOfDelivery(): string
+    public function getTypeOfDelivery(): ?string
     {
         return $this->typeOfDelivery;
     }
@@ -393,7 +393,7 @@ final class ShopOrderPosition
      *     invoiceNumber: string,
      *     dateOfComplaint: string | null,
      *     deliveryNotification: int,
-     *     typeOfDelivery: string,
+     *     typeOfDelivery: string | null,
      *     deliveryCode: string,
      *     partialDeliveryCode: int,
      *     planningCode: string,
@@ -436,7 +436,7 @@ final class ShopOrderPosition
             $data['invoiceNumber'],
             $data['dateOfComplaint'] ?? null,
             $data['deliveryNotification'],
-            $data['typeOfDelivery'],
+            $data['typeOfDelivery'] ?? null,
             $data['deliveryCode'],
             $data['partialDeliveryCode'],
             $data['planningCode'],

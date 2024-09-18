@@ -614,15 +614,15 @@ class Client
         return QueryProductLinkRelationStatuses::fromArray($data);
     }
 
-    final public function queryShopOrderInfo(int $orderID, string $lastName, string $postCode): ShopOrderInfo
+    final public function queryShopOrderInfo(int $orderID, string $lastName, string $postCode): QueryShopOrderInfo
     {
         $response = $this->client->query(
-            ShopOrderInfo::query(),
-            ShopOrderInfo::variables($orderID, $lastName, $postCode),
+            QueryShopOrderInfo::query(),
+            QueryShopOrderInfo::variables($orderID, $lastName, $postCode),
         );
 
         if ($response->hasErrors()) {
-            return ShopOrderInfo::withErrors($response->getErrors());
+            return QueryShopOrderInfo::withErrors($response->getErrors());
         }
 
         /**
@@ -722,6 +722,6 @@ class Client
          */
         $data = $response->getData();
 
-        return ShopOrderInfo::fromArray($data);
+        return QueryShopOrderInfo::fromArray($data);
     }
 }

@@ -17,7 +17,7 @@ final class ShopOrderHead
      * @param ?int $deliveryYear
      * @param ?int $deliveryWeek
      * @param string $deliveryCode
-     * @param string $typeOfDelivery
+     * @param ?string $typeOfDelivery
      * @param ?string $deliveryBlock
      * @param ?string $deliveryBeginningDate
      * @param ?string $deliveryEndDate
@@ -38,7 +38,7 @@ final class ShopOrderHead
         private ?int $deliveryYear,
         private ?int $deliveryWeek,
         private string $deliveryCode,
-        private string $typeOfDelivery,
+        private ?string $typeOfDelivery,
         private ?string $deliveryBlock,
         private ?string $deliveryBeginningDate,
         private ?string $deliveryEndDate,
@@ -131,9 +131,9 @@ final class ShopOrderHead
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTypeOfDelivery(): string
+    public function getTypeOfDelivery(): ?string
     {
         return $this->typeOfDelivery;
     }
@@ -240,7 +240,7 @@ final class ShopOrderHead
      *     deliveryYear: int | null,
      *     deliveryWeek: int | null,
      *     deliveryCode: string,
-     *     typeOfDelivery: string,
+     *     typeOfDelivery: string | null,
      *     deliveryBlock: string | null,
      *     deliveryBeginningDate: string | null,
      *     deliveryEndDate: string | null,
@@ -266,7 +266,7 @@ final class ShopOrderHead
             $data['deliveryYear'] ?? null,
             $data['deliveryWeek'] ?? null,
             $data['deliveryCode'],
-            $data['typeOfDelivery'],
+            $data['typeOfDelivery'] ?? null,
             $data['deliveryBlock'] ?? null,
             $data['deliveryBeginningDate'] ?? null,
             $data['deliveryEndDate'] ?? null,
