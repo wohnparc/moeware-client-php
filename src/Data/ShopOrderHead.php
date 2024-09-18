@@ -29,6 +29,7 @@ final class ShopOrderHead
      * @param ?string $complaintCode
      * @param string $status
      * @param string $payment
+     * @param int $invoiceAmount
      */
     public function __construct(
         private int $orderID,
@@ -51,6 +52,7 @@ final class ShopOrderHead
         private ?string $complaintCode,
         private string $status,
         private string $payment,
+        private int $invoiceAmount,
     ) {
     }
 
@@ -215,6 +217,14 @@ final class ShopOrderHead
     }
 
     /**
+     * @return int
+     */
+    public function getInvoiceAmount(): int
+    {
+        return $this->invoiceAmount;
+    }
+
+    /**
      * @param array{
      *     orderID: int,
      *     customerID: int,
@@ -262,6 +272,7 @@ final class ShopOrderHead
      *     complaintCode: string | null,
      *     status: string,
      *     payment: string,
+     *     invoiceAmount: int,
      * } $data
      *
      * @return static
@@ -288,6 +299,7 @@ final class ShopOrderHead
             $data['deliveryTimeUntil'] ?? null,
             $data['complaintCode'] ?? null,
             $data['status'],
+            $data['invoiceAmount'],
             $data['payment'],
         );
     }

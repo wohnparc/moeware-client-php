@@ -115,6 +115,7 @@ final class QueryShopOrderInfo extends Query
      *             deliveryTimeUntil: int | null,
      *             complaintCode: string | null,
      *             status: string,
+     *             invoiceAmount: int,
      *             payment: string,
      *         },
      *         positions: array{

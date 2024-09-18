@@ -676,6 +676,7 @@ class Client
          *                 deliveryTimeFrom: int | null,
          *                 deliveryTimeUntil: int | null,
          *                 complaintCode: string | null,
+         *                 invoiceAmount: int,
          *                 payment: string,
          *                 status: string,
          *             },
