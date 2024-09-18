@@ -22,12 +22,21 @@ final class PriceWatch
         private ?int $suggestedPrice,
         private ?DateTimeImmutable $suggestedPriceUpdatedAt,
         private ?DateTimeImmutable $suggestedPriceSyncedAt,
+        private ?DateTimeImmutable $priceSyncDisabledAt,
         private bool $enabled,
         private ?string $externalID,
         private ?string $externalURL,
         private ?DateTimeImmutable $enabledAt,
         private ?DateTimeImmutable $disabledAt,
     ) {
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getPriceSyncDisabledAt(): ?DateTimeImmutable
+    {
+        return $this->priceSyncDisabledAt;
     }
 
     /**
@@ -104,6 +113,7 @@ final class PriceWatch
      *      suggestedPrice: int| null,
      *      suggestedPriceUpdatedAt: string| null,
      *      suggestedPriceSyncedAt: string| null,
+     *      priceSyncDisabledAt: string| null,
      * } $data
      */
     public static function fromArray(
@@ -113,6 +123,7 @@ final class PriceWatch
             $data['suggestedPrice'],
             Util::fromRawDate($data['suggestedPriceUpdatedAt'] ?? ''),
             Util::fromRawDate($data['suggestedPriceSyncedAt'] ?? ''),
+            Util::fromRawDate($data['priceSyncDisabledAt'] ?? ''),
             ((bool) $data['enabled']),
             $data['externalID'] ?: null,
             $data['externalURL'] ?: null,
