@@ -299,8 +299,8 @@ final class ShopOrderHead
             $data['deliveryTimeUntil'] ?? null,
             $data['complaintCode'] ?? null,
             $data['status'],
-            $data['invoiceAmount'],
             $data['payment'],
+            $data['invoiceAmount'],
         );
     }
 }
