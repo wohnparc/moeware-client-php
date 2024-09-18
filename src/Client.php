@@ -722,6 +722,6 @@ class Client
          */
         $data = $response->getData();
 
-        return QueryShopOrderInfo::fromArray($data);
+        return QueryShopOrderInfo::fromArray($data['shopOrderInfo']);
     }
 }
