@@ -14,7 +14,7 @@ final class ShopOrderHead
      * @param string $dateOfContract
      * @param ShopOrderAddress $billingAddress
      * @param ?ShopOrderAddress $deliveryAddress
-     * @param string $delivery
+     * @param ?string $delivery
      * @param ?string $deliveryDate
      * @param ?int $deliveryYear
      * @param ?int $deliveryWeek
@@ -36,7 +36,7 @@ final class ShopOrderHead
         private string $dateOfContract,
         private ShopOrderAddress $billingAddress,
         private ?ShopOrderAddress $deliveryAddress,
-        private string $delivery,
+        private ?string $delivery,
         private ?string $deliveryDate,
         private ?int $deliveryYear,
         private ?int $deliveryWeek,
@@ -95,9 +95,9 @@ final class ShopOrderHead
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getDelivery(): string
+    public function getDelivery(): ?string
     {
         return $this->delivery;
     }
@@ -274,7 +274,7 @@ final class ShopOrderHead
             $data['dateOfContract'],
             ShopOrderAddress::fromArray($data['billingAddress']),
             isset($data['deliveryAddress']) ? ShopOrderAddress::fromArray($data['deliveryAddress']) : null,
-            $data['delivery'],
+            isset($data['delivery']) ? (string)$data['delivery'] : null,
             $data['deliveryDate'] ?? null,
             $data['deliveryYear'] ?? null,
             $data['deliveryWeek'] ?? null,

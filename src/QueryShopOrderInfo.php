@@ -101,7 +101,7 @@ final class QueryShopOrderInfo extends Query
      *                 houseNumber: string,
      *                 floor: string,
      *             } | null,
-     *             delivery: string,
+     *             delivery: string | null,
      *             deliveryDate: string | null,
      *             deliveryYear: int | null,
      *             deliveryWeek: int | null,
