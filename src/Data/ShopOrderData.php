@@ -82,6 +82,7 @@ final class ShopOrderData
      *         deliveryTimeUntil: int | null,
      *         complaintCode: string | null,
      *         status: string,
+     *         payment: string,
      *     },
      *     positions: array{
      *         positionNumber: int,
