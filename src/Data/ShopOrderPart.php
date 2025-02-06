@@ -19,8 +19,7 @@ final class ShopOrderPart
         private int    $price,
         private string $deliveryDate,
         private array  $positions
-    )
-    {
+    ) {
     }
 
     public function getTitle(): string
