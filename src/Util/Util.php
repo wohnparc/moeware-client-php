@@ -36,7 +36,7 @@ class Util
      */
     public static function fromRawDate(string $raw): ?DateTimeImmutable
     {
-        return DateTimeImmutable::createFromFormat(Util::DATE_FORMAT, $raw) ?: null;
+        return DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $raw) ?: null;
     }
 
 }
