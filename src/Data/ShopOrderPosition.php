@@ -14,7 +14,7 @@ final class ShopOrderPosition
      * @param int $baseID
      * @param int $variantID
      * @param int $quantity
-     * @param int $unitPrice
+     * @param ?int $unitPrice
      * @param string $status
      * @param ?string $dateOfStatus
      * @param ?string $dateOfContract
@@ -52,7 +52,7 @@ final class ShopOrderPosition
         private int $baseID,
         private int $variantID,
         private int $quantity,
-        private int $unitPrice,
+        private ?int $unitPrice,
         private string $status,
         private ?string $dateOfStatus,
         private ?string $dateOfContract,
@@ -129,7 +129,7 @@ final class ShopOrderPosition
     /**
      * @return int
      */
-    public function getUnitPrice(): int
+    public function getUnitPrice(): ?int
     {
         return $this->unitPrice;
     }
@@ -381,7 +381,7 @@ final class ShopOrderPosition
      *     baseID: int,
      *     variantID: int,
      *     quantity: int,
-     *     unitPrice: int,
+     *     unitPrice: int | null,
      *     status: string,
      *     dateOfStatus: string | null,
      *     dateOfContract: string | null,
