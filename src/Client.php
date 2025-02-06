@@ -636,11 +636,7 @@ class Client
          *                 customerID: int,
          *                 dateOfContract: string,
          *                 billingAddress: array{
-         *                     salutation: string | null,
-         *                     title: string | null,
-         *                     firstName: string,
-         *                     lastName: string,
-         *                     additionalName: string,
+         *                     name: string,
          *                     email: string,
          *                     country: string,
          *                     postCode: string,
@@ -650,11 +646,7 @@ class Client
          *                     floor: string,
          *                 },
          *                 deliveryAddress: array{
-         *                     salutation: string | null,
-         *                     title: string | null,
-         *                     firstName: string,
-         *                     lastName: string,
-         *                     additionalName: string,
+         *                     name: string,
          *                     email: string,
          *                     country: string,
          *                     postCode: string,
@@ -680,6 +672,10 @@ class Client
          *                 payment: string,
          *                 status: string,
          *             },
+         *             parts: array{
+         *                 title: string,
+         *                 price: int,
+         *                 deliveryDate: string,
          *             positions: array{
          *                 positionNumber: int,
          *                 uniquePositionNumber: int,
@@ -718,8 +714,9 @@ class Client
          *                 trackingNumber2: string | null,
          *                 trackingURL: string | null,
          *             }[],
+         *     }[],
          *         } | null,
-         *     } | null,
+         *     },
          * } $data
          */
         $data = $response->getData();

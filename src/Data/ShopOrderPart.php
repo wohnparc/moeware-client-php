@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+use Closure;
 use DateTimeImmutable;
 use Wohnparc\Moeware\Util\Util;
 
@@ -14,13 +15,13 @@ final class ShopOrderPart
      *
      * @param string $title
      * @param int $price
-     * @param DateTimeImmutable $deliveryDate
-     * @param array $positions
+     * @param ?DateTimeImmutable $deliveryDate
+     * @param ShopOrderPosition[] $positions
      */
     public function __construct(
         private string $title,
         private int    $price,
-        private DateTimeImmutable $deliveryDate,
+        private ?DateTimeImmutable $deliveryDate,
         private array  $positions
     ) {
     }
@@ -35,11 +36,14 @@ final class ShopOrderPart
         return $this->price;
     }
 
-    public function getDeliveryDate(): DateTimeImmutable
+    public function getDeliveryDate(): ?DateTimeImmutable
     {
         return $this->deliveryDate;
     }
 
+    /**
+     * @return ShopOrderPosition[]
+     */
     public function getPositions(): array
     {
         return $this->positions;
@@ -87,7 +91,7 @@ final class ShopOrderPart
      * trackingNumber1: string | null,
      * trackingNumber2: string | null,
      *         trackingURL: string | null,
-     *     },
+     *     }[],
      * } $data
      *
      * @return static

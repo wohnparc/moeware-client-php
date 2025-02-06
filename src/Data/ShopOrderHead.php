@@ -14,7 +14,7 @@ final class ShopOrderHead
      *
      * @param int $orderID
      * @param int $customerID
-     * @param DateTimeImmutable $dateOfContract
+     * @param ?DateTimeImmutable $dateOfContract
      * @param ShopOrderAddress $billingAddress
      * @param ?ShopOrderAddress $deliveryAddress
      * @param ?string $delivery
@@ -37,7 +37,7 @@ final class ShopOrderHead
     public function __construct(
         private int $orderID,
         private int $customerID,
-        private DateTimeImmutable $dateOfContract,
+        private ?DateTimeImmutable $dateOfContract,
         private ShopOrderAddress $billingAddress,
         private ?ShopOrderAddress $deliveryAddress,
         private ?string $delivery,
@@ -76,9 +76,9 @@ final class ShopOrderHead
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return ?DateTimeImmutable
      */
-    public function getDateOfContract(): DateTimeImmutable
+    public function getDateOfContract(): ?DateTimeImmutable
     {
         return $this->dateOfContract;
     }
@@ -233,11 +233,7 @@ final class ShopOrderHead
      *     customerID: int,
      *     dateOfContract: string,
      *     billingAddress: array{
-     *         salutation: string | null,
-     *         title: string | null,
-     *         firstName: string,
-     *         lastName: string,
-     *         additionalName: string,
+     *         name: string,
      *         email: string,
      *         country: string,
      *         postCode: string,
@@ -247,11 +243,7 @@ final class ShopOrderHead
      *         floor: string,
      *     },
      *     deliveryAddress: array{
-     *         salutation: string | null,
-     *         title: string | null,
-     *         firstName: string,
-     *         lastName: string,
-     *         additionalName: string,
+     *         name: string,
      *         email: string,
      *         country: string,
      *         postCode: string,
@@ -260,7 +252,7 @@ final class ShopOrderHead
      *         houseNumber: string,
      *         floor: string,
      *     } | null,
-     *     delivery: string,
+     *     delivery: string | null,
      *     deliveryDate: string | null,
      *     deliveryYear: int | null,
      *     deliveryWeek: int | null,
