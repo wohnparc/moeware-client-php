@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+use DateTimeImmutable;
+use Wohnparc\Moeware\Util\Util;
+
 final class ShopOrderHead
 {
     /**
@@ -11,11 +14,11 @@ final class ShopOrderHead
      *
      * @param int $orderID
      * @param int $customerID
-     * @param string $dateOfContract
+     * @param DateTimeImmutable $dateOfContract
      * @param ShopOrderAddress $billingAddress
      * @param ?ShopOrderAddress $deliveryAddress
      * @param ?string $delivery
-     * @param ?string $deliveryDate
+     * @param ?DateTimeImmutable $deliveryDate
      * @param ?int $deliveryYear
      * @param ?int $deliveryWeek
      * @param string $deliveryCode
@@ -34,11 +37,11 @@ final class ShopOrderHead
     public function __construct(
         private int $orderID,
         private int $customerID,
-        private string $dateOfContract,
+        private DateTimeImmutable $dateOfContract,
         private ShopOrderAddress $billingAddress,
         private ?ShopOrderAddress $deliveryAddress,
         private ?string $delivery,
-        private ?string $deliveryDate,
+        private ?DateTimeImmutable $deliveryDate,
         private ?int $deliveryYear,
         private ?int $deliveryWeek,
         private string $deliveryCode,
@@ -73,9 +76,9 @@ final class ShopOrderHead
     }
 
     /**
-     * @return string
+     * @return DateTimeImmutable
      */
-    public function getDateOfContract(): string
+    public function getDateOfContract(): DateTimeImmutable
     {
         return $this->dateOfContract;
     }
@@ -105,9 +108,9 @@ final class ShopOrderHead
     }
 
     /**
-     * @return ?string
+     * @return ?DateTimeImmutable
      */
-    public function getDeliveryDate(): ?string
+    public function getDeliveryDate(): ?DateTimeImmutable
     {
         return $this->deliveryDate;
     }
@@ -282,11 +285,11 @@ final class ShopOrderHead
         return new self(
             $data['orderID'],
             $data['customerID'],
-            $data['dateOfContract'],
+            Util::fromRawDate((string) $data['dateOfContract']),
             ShopOrderAddress::fromArray($data['billingAddress']),
             isset($data['deliveryAddress']) ? ShopOrderAddress::fromArray($data['deliveryAddress']) : null,
             isset($data['delivery']) ? (string)$data['delivery'] : null,
-            $data['deliveryDate'] ?? null,
+            $data['deliveryDate'] ? Util::fromRawDate((string) $data['deliveryDate']) : null,
             $data['deliveryYear'] ?? null,
             $data['deliveryWeek'] ?? null,
             $data['deliveryCode'],

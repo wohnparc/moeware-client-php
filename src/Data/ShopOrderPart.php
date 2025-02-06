@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+use DateTimeImmutable;
+use Wohnparc\Moeware\Util\Util;
+
 final class ShopOrderPart
 {
     /**
@@ -11,13 +14,13 @@ final class ShopOrderPart
      *
      * @param string $title
      * @param int $price
-     * @param string $deliveryDate
+     * @param DateTimeImmutable $deliveryDate
      * @param array $positions
      */
     public function __construct(
         private string $title,
         private int    $price,
-        private string $deliveryDate,
+        private DateTimeImmutable $deliveryDate,
         private array  $positions
     ) {
     }
@@ -32,7 +35,7 @@ final class ShopOrderPart
         return $this->price;
     }
 
-    public function getDeliveryDate(): string
+    public function getDeliveryDate(): DateTimeImmutable
     {
         return $this->deliveryDate;
     }
@@ -94,7 +97,7 @@ final class ShopOrderPart
         return new self(
             $data['title'],
             $data['price'],
-            $data['deliveryDate'],
+            Util::fromRawDate((string) $data['deliveryDate']),
             array_map([ShopOrderPosition::class, 'fromArray'], $data['positions'])
         );
     }

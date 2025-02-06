@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+use DateTimeImmutable;
+use Wohnparc\Moeware\Util\Util;
+
 final class ShopOrderPosition
 {
     /**
@@ -19,7 +22,7 @@ final class ShopOrderPosition
      * @param ?string $dateOfStatus
      * @param ?string $dateOfContract
      * @param ?string $dateOfDispatch
-     * @param ?string $dateOfExpectedDelivery
+     * @param ?DateTimeImmutable $dateOfExpectedDelivery
      * @param ?string $timeOfExpectedDelivery
      * @param ?string $dateOfExpectedDeliveryAccording
      * @param ?string $dateOfGoodsReturnedFromCustomer
@@ -57,7 +60,7 @@ final class ShopOrderPosition
         private ?string $dateOfStatus,
         private ?string $dateOfContract,
         private ?string $dateOfDispatch,
-        private ?string $dateOfExpectedDelivery,
+        private ?DateTimeImmutable $dateOfExpectedDelivery,
         private ?string $timeOfExpectedDelivery,
         private ?string $dateOfExpectedDeliveryAccording,
         private ?string $dateOfGoodsReturnedFromCustomer,
@@ -167,9 +170,9 @@ final class ShopOrderPosition
     }
 
     /**
-     * @return ?string
+     * @return ?DateTimeImmutable
      */
-    public function getDateOfExpectedDelivery(): ?string
+    public function getDateOfExpectedDelivery(): ?DateTimeImmutable
     {
         return $this->dateOfExpectedDelivery;
     }
@@ -429,7 +432,7 @@ final class ShopOrderPosition
             $data['dateOfStatus'] ?? null,
             $data['dateOfContract'] ?? null,
             $data['dateOfDispatch'] ?? null,
-            $data['dateOfExpectedDelivery'] ?? null,
+            $data['dateOfExpectedDelivery'] ? Util::fromRawDate((string) $data['dateOfExpectedDelivery']) : null,
             $data['timeOfExpectedDelivery'] ?? null,
             $data['dateOfExpectedDeliveryAccording'] ?? null,
             $data['dateOfGoodsReturnedFromCustomer'] ?? null,

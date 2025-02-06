@@ -118,8 +118,8 @@ final class ShopOrderData
      *             trackingNumber1: string | null,
      *             trackingNumber2: string | null,
      *             trackingURL: string | null,
-     *         },
-     *     },
+     *         }[],
+     *     }[],
      * } $data
      *
      * @return static
