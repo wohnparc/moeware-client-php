@@ -9,11 +9,7 @@ final class ShopOrderAddress
     /**
      * ShopOrderAddress constructor.
      *
-     * @param ?string $salutation
-     * @param ?string $title
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $additionalName
+     * @param string $name
      * @param string $email
      * @param string $country
      * @param string $postCode
@@ -23,11 +19,7 @@ final class ShopOrderAddress
      * @param string $floor
      */
     public function __construct(
-        private ?string $salutation,
-        private ?string $title,
-        private string $firstName,
-        private string $lastName,
-        private string $additionalName,
+        private string $name,
         private string $email,
         private string $country,
         private string $postCode,
@@ -39,43 +31,11 @@ final class ShopOrderAddress
     }
 
     /**
-     * @return ?string
-     */
-    public function getSalutation(): ?string
-    {
-        return $this->salutation;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getName(): string
     {
-        return $this->firstName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAdditionalName(): string
-    {
-        return $this->additionalName;
+        return $this->name;
     }
 
     /**
@@ -136,11 +96,7 @@ final class ShopOrderAddress
 
     /**
      * @param array{
-     *     salutation: string | null,
-     *     title: string | null,
-     *     firstName: string,
-     *     lastName: string,
-     *     additionalName: string,
+     *     name: string,
      *     email: string,
      *     country: string,
      *     postCode: string,
@@ -155,11 +111,7 @@ final class ShopOrderAddress
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['salutation'] ?? null,
-            $data['title'] ?? null,
-            $data['firstName'],
-            $data['lastName'],
-            $data['additionalName'],
+            $data['name'],
             $data['email'],
             $data['country'],
             $data['postCode'],
