@@ -10,11 +10,11 @@ final class ShopOrderData
      * ShopOrderData constructor.
      *
      * @param ShopOrderHead $head
-     * @param ShopOrderPosition[] $positions
+     * @param ShopOrderPart[] $parts
      */
     public function __construct(
         private ShopOrderHead $head,
-        private array $positions
+        private array $parts
     ) {
     }
 
@@ -27,11 +27,11 @@ final class ShopOrderData
     }
 
     /**
-     * @return ShopOrderPosition[]
+     * @return ShopOrderPart[]
      */
-    public function getPositions(): array
+    public function getParts(): array
     {
-        return $this->positions;
+        return $this->parts;
     }
 
     /**
