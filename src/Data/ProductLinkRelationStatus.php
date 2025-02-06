@@ -186,6 +186,7 @@ final class ProductLinkRelationStatus
      *      suggestedPrice: int| null,
      *      suggestedPriceUpdatedAt: string| null,
      *      suggestedPriceSyncedAt: string| null,
+     *      priceSyncDisabledAt: string| null,
      *     }| null,
      *     moewareURL: string| null,
      *     shopSyncActive: bool,
