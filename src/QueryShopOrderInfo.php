@@ -185,14 +185,11 @@ final class QueryShopOrderInfo extends Query
             data {
               head {
                 orderID
+                storeKey
                 customerID
                 dateOfContract
                 billingAddress {
-                  salutation
-                  title
-                  firstName
-                  lastName
-                  additionalName
+                  name
                   email
                   country
                   postCode
@@ -202,11 +199,7 @@ final class QueryShopOrderInfo extends Query
                   floor
                 }
                 deliveryAddress {
-                  salutation
-                  title
-                  firstName
-                  lastName
-                  additionalName
+                  name
                   email
                   country
                   postCode
@@ -232,43 +225,48 @@ final class QueryShopOrderInfo extends Query
                 complaintCode
                 status
               }
-              positions {
-                positionNumber
-                uniquePositionNumber
-                baseID
-                variantID
-                quantity
-                unitPrice
-                status
-                dateOfStatus
-                dateOfContract
-                dateOfDispatch
-                dateOfExpectedDelivery
-                timeOfExpectedDelivery
-                dateOfExpectedDeliveryAccording
-                dateOfGoodsReturnedFromCustomer
-                dateOfPickup
-                timeOfPickup
-                invoiceNumber
-                dateOfComplaint
-                deliveryNotification
-                typeOfDelivery
-                deliveryCode
-                partialDeliveryCode
-                planningCode
-                deliveryDateOfContractOfSale
-                dateOfReceipt
-                scheduledDeliveryDate
-                itemText1
-                itemText2
-                itemText3
-                itemTextShop1
-                itemTextShop2
-                itemTextShop3
-                positionText123
-                trackingNumber1
-                trackingNumber2
-                trackingURL
+              parts {
+                title
+                price
+                deliveryDate
+                positions {
+                    positionNumber
+                    uniquePositionNumber
+                    baseID
+                    variantID
+                    quantity
+                    unitPrice
+                    status
+                    dateOfStatus
+                    dateOfContract
+                    dateOfDispatch
+                    dateOfExpectedDelivery
+                    timeOfExpectedDelivery
+                    dateOfExpectedDeliveryAccording
+                    dateOfGoodsReturnedFromCustomer
+                    dateOfPickup
+                    timeOfPickup
+                    invoiceNumber
+                    dateOfComplaint
+                    deliveryNotification
+                    typeOfDelivery
+                    deliveryCode
+                    partialDeliveryCode
+                    planningCode
+                    deliveryDateOfContractOfSale
+                    dateOfReceipt
+                    scheduledDeliveryDate
+                    itemText1
+                    itemText2
+                    itemText3
+                    itemTextShop1
+                    itemTextShop2
+                    itemTextShop3
+                    positionText123
+                  trackingNumber1
+                  trackingNumber2
+                  trackingURL
+                }
               }
             }
           }
