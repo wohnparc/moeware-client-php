@@ -7,6 +7,7 @@ namespace Wohnparc\Moeware;
 use Composer\InstalledVersions;
 use DateTime;
 use GuzzleHttp\RequestOptions;
+use ShopOrderInfo;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Client as GQLClient;
 use Wohnparc\Moeware\Data\ArticleRef;
@@ -613,4 +614,113 @@ class Client
         return QueryProductLinkRelationStatuses::fromArray($data);
     }
 
+    final public function queryShopOrderInfo(int $orderID, string $lastName, string $postCode): QueryShopOrderInfo
+    {
+        $response = $this->client->query(
+            QueryShopOrderInfo::query(),
+            QueryShopOrderInfo::variables($orderID, $lastName, $postCode),
+        );
+
+        if ($response->hasErrors()) {
+            return QueryShopOrderInfo::withErrors($response->getErrors());
+        }
+
+        /**
+         * @var array{
+         *     shopOrderInfo: array{
+         *         status: string,
+         *         message: string | null,
+         *         data: array{
+         *             head: array{
+         *                 orderID: int,
+         *                 customerID: int,
+         *                 dateOfContract: string,
+         *                 billingAddress: array{
+         *                     name: string,
+         *                     email: string,
+         *                     country: string,
+         *                     postCode: string,
+         *                     city: string,
+         *                     street: string,
+         *                     houseNumber: string,
+         *                     floor: string,
+         *                 },
+         *                 deliveryAddress: array{
+         *                     name: string,
+         *                     email: string,
+         *                     country: string,
+         *                     postCode: string,
+         *                     city: string,
+         *                     street: string,
+         *                     houseNumber: string,
+         *                     floor: string,
+         *                 } | null,
+         *                 delivery: string | null,
+         *                 deliveryDate: string | null,
+         *                 deliveryYear: int | null,
+         *                 deliveryWeek: int | null,
+         *                 deliveryCode: string,
+         *                 typeOfDelivery: string,
+         *                 deliveryBlock: string | null,
+         *                 deliveryBeginningDate: string | null,
+         *                 deliveryEndDate: string | null,
+         *                 deliveryDayTimeCode: string | null,
+         *                 deliveryTimeFrom: int | null,
+         *                 deliveryTimeUntil: int | null,
+         *                 complaintCode: string | null,
+         *                 invoiceAmount: int,
+         *                 payment: string,
+         *                 status: string,
+         *             },
+         *             parts: array{
+         *                 title: string,
+         *                 price: int,
+         *                 deliveryDate: string,
+         *             positions: array{
+         *                 positionNumber: int,
+         *                 uniquePositionNumber: int,
+         *                 baseID: int,
+         *                 variantID: int,
+         *                 quantity: int,
+         *                 unitPrice: int,
+         *                 status: string,
+         *                 dateOfStatus: string | null,
+         *                 dateOfContract: string | null,
+         *                 dateOfDispatch: string | null,
+         *                 dateOfExpectedDelivery: string | null,
+         *                 timeOfExpectedDelivery: string | null,
+         *                 dateOfExpectedDeliveryAccording: string | null,
+         *                 dateOfGoodsReturnedFromCustomer: string | null,
+         *                 dateOfPickup: string | null,
+         *                 timeOfPickup: int,
+         *                 invoiceNumber: string,
+         *                 dateOfComplaint: string | null,
+         *                 deliveryNotification: int,
+         *                 typeOfDelivery: string,
+         *                 deliveryCode: string,
+         *                 partialDeliveryCode: int,
+         *                 planningCode: string,
+         *                 deliveryDateOfContractOfSale: string | null,
+         *                 dateOfReceipt: string | null,
+         *                 scheduledDeliveryDate: string | null,
+         *                 itemText1: string,
+         *                 itemText2: string,
+         *                 itemText3: string,
+         *                 itemTextShop1: string,
+         *                 itemTextShop2: string,
+         *                 itemTextShop3: string,
+         *                 positionText123: string,
+         *                 trackingNumber1: string | null,
+         *                 trackingNumber2: string | null,
+         *                 trackingURL: string | null,
+         *             }[],
+         *     }[],
+         *         } | null,
+         *     },
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryShopOrderInfo::fromArray($data['shopOrderInfo']);
+    }
 }

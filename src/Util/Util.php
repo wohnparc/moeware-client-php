@@ -7,11 +7,11 @@ namespace Wohnparc\Moeware\Util;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use DateTimeZone;
 
 class Util
 {
-    public const  DATE_FORMAT = 'Y-m-d\TH:i:s.v\Z';
+    public const  DATE_FORMAT = 'Y-m-d\TH:i:s\Z';
+    public const  DATE_FORMAT_ALTERNATE = 'Y-m-d\TH:i:s.v\Z';
 
     /**
      * Returns the formatted string representation of the
@@ -36,7 +36,13 @@ class Util
      */
     public static function fromRawDate(string $raw): ?DateTimeImmutable
     {
-        return DateTimeImmutable::createFromFormat(Util::DATE_FORMAT, $raw) ?: null;
+        $date = DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $raw);
+
+        if (!$date) {
+            $date = DateTimeImmutable::createFromFormat(self::DATE_FORMAT_ALTERNATE, $raw);
+        }
+
+        return $date ?: null;
     }
 
 }
