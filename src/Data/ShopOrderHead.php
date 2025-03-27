@@ -228,7 +228,7 @@ final class ShopOrderHead
             ShopOrderAddress::fromArray($data['billingAddress']),
             isset($data['deliveryAddress']) ? ShopOrderAddress::fromArray($data['deliveryAddress']) : null,
             isset($data['delivery']) ? (string)$data['delivery'] : null,
-            $data['deliveryDate'] ,
+            $data['deliveryDate'],
             $data['deliveryCode'],
             $data['typeOfDelivery'] ?? null,
             $data['deliveryBlock'] ?? null,
