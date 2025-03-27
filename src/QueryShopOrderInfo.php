@@ -94,17 +94,12 @@ final class QueryShopOrderInfo extends Query
      *                 floor: string,
      *             } | null,
      *             delivery: string | null,
-     *             deliveryDate: string | null,
-     *             deliveryYear: int | null,
-     *             deliveryWeek: int | null,
+     *             deliveryDate: string,
      *             deliveryCode: string,
      *             typeOfDelivery: string | null,
      *             deliveryBlock: string | null,
-     *             deliveryBeginningDate: string | null,
-     *             deliveryEndDate: string | null,
      *             deliveryDayTimeCode: string | null,
-     *             deliveryTimeFrom: int | null,
-     *             deliveryTimeUntil: int | null,
+     *             deliveryTimeRange: string | null,
      *             complaintCode: string | null,
      *             status: string,
      *             invoiceAmount: int,
@@ -207,16 +202,11 @@ final class QueryShopOrderInfo extends Query
                 }
                 delivery
                 deliveryDate
-                deliveryYear
-                deliveryWeek
+                deliveryTimeRange
                 deliveryCode
                 typeOfDelivery
                 deliveryBlock
-                deliveryBeginningDate
-                deliveryEndDate
                 deliveryDayTimeCode
-                deliveryTimeFrom
-                deliveryTimeUntil
                 invoiceAmount
                 payment
                 complaintCode
