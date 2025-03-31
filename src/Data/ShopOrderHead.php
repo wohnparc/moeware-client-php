@@ -18,17 +18,12 @@ final class ShopOrderHead
      * @param ShopOrderAddress $billingAddress
      * @param ?ShopOrderAddress $deliveryAddress
      * @param ?string $delivery
-     * @param ?DateTimeImmutable $deliveryDate
-     * @param ?int $deliveryYear
-     * @param ?int $deliveryWeek
+     * @param string $deliveryDate
      * @param string $deliveryCode
      * @param ?string $typeOfDelivery
      * @param ?string $deliveryBlock
-     * @param ?string $deliveryBeginningDate
-     * @param ?string $deliveryEndDate
      * @param ?string $deliveryDayTimeCode
-     * @param ?int $deliveryTimeFrom
-     * @param ?int $deliveryTimeUntil
+     * @param ?string $deliveryTimeRange
      * @param ?string $complaintCode
      * @param string $status
      * @param string $payment
@@ -41,17 +36,12 @@ final class ShopOrderHead
         private ShopOrderAddress $billingAddress,
         private ?ShopOrderAddress $deliveryAddress,
         private ?string $delivery,
-        private ?DateTimeImmutable $deliveryDate,
-        private ?int $deliveryYear,
-        private ?int $deliveryWeek,
+        private string $deliveryDate,
         private string $deliveryCode,
         private ?string $typeOfDelivery,
         private ?string $deliveryBlock,
-        private ?string $deliveryBeginningDate,
-        private ?string $deliveryEndDate,
         private ?string $deliveryDayTimeCode,
-        private ?int $deliveryTimeFrom,
-        private ?int $deliveryTimeUntil,
+        private ?string $deliveryTimeRange,
         private ?string $complaintCode,
         private string $status,
         private string $payment,
@@ -108,28 +98,13 @@ final class ShopOrderHead
     }
 
     /**
-     * @return ?DateTimeImmutable
+     * @return string
      */
-    public function getDeliveryDate(): ?DateTimeImmutable
+    public function getDeliveryDate(): string
     {
         return $this->deliveryDate;
     }
 
-    /**
-     * @return ?int
-     */
-    public function getDeliveryYear(): ?int
-    {
-        return $this->deliveryYear;
-    }
-
-    /**
-     * @return ?int
-     */
-    public function getDeliveryWeek(): ?int
-    {
-        return $this->deliveryWeek;
-    }
 
     /**
      * @return string
@@ -155,21 +130,6 @@ final class ShopOrderHead
         return $this->deliveryBlock;
     }
 
-    /**
-     * @return ?string
-     */
-    public function getDeliveryBeginningDate(): ?string
-    {
-        return $this->deliveryBeginningDate;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getDeliveryEndDate(): ?string
-    {
-        return $this->deliveryEndDate;
-    }
 
     /**
      * @return ?string
@@ -180,19 +140,11 @@ final class ShopOrderHead
     }
 
     /**
-     * @return ?int
+     * @return ?string
      */
-    public function getDeliveryTimeFrom(): ?int
+    public function getDeliveryTimeRange(): ?string
     {
-        return $this->deliveryTimeFrom;
-    }
-
-    /**
-     * @return ?int
-     */
-    public function getDeliveryTimeUntil(): ?int
-    {
-        return $this->deliveryTimeUntil;
+        return $this->deliveryTimeRange;
     }
 
     /**
@@ -253,17 +205,12 @@ final class ShopOrderHead
      *         floor: string,
      *     } | null,
      *     delivery: string | null,
-     *     deliveryDate: string | null,
-     *     deliveryYear: int | null,
-     *     deliveryWeek: int | null,
+     *     deliveryDate: string,
+     *     deliveryTimeRange: string | null,
      *     deliveryCode: string,
      *     typeOfDelivery: string | null,
      *     deliveryBlock: string | null,
-     *     deliveryBeginningDate: string | null,
-     *     deliveryEndDate: string | null,
      *     deliveryDayTimeCode: string | null,
-     *     deliveryTimeFrom: int | null,
-     *     deliveryTimeUntil: int | null,
      *     complaintCode: string | null,
      *     status: string,
      *     payment: string,
@@ -281,17 +228,12 @@ final class ShopOrderHead
             ShopOrderAddress::fromArray($data['billingAddress']),
             isset($data['deliveryAddress']) ? ShopOrderAddress::fromArray($data['deliveryAddress']) : null,
             isset($data['delivery']) ? (string)$data['delivery'] : null,
-            $data['deliveryDate'] ? Util::fromRawDate((string) $data['deliveryDate']) : null,
-            $data['deliveryYear'] ?? null,
-            $data['deliveryWeek'] ?? null,
+            $data['deliveryDate'],
             $data['deliveryCode'],
             $data['typeOfDelivery'] ?? null,
             $data['deliveryBlock'] ?? null,
-            $data['deliveryBeginningDate'] ?? null,
-            $data['deliveryEndDate'] ?? null,
             $data['deliveryDayTimeCode'] ?? null,
-            $data['deliveryTimeFrom'] ?? null,
-            $data['deliveryTimeUntil'] ?? null,
+            $data['deliveryTimeRange'] ?? null,
             $data['complaintCode'] ?? null,
             $data['status'],
             $data['payment'],
