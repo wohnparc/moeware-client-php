@@ -109,23 +109,17 @@ final class QueryShopOrderInfo extends Query
      *             title: string,
      *             price: int,
      *             deliveryDate: string,
-     *            positions: array{
+     *             positions: array{
      *              positionNumber: int,
      *              uniquePositionNumber: int,
      *              baseID: int,
      *              variantID: int,
      *              quantity: int,
-     *              unitPrice: int,
+     *              unitPrice: int | null,
      *              status: string,
+     *              date: string,
      *              dateOfStatus: string | null,
-     *              dateOfContract: string | null,
-     *              dateOfDispatch: string | null,
-     *              dateOfExpectedDelivery: string | null,
-     *              timeOfExpectedDelivery: string | null,
-     *              dateOfExpectedDeliveryAccording: string | null,
      *              dateOfGoodsReturnedFromCustomer: string | null,
-     *              dateOfPickup: string | null,
-     *              timeOfPickup: int,
      *              invoiceNumber: string,
      *              dateOfComplaint: string | null,
      *              deliveryNotification: int,
@@ -134,8 +128,6 @@ final class QueryShopOrderInfo extends Query
      *              partialDeliveryCode: int,
      *              planningCode: string,
      *              deliveryDateOfContractOfSale: string | null,
-     *              dateOfReceipt: string | null,
-     *              scheduledDeliveryDate: string | null,
      *              itemText1: string,
      *              itemText2: string,
      *              itemText3: string,
@@ -236,7 +228,6 @@ final class QueryShopOrderInfo extends Query
                     partialDeliveryCode
                     planningCode
                     deliveryDateOfContractOfSale
-                    scheduledDeliveryDate
                     itemText1
                     itemText2
                     itemText3
@@ -244,9 +235,9 @@ final class QueryShopOrderInfo extends Query
                     itemTextShop2
                     itemTextShop3
                     positionText123
-                  trackingNumber1
-                  trackingNumber2
-                  trackingURL
+                    trackingNumber1
+                    trackingNumber2
+                    trackingURL
                 }
               }
             }
