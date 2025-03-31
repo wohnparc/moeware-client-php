@@ -225,14 +225,9 @@ final class QueryShopOrderInfo extends Query
                     unitPrice
                     status
                     dateOfStatus
+                    date
                     dateOfContract
-                    dateOfDispatch
-                    dateOfExpectedDelivery
-                    timeOfExpectedDelivery
-                    dateOfExpectedDeliveryAccording
                     dateOfGoodsReturnedFromCustomer
-                    dateOfPickup
-                    timeOfPickup
                     invoiceNumber
                     dateOfComplaint
                     deliveryNotification
@@ -241,7 +236,6 @@ final class QueryShopOrderInfo extends Query
                     partialDeliveryCode
                     planningCode
                     deliveryDateOfContractOfSale
-                    dateOfReceipt
                     scheduledDeliveryDate
                     itemText1
                     itemText2
