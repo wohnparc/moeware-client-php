@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
-use DateTimeImmutable;
-use Wohnparc\Moeware\Util\Util;
-
 final class ShopOrderPosition
 {
     /**
@@ -20,14 +17,8 @@ final class ShopOrderPosition
      * @param ?int $unitPrice
      * @param string $status
      * @param ?string $dateOfStatus
-     * @param ?string $dateOfContract
-     * @param ?string $dateOfDispatch
-     * @param ?DateTimeImmutable $dateOfExpectedDelivery
-     * @param ?string $timeOfExpectedDelivery
-     * @param ?string $dateOfExpectedDeliveryAccording
+     * @param string $date
      * @param ?string $dateOfGoodsReturnedFromCustomer
-     * @param ?string $dateOfPickup
-     * @param int $timeOfPickup
      * @param string $invoiceNumber
      * @param ?string $dateOfComplaint
      * @param int $deliveryNotification
@@ -36,8 +27,6 @@ final class ShopOrderPosition
      * @param int $partialDeliveryCode
      * @param string $planningCode
      * @param ?string $deliveryDateOfContractOfSale
-     * @param ?string $dateOfReceipt
-     * @param ?string $scheduledDeliveryDate
      * @param string $itemText1
      * @param string $itemText2
      * @param string $itemText3
@@ -58,14 +47,8 @@ final class ShopOrderPosition
         private ?int $unitPrice,
         private string $status,
         private ?string $dateOfStatus,
-        private ?string $dateOfContract,
-        private ?string $dateOfDispatch,
-        private ?DateTimeImmutable $dateOfExpectedDelivery,
-        private ?string $timeOfExpectedDelivery,
-        private ?string $dateOfExpectedDeliveryAccording,
+        private string $date,
         private ?string $dateOfGoodsReturnedFromCustomer,
-        private ?string $dateOfPickup,
-        private int $timeOfPickup,
         private string $invoiceNumber,
         private ?string $dateOfComplaint,
         private int $deliveryNotification,
@@ -74,8 +57,6 @@ final class ShopOrderPosition
         private int $partialDeliveryCode,
         private string $planningCode,
         private ?string $deliveryDateOfContractOfSale,
-        private ?string $dateOfReceipt,
-        private ?string $scheduledDeliveryDate,
         private string $itemText1,
         private string $itemText2,
         private string $itemText3,
@@ -88,6 +69,15 @@ final class ShopOrderPosition
         private ?string $trackingURL
     ) {
     }
+
+    /**
+     * @return ?string
+     */
+    public function getDateOfGoodsReturnedFromCustomer(): ?string
+    {
+        return $this->dateOfGoodsReturnedFromCustomer;
+    }
+
 
     /**
      * @return int
@@ -156,65 +146,9 @@ final class ShopOrderPosition
     /**
      * @return ?string
      */
-    public function getDateOfContract(): ?string
+    public function getDate(): ?string
     {
-        return $this->dateOfContract;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getDateOfDispatch(): ?string
-    {
-        return $this->dateOfDispatch;
-    }
-
-    /**
-     * @return ?DateTimeImmutable
-     */
-    public function getDateOfExpectedDelivery(): ?DateTimeImmutable
-    {
-        return $this->dateOfExpectedDelivery;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getTimeOfExpectedDelivery(): ?string
-    {
-        return $this->timeOfExpectedDelivery;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getDateOfExpectedDeliveryAccording(): ?string
-    {
-        return $this->dateOfExpectedDeliveryAccording;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getDateOfGoodsReturnedFromCustomer(): ?string
-    {
-        return $this->dateOfGoodsReturnedFromCustomer;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getDateOfPickup(): ?string
-    {
-        return $this->dateOfPickup;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTimeOfPickup(): int
-    {
-        return $this->timeOfPickup;
+        return $this->date;
     }
 
     /**
@@ -281,21 +215,7 @@ final class ShopOrderPosition
         return $this->deliveryDateOfContractOfSale;
     }
 
-    /**
-     * @return ?string
-     */
-    public function getDateOfReceipt(): ?string
-    {
-        return $this->dateOfReceipt;
-    }
 
-    /**
-     * @return ?string
-     */
-    public function getScheduledDeliveryDate(): ?string
-    {
-        return $this->scheduledDeliveryDate;
-    }
 
     /**
      * @return string
@@ -386,15 +306,9 @@ final class ShopOrderPosition
      *     quantity: int,
      *     unitPrice: int | null,
      *     status: string,
+     *     date: string,
      *     dateOfStatus: string | null,
-     *     dateOfContract: string | null,
-     *     dateOfDispatch: string | null,
-     *     dateOfExpectedDelivery: string | null,
-     *     timeOfExpectedDelivery: string | null,
-     *     dateOfExpectedDeliveryAccording: string | null,
      *     dateOfGoodsReturnedFromCustomer: string | null,
-     *     dateOfPickup: string | null,
-     *     timeOfPickup: int,
      *     invoiceNumber: string,
      *     dateOfComplaint: string | null,
      *     deliveryNotification: int,
@@ -403,8 +317,6 @@ final class ShopOrderPosition
      *     partialDeliveryCode: int,
      *     planningCode: string,
      *     deliveryDateOfContractOfSale: string | null,
-     *     dateOfReceipt: string | null,
-     *     scheduledDeliveryDate: string | null,
      *     itemText1: string,
      *     itemText2: string,
      *     itemText3: string,
@@ -430,14 +342,8 @@ final class ShopOrderPosition
             $data['unitPrice'],
             $data['status'],
             $data['dateOfStatus'] ?? null,
-            $data['dateOfContract'] ?? null,
-            $data['dateOfDispatch'] ?? null,
-            $data['dateOfExpectedDelivery'] ? Util::fromRawDate((string) $data['dateOfExpectedDelivery']) : null,
-            $data['timeOfExpectedDelivery'] ?? null,
-            $data['dateOfExpectedDeliveryAccording'] ?? null,
+            $data['date'] ?? null,
             $data['dateOfGoodsReturnedFromCustomer'] ?? null,
-            $data['dateOfPickup'] ?? null,
-            $data['timeOfPickup'],
             $data['invoiceNumber'],
             $data['dateOfComplaint'] ?? null,
             $data['deliveryNotification'],
@@ -446,8 +352,6 @@ final class ShopOrderPosition
             $data['partialDeliveryCode'],
             $data['planningCode'],
             $data['deliveryDateOfContractOfSale'] ?? null,
-            $data['dateOfReceipt'] ?? null,
-            $data['scheduledDeliveryDate'] ?? null,
             $data['itemText1'],
             $data['itemText2'],
             $data['itemText3'],
