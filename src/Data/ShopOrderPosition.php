@@ -17,7 +17,7 @@ final class ShopOrderPosition
      * @param ?int $unitPrice
      * @param string $status
      * @param ?string $dateOfStatus
-     * @param string $date
+     * @param ?string $date
      * @param ?string $dateOfGoodsReturnedFromCustomer
      * @param string $invoiceNumber
      * @param ?string $dateOfComplaint
@@ -47,7 +47,7 @@ final class ShopOrderPosition
         private ?int $unitPrice,
         private string $status,
         private ?string $dateOfStatus,
-        private string $date,
+        private ?string $date,
         private ?string $dateOfGoodsReturnedFromCustomer,
         private string $invoiceNumber,
         private ?string $dateOfComplaint,
@@ -306,7 +306,7 @@ final class ShopOrderPosition
      *     quantity: int,
      *     unitPrice: int | null,
      *     status: string,
-     *     date: string,
+     *     date: string | null,
      *     dateOfStatus: string | null,
      *     dateOfGoodsReturnedFromCustomer: string | null,
      *     invoiceNumber: string,

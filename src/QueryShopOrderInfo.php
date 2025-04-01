@@ -117,7 +117,7 @@ final class QueryShopOrderInfo extends Query
      *              quantity: int,
      *              unitPrice: int | null,
      *              status: string,
-     *              date: string,
+     *              date: string | null,
      *              dateOfStatus: string | null,
      *              dateOfGoodsReturnedFromCustomer: string | null,
      *              invoiceNumber: string,

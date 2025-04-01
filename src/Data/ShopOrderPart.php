@@ -62,7 +62,7 @@ final class ShopOrderPart
      *      quantity: int,
      *      unitPrice: int | null,
      *      status: string,
-     *      date: string,
+     *      date: string | null,
      *      dateOfStatus: string | null,
      *      dateOfContract: string | null,
      *      dateOfGoodsReturnedFromCustomer: string | null,
