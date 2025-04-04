@@ -5,47 +5,65 @@ declare(strict_types=1);
 namespace Wohnparc\Moeware\Data;
 
 use DateTimeImmutable;
-use Wohnparc\Moeware\Util\Util;
 
+/**
+ * @phpstan-import-type ShopOrderAddressPayload from \Wohnparc\Moeware\Data\ShopOrderAddress
+ * @phpstan-type ShopOrderHeadPayload array{
+ *     orderID: int,
+ *     customerID: int,
+ *     dateOfContract: string|null,
+ *     billingAddress: ShopOrderAddressPayload,
+ *     deliveryAddress?: ShopOrderAddressPayload|null,
+ *     delivery?: string|null,
+ *     deliveryDate: string,
+ *     deliveryTimeRange?: string|null,
+ *     deliveryCode: string,
+ *     typeOfDelivery?: string|null,
+ *     deliveryBlock?: string|null,
+ *     deliveryDayTimeCode?: string|null,
+ *     complaintCode?: string|null,
+ *     status: string,
+ *     invoiceAmount: int,
+ *     payment: string
+ * }
+ */
 final class ShopOrderHead
 {
     /**
-     * ShopOrderHead constructor.
-     *
      * @param int $orderID
      * @param int $customerID
-     * @param ?DateTimeImmutable $dateOfContract
+     * @param ?string $dateOfContract
      * @param ShopOrderAddress $billingAddress
-     * @param ?ShopOrderAddress $deliveryAddress
-     * @param ?string $delivery
+     * @param ShopOrderAddress|null $deliveryAddress
+     * @param string|null $delivery
      * @param string $deliveryDate
+     * @param string|null $deliveryTimeRange
      * @param string $deliveryCode
-     * @param ?string $typeOfDelivery
-     * @param ?string $deliveryBlock
-     * @param ?string $deliveryDayTimeCode
-     * @param ?string $deliveryTimeRange
-     * @param ?string $complaintCode
+     * @param string|null $typeOfDelivery
+     * @param string|null $deliveryBlock
+     * @param string|null $deliveryDayTimeCode
+     * @param string|null $complaintCode
      * @param string $status
-     * @param string $payment
      * @param int $invoiceAmount
+     * @param string $payment
      */
     public function __construct(
         private int $orderID,
         private int $customerID,
-        private ?DateTimeImmutable $dateOfContract,
+        private ?string $dateOfContract,
         private ShopOrderAddress $billingAddress,
         private ?ShopOrderAddress $deliveryAddress,
         private ?string $delivery,
         private string $deliveryDate,
+        private ?string $deliveryTimeRange,
         private string $deliveryCode,
         private ?string $typeOfDelivery,
         private ?string $deliveryBlock,
         private ?string $deliveryDayTimeCode,
-        private ?string $deliveryTimeRange,
         private ?string $complaintCode,
         private string $status,
-        private string $payment,
         private int $invoiceAmount,
+        private string $payment
     ) {
     }
 
@@ -66,9 +84,9 @@ final class ShopOrderHead
     }
 
     /**
-     * @return ?DateTimeImmutable
+     * @return ?string
      */
-    public function getDateOfContract(): ?DateTimeImmutable
+    public function getDateOfContract(): ?string
     {
         return $this->dateOfContract;
     }
@@ -180,64 +198,27 @@ final class ShopOrderHead
     }
 
     /**
-     * @param array{
-     *     orderID: int,
-     *     customerID: int,
-     *     dateOfContract: string,
-     *     billingAddress: array{
-     *         name: string,
-     *         email: string,
-     *         country: string,
-     *         postCode: string,
-     *         city: string,
-     *         street: string,
-     *         houseNumber: string,
-     *         floor: string,
-     *     },
-     *     deliveryAddress: array{
-     *         name: string,
-     *         email: string,
-     *         country: string,
-     *         postCode: string,
-     *         city: string,
-     *         street: string,
-     *         houseNumber: string,
-     *         floor: string,
-     *     } | null,
-     *     delivery: string | null,
-     *     deliveryDate: string,
-     *     deliveryTimeRange: string | null,
-     *     deliveryCode: string,
-     *     typeOfDelivery: string | null,
-     *     deliveryBlock: string | null,
-     *     deliveryDayTimeCode: string | null,
-     *     complaintCode: string | null,
-     *     status: string,
-     *     payment: string,
-     *     invoiceAmount: int,
-     * } $data
-     *
-     * @return static
+     * @phpstan-param ShopOrderHeadPayload $data
      */
     public static function fromArray(array $data): self
     {
         return new self(
             $data['orderID'],
             $data['customerID'],
-            Util::fromRawDate((string) $data['dateOfContract']),
+            $data['dateOfContract'] ?? null,
             ShopOrderAddress::fromArray($data['billingAddress']),
             isset($data['deliveryAddress']) ? ShopOrderAddress::fromArray($data['deliveryAddress']) : null,
-            isset($data['delivery']) ? (string)$data['delivery'] : null,
+            $data['delivery'] ?? null,
             $data['deliveryDate'],
+            $data['deliveryTimeRange'] ?? null,
             $data['deliveryCode'],
             $data['typeOfDelivery'] ?? null,
             $data['deliveryBlock'] ?? null,
             $data['deliveryDayTimeCode'] ?? null,
-            $data['deliveryTimeRange'] ?? null,
             $data['complaintCode'] ?? null,
             $data['status'],
-            $data['payment'],
             $data['invoiceAmount'],
+            $data['payment'],
         );
     }
 }
