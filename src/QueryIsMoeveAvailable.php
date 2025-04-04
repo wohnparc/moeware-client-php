@@ -73,10 +73,10 @@ final class QueryIsMoeveAvailable extends Query
     }
 
     /**
-     * @return array{}|null
+     * @return mixed
      */
-    public static function variables(): ?array
+    public static function variables()
     {
-        return null;
+
     }
 }

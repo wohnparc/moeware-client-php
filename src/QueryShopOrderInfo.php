@@ -6,6 +6,11 @@ namespace Wohnparc\Moeware;
 
 use Wohnparc\Moeware\Data\ShopOrderData;
 
+/** @phpstan-import-type ShopOrderDataPayload from \Wohnparc\Moeware\Data\ShopOrderData */
+/** @phpstan-import-type ShopOrderHeadPayload from \Wohnparc\Moeware\Data\ShopOrderHead */
+/** @phpstan-import-type ShopOrderPartPayload from \Wohnparc\Moeware\Data\ShopOrderPart */
+/** @phpstan-import-type ShopOrderPositionPayload from \Wohnparc\Moeware\Data\ShopOrderPosition */
+/** @phpstan-import-type ShopOrderAddressPayload from \Wohnparc\Moeware\Data\ShopOrderAddress */
 final class QueryShopOrderInfo extends Query
 {
     /**
@@ -64,93 +69,20 @@ final class QueryShopOrderInfo extends Query
         return $this->data;
     }
 
+
     /**
-     * @param array{
-     *     status: string,
-     *     message: string | null,
-     *     data: array{
-     *         head: array{
-     *             orderID: int,
-     *             customerID: int,
-     *             dateOfContract: string,
-     *             billingAddress: array{
-     *                 name: string,
-     *                 email: string,
-     *                 country: string,
-     *                 postCode: string,
-     *                 city: string,
-     *                 street: string,
-     *                 houseNumber: string,
-     *                 floor: string,
-     *             },
-     *             deliveryAddress: array{
-     *                 name: string,
-     *                 email: string,
-     *                 country: string,
-     *                 postCode: string,
-     *                 city: string,
-     *                 street: string,
-     *                 houseNumber: string,
-     *                 floor: string,
-     *             } | null,
-     *             delivery: string | null,
-     *             deliveryDate: string,
-     *             deliveryCode: string,
-     *             typeOfDelivery: string | null,
-     *             deliveryBlock: string | null,
-     *             deliveryDayTimeCode: string | null,
-     *             deliveryTimeRange: string | null,
-     *             complaintCode: string | null,
-     *             status: string,
-     *             invoiceAmount: int,
-     *             payment: string,
-     *         },
-     *         parts: array{
-     *             title: string,
-     *             price: int,
-     *             deliveryDate: string,
-     *             positions: array{
-     *              positionNumber: int,
-     *              uniquePositionNumber: int,
-     *              baseID: int,
-     *              variantID: int,
-     *              quantity: int,
-     *              unitPrice: int | null,
-     *              status: string,
-     *              date: string | null,
-     *              dateOfStatus: string | null,
-     *              dateOfGoodsReturnedFromCustomer: string | null,
-     *              invoiceNumber: string,
-     *              dateOfComplaint: string | null,
-     *              deliveryNotification: int,
-     *              typeOfDelivery: string | null,
-     *              deliveryCode: string,
-     *              partialDeliveryCode: int,
-     *              planningCode: string,
-     *              deliveryDateOfContractOfSale: string | null,
-     *              itemText1: string,
-     *              itemText2: string,
-     *              itemText3: string,
-     *              itemTextShop1: string,
-     *              itemTextShop2: string,
-     *              itemTextShop3: string,
-     *              positionText123: string,
-     *              trackingNumber1: string | null,
-     *              trackingNumber2: string | null,
-     *              trackingURL: string | null,
-     *          }[],
-     *         }[],
-     *     } | null,
+     * @phpstan-param array{
+     *   status: string,
+     *   message: string|null,
+     *   data: ShopOrderData|null
      * } $data
-     *
-     * @return static
      */
     public static function fromArray(array $data): self
     {
         return new self(
-            (string)$data['status'],
+            $data['status'],
             isset($data['message']) ? (string)$data['message'] : null,
-            isset($data['data']) ? ShopOrderData::fromArray($data['data']) : null
+            $data['data'] ?? null
         );
     }
 

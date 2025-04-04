@@ -8,6 +8,16 @@ use Closure;
 use DateTimeImmutable;
 use Wohnparc\Moeware\Util\Util;
 
+/**
+ * @phpstan-import-type ShopOrderPositionPayload from \Wohnparc\Moeware\Data\ShopOrderPosition
+ *
+ * @phpstan-type ShopOrderPartPayload array{
+ *     title: string,
+ *     price: int,
+ *     deliveryDate: string,
+ *     positions: list<ShopOrderPositionPayload>
+ * }
+ */
 final class ShopOrderPart
 {
     /**
@@ -20,9 +30,9 @@ final class ShopOrderPart
      */
     public function __construct(
         private string $title,
-        private int    $price,
+        private int $price,
         private string $deliveryDate,
-        private array  $positions
+        private array $positions
     ) {
     }
 
@@ -50,46 +60,7 @@ final class ShopOrderPart
     }
 
     /**
-     * @param array{
-     *     title: string,
-     *     price: int,
-     *     deliveryDate: string,
-     *     positions: array{
-     *      positionNumber: int,
-     *      uniquePositionNumber: int,
-     *      baseID: int,
-     *      variantID: int,
-     *      quantity: int,
-     *      unitPrice: int | null,
-     *      status: string,
-     *      date: string | null,
-     *      dateOfStatus: string | null,
-     *      dateOfContract: string | null,
-     *      dateOfGoodsReturnedFromCustomer: string | null,
-     *      invoiceNumber: string,
-     *      dateOfComplaint: string | null,
-     *      deliveryNotification: int,
-     *      typeOfDelivery: string | null,
-     *      deliveryCode: string,
-     *      partialDeliveryCode: int,
-     *      planningCode: string,
-     *      deliveryDateOfContractOfSale: string | null,
-     *      dateOfReceipt: string | null,
-     *      scheduledDeliveryDate: string | null,
-     *      itemText1: string,
-     *      itemText2: string,
-     *      itemText3: string,
-     *      itemTextShop1: string,
-     *      itemTextShop2: string,
-     *      itemTextShop3: string,
-     *      positionText123: string,
-     *      trackingNumber1: string | null,
-     *      trackingNumber2: string | null,
-     *      trackingURL: string | null,
-     *     }[],
-     * } $data
-     *
-     * @return static
+     * @phpstan-param ShopOrderPartPayload $data
      */
     public static function fromArray(array $data): self
     {
@@ -100,4 +71,5 @@ final class ShopOrderPart
             array_map([ShopOrderPosition::class, 'fromArray'], $data['positions'])
         );
     }
+
 }

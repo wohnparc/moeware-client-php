@@ -4,11 +4,21 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+/**
+ * @phpstan-type ShopOrderAddressPayload array{
+ *     name: string | null,
+ *     email: string| null,
+ *     country: string| null,
+ *     postCode: string| null,
+ *     city: string| null,
+ *     street: string| null,
+ *     houseNumber: string| null,
+ *     floor: string| null
+ * }
+ */
 final class ShopOrderAddress
 {
     /**
-     * ShopOrderAddress constructor.
-     *
      * @param string $name
      * @param string $email
      * @param string $country
@@ -94,31 +104,22 @@ final class ShopOrderAddress
         return $this->floor;
     }
 
+
     /**
-     * @param array{
-     *     name: string,
-     *     email: string,
-     *     country: string,
-     *     postCode: string,
-     *     city: string,
-     *     street: string,
-     *     houseNumber: string,
-     *     floor: string,
-     * } $data
-     *
-     * @return static
+     * @phpstan-param ShopOrderAddressPayload $data
+     * @param mixed $data
      */
-    public static function fromArray(array $data): self
+    public static function fromArray($data): self
     {
         return new self(
-            $data['name'],
-            $data['email'],
-            $data['country'],
-            $data['postCode'],
-            $data['city'],
-            $data['street'],
-            $data['houseNumber'],
-            $data['floor']
+            $data['name'] ?? '',
+            $data['email'] ?? '',
+            $data['country'] ?? '',
+            $data['postCode'] ?? '',
+            $data['city'] ?? '',
+            $data['street'] ?? '',
+            $data['houseNumber'] ?? '',
+            $data['floor'] ?? ''
         );
     }
 }

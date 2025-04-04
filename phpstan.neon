@@ -1,5 +1,9 @@
-parameters:
-   level: max
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
 
-   paths:
-     - src
+parameters:
+    level: 8
+    paths:
+        - src
+
+    inferPrivatePropertyTypeFromConstructor: true

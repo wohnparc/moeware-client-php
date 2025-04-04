@@ -4,29 +4,59 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+/**
+ * @phpstan-type ShopOrderPositionPayload array{
+ *     positionNumber: int|null,
+ *     uniquePositionNumber: int|null,
+ *     baseID: int|null,
+ *     variantID: int|null,
+ *     quantity: int|null,
+ *     unitPrice: int|null,
+ *     status: string|null,
+ *     dateOfStatus: string|null,
+ *     date: string|null,
+ *     dateOfGoodsReturnedFromCustomer: string|null,
+ *     invoiceNumber: string|null,
+ *     dateOfComplaint: string|null,
+ *     deliveryNotification: int|null,
+ *     typeOfDelivery: string|null,
+ *     deliveryCode: string|null,
+ *     partialDeliveryCode: int|null,
+ *     planningCode: string|null,
+ *     deliveryDateOfContractOfSale: string|null,
+ *     itemText1: string|null,
+ *     itemText2: string|null,
+ *     itemText3: string|null,
+ *     itemTextShop1: string|null,
+ *     itemTextShop2: string|null,
+ *     itemTextShop3: string|null,
+ *     positionText123: string|null,
+ *     trackingNumber1: string|null,
+ *     trackingNumber2: string|null,
+ *     trackingURL: string|null
+ * }
+ */
 final class ShopOrderPosition
 {
     /**
-     * ShopOrderPosition constructor.
-     *
      * @param int $positionNumber
      * @param int $uniquePositionNumber
      * @param int $baseID
      * @param int $variantID
      * @param int $quantity
-     * @param ?int $unitPrice
+     * @param int|null $unitPrice
      * @param string $status
-     * @param ?string $dateOfStatus
-     * @param ?string $date
-     * @param ?string $dateOfGoodsReturnedFromCustomer
+     * @param string|null $dateOfStatus
+     * @param string|null $date
+     * @param string|null $dateOfGoodsReturnedFromCustomer
      * @param string $invoiceNumber
-     * @param ?string $dateOfComplaint
+     * @param string|null $dateOfComplaint
      * @param int $deliveryNotification
-     * @param ?string $typeOfDelivery
+     * @param string|null $typeOfDelivery
      * @param string $deliveryCode
      * @param int $partialDeliveryCode
      * @param string $planningCode
-     * @param ?string $deliveryDateOfContractOfSale
+     * @param string|null $deliveryDateOfContractOfSale
      * @param string $itemText1
      * @param string $itemText2
      * @param string $itemText3
@@ -34,9 +64,9 @@ final class ShopOrderPosition
      * @param string $itemTextShop2
      * @param string $itemTextShop3
      * @param string $positionText123
-     * @param ?string $trackingNumber1
-     * @param ?string $trackingNumber2
-     * @param ?string $trackingURL
+     * @param string|null $trackingNumber1
+     * @param string|null $trackingNumber2
+     * @param string|null $trackingURL
      */
     public function __construct(
         private int $positionNumber,
@@ -298,70 +328,39 @@ final class ShopOrderPosition
     }
 
     /**
-     * @param array{
-     *     positionNumber: int,
-     *     uniquePositionNumber: int,
-     *     baseID: int,
-     *     variantID: int,
-     *     quantity: int,
-     *     unitPrice: int | null,
-     *     status: string,
-     *     date: string | null,
-     *     dateOfStatus: string | null,
-     *     dateOfGoodsReturnedFromCustomer: string | null,
-     *     invoiceNumber: string,
-     *     dateOfComplaint: string | null,
-     *     deliveryNotification: int,
-     *     typeOfDelivery: string | null,
-     *     deliveryCode: string,
-     *     partialDeliveryCode: int,
-     *     planningCode: string,
-     *     deliveryDateOfContractOfSale: string | null,
-     *     itemText1: string,
-     *     itemText2: string,
-     *     itemText3: string,
-     *     itemTextShop1: string,
-     *     itemTextShop2: string,
-     *     itemTextShop3: string,
-     *     positionText123: string,
-     *     trackingNumber1: string | null,
-     *     trackingNumber2: string | null,
-     *     trackingURL: string | null,
-     * } $data
-     *
-     * @return static
+     * @phpstan-param ShopOrderPositionPayload $data
      */
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['positionNumber'],
-            $data['uniquePositionNumber'],
-            $data['baseID'],
-            $data['variantID'],
-            $data['quantity'],
-            $data['unitPrice'],
-            $data['status'],
+            $data['positionNumber'] ?? 0,
+            $data['uniquePositionNumber'] ?? 0,
+            $data['baseID'] ?? 0,
+            $data['variantID'] ?? 0,
+            $data['quantity'] ?? 0,
+            $data['unitPrice'] ?? null,
+            $data['status'] ?? '',
             $data['dateOfStatus'] ?? null,
             $data['date'] ?? null,
             $data['dateOfGoodsReturnedFromCustomer'] ?? null,
-            $data['invoiceNumber'],
+            $data['invoiceNumber'] ?? '',
             $data['dateOfComplaint'] ?? null,
-            $data['deliveryNotification'],
+            $data['deliveryNotification'] ?? 0,
             $data['typeOfDelivery'] ?? null,
-            $data['deliveryCode'],
-            $data['partialDeliveryCode'],
-            $data['planningCode'],
+            $data['deliveryCode'] ?? '',
+            $data['partialDeliveryCode'] ?? 0,
+            $data['planningCode'] ?? '',
             $data['deliveryDateOfContractOfSale'] ?? null,
-            $data['itemText1'],
-            $data['itemText2'],
-            $data['itemText3'],
-            $data['itemTextShop1'],
-            $data['itemTextShop2'],
-            $data['itemTextShop3'],
-            $data['positionText123'],
+            $data['itemText1'] ?? '',
+            $data['itemText2'] ?? '',
+            $data['itemText3'] ?? '',
+            $data['itemTextShop1'] ?? '',
+            $data['itemTextShop2'] ?? '',
+            $data['itemTextShop3'] ?? '',
+            $data['positionText123'] ?? '',
             $data['trackingNumber1'] ?? null,
             $data['trackingNumber2'] ?? null,
-            $data['trackingURL'] ?? null
+            $data['trackingURL'] ?? null,
         );
     }
 }

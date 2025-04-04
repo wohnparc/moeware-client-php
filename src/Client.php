@@ -7,12 +7,13 @@ namespace Wohnparc\Moeware;
 use Composer\InstalledVersions;
 use DateTime;
 use GuzzleHttp\RequestOptions;
-use ShopOrderInfo;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Client as GQLClient;
 use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Data\SetArticleRef;
+use Wohnparc\Moeware\Data\ShopOrderData;
 
+/** @phpstan-import-type ShopOrderDataPayload from \Wohnparc\Moeware\Data\ShopOrderData */
 class Client
 {
     /**
@@ -42,12 +43,42 @@ class Client
         ]);
     }
 
+
+    public function queryShopOrderInfo(int $orderID, string $lastName, string $postCode): QueryShopOrderInfo
+    {
+        $response = $this->client->query(
+            QueryShopOrderInfo::query(),
+            QueryShopOrderInfo::variables($orderID, $lastName, $postCode),
+        );
+
+        if ($response->hasErrors()) {
+            return QueryShopOrderInfo::withErrors($response->getErrors());
+        }
+
+
+        /** @phpstan-var array{shopOrderInfo: array{status: string, message: string|null, data: ShopOrderDataPayload|null}} $data */
+        $data = $response->getData();
+
+        /** @phpstan-var ShopOrderDataPayload|null $shopOrderDataArray */
+        $shopOrderDataArray = $data['shopOrderInfo']['data'] ?? null;
+
+        $shopOrderData = $shopOrderDataArray !== null
+            ? ShopOrderData::fromArray($shopOrderDataArray)
+            : null;
+
+        return QueryShopOrderInfo::fromArray([
+            'status' => $data['shopOrderInfo']['status'],
+            'message' => $data['shopOrderInfo']['message'],
+            'data' => $shopOrderData,
+        ]);
+    }
+
     /**
      * @param DateTime $since
      *
-     * @return QueryUpdatedArticleRefs|null
+     * @return QueryUpdatedArticleRefs
      */
-    final public function queryUpdatedArticleRefs(DateTime $since): ?QueryUpdatedArticleRefs
+    final public function queryUpdatedArticleRefs(DateTime $since): QueryUpdatedArticleRefs
     {
         $response = $this->client->query(
             QueryUpdatedArticleRefs::query(),
@@ -77,9 +108,9 @@ class Client
      *
      * @param DateTime $since
      *
-     * @return QueryUpdatedSetRefs|null
+     * @return QueryUpdatedSetRefs
      */
-    final public function queryUpdatedSetRefs(DateTime $since): ?QueryUpdatedSetRefs
+    final public function queryUpdatedSetRefs(DateTime $since): QueryUpdatedSetRefs
     {
         $response = $this->client->query(
             QueryUpdatedSetRefs::query(),
@@ -106,12 +137,12 @@ class Client
     /**
      * @param DateTime $since
      *
-     * @return QueryUpdatedArticleAndSetRefs|null
+     * @return QueryUpdatedArticleAndSetRefs
      *
      * @deprecated updated set refs does not work correctly for GACO. Please use
      * updated article refs via the queryUpdatedArticleRefs call instead.
      */
-    final public function queryUpdatedArticleAndSetRefs(DateTime $since): ?QueryUpdatedArticleAndSetRefs
+    final public function queryUpdatedArticleAndSetRefs(DateTime $since): QueryUpdatedArticleAndSetRefs
     {
         $response = $this->client->query(
             QueryUpdatedArticleAndSetRefs::query(),
@@ -150,9 +181,9 @@ class Client
      *
      * @param ArticleRef[] $refs
      *
-     * @return QueryArticleInfo|null
+     * @return QueryArticleInfo
      */
-    final public function queryArticleInfo(array $refs): ?QueryArticleInfo
+    final public function queryArticleInfo(array $refs): QueryArticleInfo
     {
         $chunks = [$refs];
 
@@ -256,9 +287,9 @@ class Client
      *
      * @param SetArticleRef[] $refs
      *
-     * @return QuerySetArticleInfo|null
+     * @return QuerySetArticleInfo
      */
-    final public function querySetArticleInfo(array $refs): ?QuerySetArticleInfo
+    final public function querySetArticleInfo(array $refs): QuerySetArticleInfo
     {
         $chunks = [$refs];
 
@@ -337,7 +368,7 @@ class Client
         );
     }
 
-    final public function queryIsMoeveAvailable(): ?QueryIsMoeveAvailable
+    final public function queryIsMoeveAvailable(): QueryIsMoeveAvailable
     {
         $response = $this->client->query(
             QueryIsMoeveAvailable::query(),
@@ -358,7 +389,7 @@ class Client
         return QueryIsMoeveAvailable::fromArray($data);
     }
 
-    final public function queryProductLinkRelationStatus(string $externalProductRef): ?QueryProductLinkRelationStatus
+    final public function queryProductLinkRelationStatus(string $externalProductRef): QueryProductLinkRelationStatus
     {
         $response = $this->client->query(
             QueryProductLinkRelationStatus::query(),
@@ -486,7 +517,7 @@ class Client
         return QueryProductLinkRelationStatus::fromArray($data);
     }
 
-    final public function queryProductLinkRelationStatuses(string $externalParentProductRef): ?QueryProductLinkRelationStatuses
+    final public function queryProductLinkRelationStatuses(string $externalParentProductRef): QueryProductLinkRelationStatuses
     {
         $response = $this->client->query(
             QueryProductLinkRelationStatuses::query(),
@@ -614,100 +645,5 @@ class Client
         return QueryProductLinkRelationStatuses::fromArray($data);
     }
 
-    final public function queryShopOrderInfo(int $orderID, string $lastName, string $postCode): QueryShopOrderInfo
-    {
-        $response = $this->client->query(
-            QueryShopOrderInfo::query(),
-            QueryShopOrderInfo::variables($orderID, $lastName, $postCode),
-        );
 
-        if ($response->hasErrors()) {
-            return QueryShopOrderInfo::withErrors($response->getErrors());
-        }
-
-        /**
-         * @var array{
-         *     shopOrderInfo: array{
-         *         status: string,
-         *         message: string | null,
-         *         data: array{
-         *             head: array{
-         *                 orderID: int,
-         *                 customerID: int,
-         *                 dateOfContract: string,
-         *                 billingAddress: array{
-         *                     name: string,
-         *                     email: string,
-         *                     country: string,
-         *                     postCode: string,
-         *                     city: string,
-         *                     street: string,
-         *                     houseNumber: string,
-         *                     floor: string,
-         *                 },
-         *                 deliveryAddress: array{
-         *                     name: string,
-         *                     email: string,
-         *                     country: string,
-         *                     postCode: string,
-         *                     city: string,
-         *                     street: string,
-         *                     houseNumber: string,
-         *                     floor: string,
-         *                 } | null,
-         *                 delivery: string | null,
-         *                 deliveryDate: string,
-         *                 deliveryCode: string,
-         *                 typeOfDelivery: string,
-         *                 deliveryBlock: string | null,
-         *                 deliveryDayTimeCode: string | null,
-         *                 deliveryTimeRange: string | null,
-         *                 complaintCode: string | null,
-         *                 invoiceAmount: int,
-         *                 payment: string,
-         *                 status: string,
-         *             },
-         *             parts: array{
-         *                 title: string,
-         *                 price: int,
-         *                 deliveryDate: string,
-         *             positions: array{
-         *              positionNumber: int,
-         *              uniquePositionNumber: int,
-         *              baseID: int,
-         *              variantID: int,
-         *              quantity: int,
-         *              unitPrice: int | null,
-         *              status: string,
-         *              date: string | null,
-         *              dateOfStatus: string | null,
-         *              dateOfGoodsReturnedFromCustomer: string | null,
-         *              invoiceNumber: string,
-         *              dateOfComplaint: string | null,
-         *              deliveryNotification: int,
-         *              typeOfDelivery: string | null,
-         *              deliveryCode: string,
-         *              partialDeliveryCode: int,
-         *              planningCode: string,
-         *              deliveryDateOfContractOfSale: string | null,
-         *              itemText1: string,
-         *              itemText2: string,
-         *              itemText3: string,
-         *              itemTextShop1: string,
-         *              itemTextShop2: string,
-         *              itemTextShop3: string,
-         *              positionText123: string,
-         *              trackingNumber1: string | null,
-         *              trackingNumber2: string | null,
-         *              trackingURL: string | null,
-         *          }[],
-         *     }[],
-         *         } | null,
-         *     },
-         * } $data
-         */
-        $data = $response->getData();
-
-        return QueryShopOrderInfo::fromArray($data['shopOrderInfo']);
-    }
 }
