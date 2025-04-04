@@ -72,11 +72,4 @@ final class QueryIsMoeveAvailable extends Query
         GQL;
     }
 
-    /**
-     * @return mixed
-     */
-    public static function variables()
-    {
-
-    }
 }

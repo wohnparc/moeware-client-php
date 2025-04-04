@@ -372,7 +372,7 @@ class Client
     {
         $response = $this->client->query(
             QueryIsMoeveAvailable::query(),
-            QueryIsMoeveAvailable::variables(),
+            null,
         );
 
         if ($response->hasErrors()) {
