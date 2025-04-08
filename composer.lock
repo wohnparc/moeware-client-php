@@ -759,16 +759,16 @@
         },
         {
             "name": "softonic/graphql-client",
-            "version": "3.0.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/softonic/graphql-client.git",
-                "reference": "0692fe81afeae11fb17cce735b12f52c92f95892"
+                "reference": "72ae042d3f22ad5eb57cd7672954d8f5dc9687ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/softonic/graphql-client/zipball/0692fe81afeae11fb17cce735b12f52c92f95892",
-                "reference": "0692fe81afeae11fb17cce735b12f52c92f95892",
+                "url": "https://api.github.com/repos/softonic/graphql-client/zipball/72ae042d3f22ad5eb57cd7672954d8f5dc9687ef",
+                "reference": "72ae042d3f22ad5eb57cd7672954d8f5dc9687ef",
                 "shasum": ""
             },
             "require": {
@@ -781,8 +781,8 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.9",
                 "mockery/mockery": "^1.5",
-                "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.13.8",
+                "phpunit/phpunit": "^11.0",
+                "rector/rector": "^2.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "bin": [
@@ -808,9 +808,9 @@
             ],
             "support": {
                 "issues": "https://github.com/softonic/graphql-client/issues",
-                "source": "https://github.com/softonic/graphql-client/tree/3.0.0"
+                "source": "https://github.com/softonic/graphql-client/tree/3.1.1"
             },
-            "time": "2024-03-01T09:31:49+00:00"
+            "time": "2025-03-26T14:37:06+00:00"
         },
         {
             "name": "softonic/guzzle-oauth2-middleware",
@@ -972,12 +972,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.0-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -1046,8 +1046,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1122,8 +1122,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1200,8 +1200,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1284,8 +1284,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1364,12 +1364,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.0-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -5647,12 +5647,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.0-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -5947,12 +5947,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.0-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -6214,8 +6214,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -6290,8 +6290,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -6674,13 +6674,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.0.30"
     },
