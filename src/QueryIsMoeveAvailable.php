@@ -72,11 +72,4 @@ final class QueryIsMoeveAvailable extends Query
         GQL;
     }
 
-    /**
-     * @return array{}|null
-     */
-    public static function variables(): ?array
-    {
-        return null;
-    }
 }
