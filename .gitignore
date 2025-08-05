@@ -6,3 +6,5 @@
 /vendor/
 .phpunit.result.cache
 .php-cs-fixer.cache
+
+.claude/settings.local.json
