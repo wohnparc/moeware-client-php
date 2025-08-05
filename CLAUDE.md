@@ -45,6 +45,11 @@ The library follows a query-based architecture where:
 3. Query classes extend the base `Query` class and define their GraphQL query structure
 4. Data models in `src/Data/` represent the response structures
 
+### Authentication
+The client supports two layers of authentication:
+1. **API Authentication**: Required - uses API key (X-API-Key header) and secret (Bearer token)
+2. **HTTP Basic Auth**: Optional - for instances protected by web server basic auth (e.g., Caddy)
+
 ### Key Components
 - **Client**: Main class that instantiates the GraphQL client with authentication headers
 - **Query Classes**: Each query type implements its own GraphQL query string and result parsing

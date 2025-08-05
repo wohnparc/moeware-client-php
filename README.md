@@ -57,6 +57,25 @@ $result->getSetRefs();
 
 ```
 
+#### With Basic Authentication
+
+If your Moeware instance is protected by HTTP Basic Authentication (e.g., via Caddy), you can provide the credentials:
+
+```php
+
+$client = new Client(
+    "<endpoint>", 
+    "<api_key>", 
+    "<api_secret>",
+    "<basic_auth_username>",
+    "<basic_auth_password>"
+);
+
+// Use the client as normal
+$result = $client->queryIsMoeveAvailable();
+
+```
+
 ## License
 
 This project is licensed under the terms of the MIT license.
