@@ -27,20 +27,28 @@ class Client
      * @param string $endpoint
      * @param string $key
      * @param string $secret
+     * @param string|null $basicAuthUsername
+     * @param string|null $basicAuthPassword
      */
-    public function __construct(string $endpoint, string $key, string $secret)
+    public function __construct(string $endpoint, string $key, string $secret, ?string $basicAuthUsername = null, ?string $basicAuthPassword = null)
     {
         $package = InstalledVersions::getRootPackage();
         $version = $package['version'];
 
-        $this->client = ClientBuilder::build($endpoint, [
+        $guzzleOptions = [
             RequestOptions::TIMEOUT => 0,
             RequestOptions::HEADERS => [
                 'X-API-Key' => $key,
                 'Authorization' => "BEARER $secret",
                 'User-Agent' => "Moeware PHP Client v$version",
             ],
-        ]);
+        ];
+
+        if ($basicAuthUsername !== null && $basicAuthPassword !== null) {
+            $guzzleOptions[RequestOptions::AUTH] = [$basicAuthUsername, $basicAuthPassword];
+        }
+
+        $this->client = ClientBuilder::build($endpoint, $guzzleOptions);
     }
 
 
