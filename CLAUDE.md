@@ -55,4 +55,4 @@ The library follows a query-based architecture where:
 - Uses Pest for testing
 - PHPStan at max level for static analysis
 - PHP-CS-Fixer for code formatting
-- Minimum PHP version: 8.0
+- Minimum PHP version: See the `composer.json` file for the current requirement.
