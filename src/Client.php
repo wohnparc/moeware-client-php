@@ -39,13 +39,13 @@ class Client
             RequestOptions::TIMEOUT => 0,
             RequestOptions::HEADERS => [
                 'X-API-Key' => $key,
-                'Authorization' => "BEARER $secret",
+                'X-API-Token' => $secret,
                 'User-Agent' => "Moeware PHP Client v$version",
             ],
         ];
 
         if ($basicAuthUsername !== null && $basicAuthPassword !== null) {
-            $guzzleOptions[RequestOptions::AUTH] = [$basicAuthUsername, $basicAuthPassword];
+          $guzzleOptions[RequestOptions::AUTH] = [$basicAuthUsername, $basicAuthPassword];
         }
 
         $this->client = ClientBuilder::build($endpoint, $guzzleOptions);
