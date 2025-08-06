@@ -45,7 +45,7 @@ class Client
         ];
 
         if ($basicAuthUsername !== null && $basicAuthPassword !== null) {
-          $guzzleOptions[RequestOptions::AUTH] = [$basicAuthUsername, $basicAuthPassword];
+            $guzzleOptions[RequestOptions::AUTH] = [$basicAuthUsername, $basicAuthPassword];
         }
 
         $this->client = ClientBuilder::build($endpoint, $guzzleOptions);
