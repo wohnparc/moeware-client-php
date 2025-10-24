@@ -15,7 +15,10 @@ use Wohnparc\Moeware\Util\Util;
  *     title: string,
  *     price: int,
  *     deliveryDate: string,
- *     positions: list<ShopOrderPositionPayload>
+ *     typeOfDelivery: string,
+ *     deliveryCode: string,
+ *     positions: list<ShopOrderPositionPayload>,
+ *     refunds: list<ShopOrderPositionPayload>
  * }
  */
 final class ShopOrderPart
@@ -26,13 +29,19 @@ final class ShopOrderPart
      * @param string $title
      * @param int $price
      * @param string $deliveryDate
+     * @param string $typeOfDelivery
+     * @param string $deliveryCode
      * @param ShopOrderPosition[] $positions
+     * @param ShopOrderPosition[] $refunds
      */
     public function __construct(
         private string $title,
         private int $price,
         private string $deliveryDate,
-        private array $positions
+        private string $typeOfDelivery,
+        private string $deliveryCode,
+        private array $positions,
+        private array $refunds
     ) {
     }
 
@@ -51,12 +60,30 @@ final class ShopOrderPart
         return $this->deliveryDate;
     }
 
+    public function getTypeOfDelivery(): string
+    {
+        return $this->typeOfDelivery;
+    }
+
+    public function getDeliveryCode(): string
+    {
+        return $this->deliveryCode;
+    }
+
     /**
      * @return ShopOrderPosition[]
      */
     public function getPositions(): array
     {
         return $this->positions;
+    }
+
+    /**
+     * @return ShopOrderPosition[]
+     */
+    public function getRefunds(): array
+    {
+        return $this->refunds;
     }
 
     /**
@@ -68,7 +95,10 @@ final class ShopOrderPart
             $data['title'],
             $data['price'],
             $data['deliveryDate'],
-            array_map([ShopOrderPosition::class, 'fromArray'], $data['positions'])
+            $data['typeOfDelivery'],
+            $data['deliveryCode'],
+            array_map([ShopOrderPosition::class, 'fromArray'], $data['positions']),
+            array_map([ShopOrderPosition::class, 'fromArray'], $data['refunds'] ?? [])
         );
     }
 
