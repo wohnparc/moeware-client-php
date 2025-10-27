@@ -140,7 +140,40 @@ final class QueryShopOrderInfo extends Query
                 title
                 price
                 deliveryDate
+                typeOfDelivery
+                deliveryCode
                 positions {
+                    positionNumber
+                    uniquePositionNumber
+                    baseID
+                    variantID
+                    quantity
+                    unitPrice
+                    status
+                    dateOfStatus
+                    date
+                    dateOfContract
+                    dateOfGoodsReturnedFromCustomer
+                    invoiceNumber
+                    dateOfComplaint
+                    deliveryNotification
+                    typeOfDelivery
+                    deliveryCode
+                    partialDeliveryCode
+                    planningCode
+                    deliveryDateOfContractOfSale
+                    itemText1
+                    itemText2
+                    itemText3
+                    itemTextShop1
+                    itemTextShop2
+                    itemTextShop3
+                    positionText123
+                    trackingNumber1
+                    trackingNumber2
+                    trackingURL
+                }
+                refunds {
                     positionNumber
                     uniquePositionNumber
                     baseID
