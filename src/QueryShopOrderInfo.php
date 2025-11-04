@@ -169,9 +169,11 @@ final class QueryShopOrderInfo extends Query
                     itemTextShop2
                     itemTextShop3
                     positionText123
-                    trackingNumber1
-                    trackingNumber2
-                    trackingURL
+                    tracking {
+                        Number1
+                        Number2
+                        URL
+                    }
                 }
                 refunds {
                     positionNumber
@@ -200,9 +202,11 @@ final class QueryShopOrderInfo extends Query
                     itemTextShop2
                     itemTextShop3
                     positionText123
-                    trackingNumber1
-                    trackingNumber2
-                    trackingURL
+                    tracking {
+                        Number1
+                        Number2
+                        URL
+                    }
                 }
               }
             }
