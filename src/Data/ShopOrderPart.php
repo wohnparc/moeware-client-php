@@ -92,13 +92,13 @@ final class ShopOrderPart
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['title'] ?? '',
-            $data['price'] ?? 0,
-            $data['deliveryDate'] ?? '',
-            $data['typeOfDelivery'] ?? '',
-            $data['deliveryCode'] ?? '',
-            array_map([ShopOrderPosition::class, 'fromArray'], $data['positions'] ?? []),
-            array_map([ShopOrderPosition::class, 'fromArray'], $data['refunds'] ?? [])
+            $data['title'],
+            $data['price'],
+            $data['deliveryDate'],
+            $data['typeOfDelivery'],
+            $data['deliveryCode'],
+            array_map([ShopOrderPosition::class, 'fromArray'], $data['positions']),
+            array_map([ShopOrderPosition::class, 'fromArray'], $data['refunds'])
         );
     }
 

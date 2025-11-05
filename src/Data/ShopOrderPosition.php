@@ -312,7 +312,7 @@ final class ShopOrderPosition
     public static function fromArray(array $data): self
     {
         $tracking = [];
-        if (isset($data['tracking']) && is_array($data['tracking'])) {
+        if (isset($data['tracking'])) {
             $tracking = array_map([Tracking::class, 'fromArray'], $data['tracking']);
         }
 
