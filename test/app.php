@@ -11,7 +11,13 @@ use Wohnparc\Moeware\Data\SetRef;
 $key = '';
 $secret = '';
 
+// Without Basic Auth
 $client = new Client("http://localhost:8000/$/graphql", $key, $secret);
+
+// With Basic Auth (uncomment and fill in credentials if needed)
+// $basicAuthUsername = 'your_username';
+// $basicAuthPassword = 'your_password';
+// $client = new Client("http://localhost:8000/$/graphql", $key, $secret, $basicAuthUsername, $basicAuthPassword);
 
 $res = $client->queryIsMoeveAvailable();
 
