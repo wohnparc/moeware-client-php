@@ -113,7 +113,7 @@ final class ShopOrderPart
             $data['typeOfDelivery'],
             $data['deliveryCode'],
             array_map([ShopOrderPosition::class, 'fromArray'], $data['positions']),
-            array_map([ShopOrderPosition::class, 'fromArray'], $data['refunds'] ?? [])
+            array_map([ShopOrderPosition::class, 'fromArray'], $data['refunds'])
         );
     }
 
