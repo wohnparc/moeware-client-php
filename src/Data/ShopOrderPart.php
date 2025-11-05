@@ -45,16 +45,25 @@ final class ShopOrderPart
     ) {
     }
 
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
+    /**
+     * @return int
+     */
     public function getPrice(): int
     {
         return $this->price;
     }
 
+    /**
+     * @return string
+     */
     public function getDeliveryDate(): string
     {
         return $this->deliveryDate;
