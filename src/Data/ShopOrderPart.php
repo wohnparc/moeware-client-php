@@ -60,11 +60,17 @@ final class ShopOrderPart
         return $this->deliveryDate;
     }
 
+    /**
+     * @return string
+     */
     public function getTypeOfDelivery(): string
     {
         return $this->typeOfDelivery;
     }
 
+    /**
+     * @return string
+     */
     public function getDeliveryCode(): string
     {
         return $this->deliveryCode;

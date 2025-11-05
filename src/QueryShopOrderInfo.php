@@ -185,7 +185,6 @@ final class QueryShopOrderInfo extends Query
                     status
                     dateOfStatus
                     date
-                    dateOfContract
                     dateOfGoodsReturnedFromCustomer
                     invoiceNumber
                     dateOfComplaint
