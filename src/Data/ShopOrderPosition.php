@@ -32,7 +32,7 @@ namespace Wohnparc\Moeware\Data;
  *     itemTextShop2: string|null,
  *     itemTextShop3: string|null,
  *     positionText123: string|null,
- *     tracking: array<TrackingPayload>|null
+ *     tracking: list<TrackingPayload>|null
  * }
  */
 final class ShopOrderPosition
