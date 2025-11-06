@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wohnparc\Moeware\Data;
 
 /**
+ * @phpstan-import-type TrackingPayload from Tracking
  * @phpstan-type ShopOrderPositionPayload array{
  *     positionNumber: int|null,
  *     uniquePositionNumber: int|null,
@@ -31,9 +32,7 @@ namespace Wohnparc\Moeware\Data;
  *     itemTextShop2: string|null,
  *     itemTextShop3: string|null,
  *     positionText123: string|null,
- *     trackingNumber1: string|null,
- *     trackingNumber2: string|null,
- *     trackingURL: string|null
+ *     tracking: list<TrackingPayload>|null
  * }
  */
 final class ShopOrderPosition
@@ -64,9 +63,7 @@ final class ShopOrderPosition
      * @param string $itemTextShop2
      * @param string $itemTextShop3
      * @param string $positionText123
-     * @param string|null $trackingNumber1
-     * @param string|null $trackingNumber2
-     * @param string|null $trackingURL
+     * @param Tracking[] $tracking
      */
     public function __construct(
         private int $positionNumber,
@@ -94,9 +91,7 @@ final class ShopOrderPosition
         private string $itemTextShop2,
         private string $itemTextShop3,
         private string $positionText123,
-        private ?string $trackingNumber1,
-        private ?string $trackingNumber2,
-        private ?string $trackingURL
+        private array $tracking
     ) {
     }
 
@@ -304,27 +299,11 @@ final class ShopOrderPosition
     }
 
     /**
-     * @return ?string
+     * @return Tracking[]
      */
-    public function getTrackingNumber1(): ?string
+    public function getTracking(): array
     {
-        return $this->trackingNumber1;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getTrackingNumber2(): ?string
-    {
-        return $this->trackingNumber2;
-    }
-
-    /**
-     * @return ?string
-     */
-    public function getTrackingURL(): ?string
-    {
-        return $this->trackingURL;
+        return $this->tracking;
     }
 
     /**
@@ -332,6 +311,11 @@ final class ShopOrderPosition
      */
     public static function fromArray(array $data): self
     {
+        $tracking = [];
+        if (isset($data['tracking'])) {
+            $tracking = array_map([Tracking::class, 'fromArray'], $data['tracking']);
+        }
+
         return new self(
             $data['positionNumber'] ?? 0,
             $data['uniquePositionNumber'] ?? 0,
@@ -358,9 +342,7 @@ final class ShopOrderPosition
             $data['itemTextShop2'] ?? '',
             $data['itemTextShop3'] ?? '',
             $data['positionText123'] ?? '',
-            $data['trackingNumber1'] ?? null,
-            $data['trackingNumber2'] ?? null,
-            $data['trackingURL'] ?? null,
+            $tracking,
         );
     }
 }

@@ -140,6 +140,8 @@ final class QueryShopOrderInfo extends Query
                 title
                 price
                 deliveryDate
+                typeOfDelivery
+                deliveryCode
                 positions {
                     positionNumber
                     uniquePositionNumber
@@ -167,9 +169,43 @@ final class QueryShopOrderInfo extends Query
                     itemTextShop2
                     itemTextShop3
                     positionText123
-                    trackingNumber1
-                    trackingNumber2
-                    trackingURL
+                    tracking {
+                        Number1
+                        Number2
+                        URL
+                    }
+                }
+                refunds {
+                    positionNumber
+                    uniquePositionNumber
+                    baseID
+                    variantID
+                    quantity
+                    unitPrice
+                    status
+                    dateOfStatus
+                    date
+                    dateOfGoodsReturnedFromCustomer
+                    invoiceNumber
+                    dateOfComplaint
+                    deliveryNotification
+                    typeOfDelivery
+                    deliveryCode
+                    partialDeliveryCode
+                    planningCode
+                    deliveryDateOfContractOfSale
+                    itemText1
+                    itemText2
+                    itemText3
+                    itemTextShop1
+                    itemTextShop2
+                    itemTextShop3
+                    positionText123
+                    tracking {
+                        Number1
+                        Number2
+                        URL
+                    }
                 }
               }
             }

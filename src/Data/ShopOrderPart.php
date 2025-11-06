@@ -15,7 +15,10 @@ use Wohnparc\Moeware\Util\Util;
  *     title: string,
  *     price: int,
  *     deliveryDate: string,
- *     positions: list<ShopOrderPositionPayload>
+ *     typeOfDelivery: string,
+ *     deliveryCode: string,
+ *     positions: list<ShopOrderPositionPayload>,
+ *     refunds: list<ShopOrderPositionPayload>
  * }
  */
 final class ShopOrderPart
@@ -26,29 +29,60 @@ final class ShopOrderPart
      * @param string $title
      * @param int $price
      * @param string $deliveryDate
+     * @param string $typeOfDelivery
+     * @param string $deliveryCode
      * @param ShopOrderPosition[] $positions
+     * @param ShopOrderPosition[] $refunds
      */
     public function __construct(
         private string $title,
         private int $price,
         private string $deliveryDate,
-        private array $positions
+        private string $typeOfDelivery,
+        private string $deliveryCode,
+        private array $positions,
+        private array $refunds
     ) {
     }
 
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
+    /**
+     * @return int
+     */
     public function getPrice(): int
     {
         return $this->price;
     }
 
+    /**
+     * @return string
+     */
     public function getDeliveryDate(): string
     {
         return $this->deliveryDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeOfDelivery(): string
+    {
+        return $this->typeOfDelivery;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeliveryCode(): string
+    {
+        return $this->deliveryCode;
     }
 
     /**
@@ -60,6 +94,14 @@ final class ShopOrderPart
     }
 
     /**
+     * @return ShopOrderPosition[]
+     */
+    public function getRefunds(): array
+    {
+        return $this->refunds;
+    }
+
+    /**
      * @phpstan-param ShopOrderPartPayload $data
      */
     public static function fromArray(array $data): self
@@ -68,7 +110,10 @@ final class ShopOrderPart
             $data['title'],
             $data['price'],
             $data['deliveryDate'],
-            array_map([ShopOrderPosition::class, 'fromArray'], $data['positions'])
+            $data['typeOfDelivery'],
+            $data['deliveryCode'],
+            array_map([ShopOrderPosition::class, 'fromArray'], $data['positions']),
+            array_map([ShopOrderPosition::class, 'fromArray'], $data['refunds'])
         );
     }
 
