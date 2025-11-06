@@ -17,6 +17,7 @@ use Wohnparc\Moeware\Util\Util;
  *     deliveryDate: string,
  *     typeOfDelivery: string,
  *     deliveryCode: string,
+ *     hasScheduledDelivery: bool,
  *     positions: list<ShopOrderPositionPayload>,
  *     refunds: list<ShopOrderPositionPayload>
  * }
@@ -31,6 +32,7 @@ final class ShopOrderPart
      * @param string $deliveryDate
      * @param string $typeOfDelivery
      * @param string $deliveryCode
+     * @param bool $hasScheduledDelivery
      * @param ShopOrderPosition[] $positions
      * @param ShopOrderPosition[] $refunds
      */
@@ -40,6 +42,7 @@ final class ShopOrderPart
         private string $deliveryDate,
         private string $typeOfDelivery,
         private string $deliveryCode,
+        private bool $hasScheduledDelivery,
         private array $positions,
         private array $refunds
     ) {
@@ -86,6 +89,14 @@ final class ShopOrderPart
     }
 
     /**
+     * @return bool
+     */
+    public function hasScheduledDelivery(): bool
+    {
+        return $this->hasScheduledDelivery;
+    }
+
+    /**
      * @return ShopOrderPosition[]
      */
     public function getPositions(): array
@@ -112,6 +123,7 @@ final class ShopOrderPart
             $data['deliveryDate'],
             $data['typeOfDelivery'],
             $data['deliveryCode'],
+            $data['hasScheduledDelivery'],
             array_map([ShopOrderPosition::class, 'fromArray'], $data['positions']),
             array_map([ShopOrderPosition::class, 'fromArray'], $data['refunds'])
         );
