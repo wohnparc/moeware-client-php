@@ -142,6 +142,7 @@ final class QueryShopOrderInfo extends Query
                 deliveryDate
                 typeOfDelivery
                 deliveryCode
+                hasScheduledDelivery
                 positions {
                     positionNumber
                     uniquePositionNumber
