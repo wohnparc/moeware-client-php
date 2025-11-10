@@ -426,6 +426,7 @@ class Client
          *          suggestedPrice: int| null,
          *          suggestedPriceUpdatedAt: string| null,
          *          suggestedPriceSyncedAt: string| null,
+         *          priceSyncDisabledAt: string|null
          *         },
          *         moewareURL: string| null,
          *         shopSyncActive: bool,
@@ -554,6 +555,7 @@ class Client
          *            suggestedPrice: int| null,
          *            suggestedPriceUpdatedAt: string| null,
          *            suggestedPriceSyncedAt: string| null,
+         *            priceSyncDisabledAt: string|null
          *          },
          *         moewareURL: string| null,
          *         shopSyncActive: bool,
