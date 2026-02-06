@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware;
 
+use Wohnparc\Moeware\Data\ShopMoeveAvailability;
 use Wohnparc\Moeware\Data\ShopOrderData;
 
 /** @phpstan-import-type ShopOrderDataPayload from \Wohnparc\Moeware\Data\ShopOrderData */
@@ -14,16 +15,16 @@ use Wohnparc\Moeware\Data\ShopOrderData;
 final class QueryShopOrderInfo extends Query
 {
     /**
-     * ShopOrderInfo constructor.
-     *
      * @param string $status
      * @param ?string $message
      * @param ?ShopOrderData $data
+     * @param ?ShopMoeveAvailability $availability
      */
     public function __construct(
         private string $status,
         private ?string $message = null,
         private ?ShopOrderData $data = null,
+        private ?ShopMoeveAvailability $availability = null,
     ) {
         parent::__construct([]);
     }
@@ -69,12 +70,20 @@ final class QueryShopOrderInfo extends Query
         return $this->data;
     }
 
+    /**
+     * @return ?ShopMoeveAvailability
+     */
+    public function getAvailability(): ?ShopMoeveAvailability
+    {
+        return $this->availability;
+    }
 
     /**
      * @phpstan-param array{
      *   status: string,
      *   message: string|null,
-     *   data: ShopOrderData|null
+     *   data: ShopOrderData|null,
+     *   availability: ShopMoeveAvailability|null,
      * } $data
      */
     public static function fromArray(array $data): self
@@ -82,7 +91,8 @@ final class QueryShopOrderInfo extends Query
         return new self(
             $data['status'],
             isset($data['message']) ? (string)$data['message'] : null,
-            $data['data'] ?? null
+            $data['data'] ?? null,
+            $data['availability'] ?? null,
         );
     }
 
@@ -208,6 +218,16 @@ final class QueryShopOrderInfo extends Query
                         URL
                     }
                 }
+              }
+            }
+            availability {
+              available
+              unavailabilityReason
+              activeDowntime {
+                id
+                type
+                startedAt
+                endsAt
               }
             }
           }
