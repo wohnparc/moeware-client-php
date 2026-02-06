@@ -10,6 +10,8 @@ use Wohnparc\Moeware\Util\Util;
 final class MoeveActiveDowntime
 {
     /**
+     * MoeveActiveDowntime constructor.
+     *
      * @param string $id
      * @param string $type
      * @param DateTimeImmutable $startedAt
