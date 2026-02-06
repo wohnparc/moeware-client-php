@@ -14,14 +14,14 @@ final class MoeveActiveDowntime
      *
      * @param string $id
      * @param string $type
-     * @param DateTimeImmutable $startedAt
-     * @param DateTimeImmutable $endsAt
+     * @param ?DateTimeImmutable $startedAt
+     * @param ?DateTimeImmutable $endsAt
      */
     private function __construct(
         private string $id,
         private string $type,
-        private DateTimeImmutable $startedAt,
-        private DateTimeImmutable $endsAt,
+        private ?DateTimeImmutable $startedAt,
+        private ?DateTimeImmutable $endsAt,
     ) {
     }
 
@@ -46,17 +46,17 @@ final class MoeveActiveDowntime
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return ?DateTimeImmutable
      */
-    public function getStartedAt(): DateTimeImmutable
+    public function getStartedAt(): ?DateTimeImmutable
     {
         return $this->startedAt;
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return ?DateTimeImmutable
      */
-    public function getEndsAt(): DateTimeImmutable
+    public function getEndsAt(): ?DateTimeImmutable
     {
         return $this->endsAt;
     }
@@ -80,8 +80,8 @@ final class MoeveActiveDowntime
         return new self(
             $data['id'],
             $data['type'],
-            Util::fromRawDate($data['startedAt']) ?? new DateTimeImmutable(),
-            Util::fromRawDate($data['endsAt']) ?? new DateTimeImmutable(),
+            Util::fromRawDate($data['startedAt']),
+            Util::fromRawDate($data['endsAt']),
         );
     }
 }
