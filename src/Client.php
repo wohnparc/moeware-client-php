@@ -397,6 +397,36 @@ class Client
         return QueryIsMoeveAvailable::fromArray($data);
     }
 
+    final public function queryShopCheckMoeveAvailability(): QueryShopCheckMoeveAvailability
+    {
+        $response = $this->client->query(
+            QueryShopCheckMoeveAvailability::query(),
+            null,
+        );
+
+        if ($response->hasErrors()) {
+            return QueryShopCheckMoeveAvailability::withErrors($response->getErrors());
+        }
+
+        /**
+         * @var array{
+         *     shopCheckMoeveAvailability: array{
+         *         available: bool,
+         *         unavailabilityReason: string|null,
+         *         activeDowntime: array{
+         *             id: string,
+         *             type: string,
+         *             startedAt: string,
+         *             endsAt: string,
+         *         }|null,
+         *     },
+         * } $data
+         */
+        $data = $response->getData();
+
+        return QueryShopCheckMoeveAvailability::fromArray($data);
+    }
+
     final public function queryProductLinkRelationStatus(string $externalProductRef): QueryProductLinkRelationStatus
     {
         $response = $this->client->query(
