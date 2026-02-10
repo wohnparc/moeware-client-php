@@ -13,7 +13,10 @@ use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Data\SetArticleRef;
 use Wohnparc\Moeware\Data\ShopOrderData;
 
-/** @phpstan-import-type ShopOrderDataPayload from \Wohnparc\Moeware\Data\ShopOrderData */
+/**
+ * @phpstan-import-type ShopOrderDataPayload from \Wohnparc\Moeware\Data\ShopOrderData
+ * @phpstan-import-type ShopMoeveAvailabilityPayload from \Wohnparc\Moeware\Data\ShopMoeveAvailability
+ */
 class Client
 {
     /**
@@ -63,8 +66,16 @@ class Client
             return QueryShopOrderInfo::withErrors($response->getErrors());
         }
 
-
-        /** @phpstan-var array{shopOrderInfo: array{status: string, message: string|null, data: ShopOrderDataPayload|null}} $data */
+        /**
+         * @phpstan-var array{
+         *     shopOrderInfo: array{
+         *         status: string,
+         *         message: string|null,
+         *         data: ShopOrderDataPayload|null,
+         *         availability: ShopMoeveAvailabilityPayload|null,
+         *     },
+         * } $data
+         */
         $data = $response->getData();
 
         /** @phpstan-var ShopOrderDataPayload|null $shopOrderDataArray */
@@ -78,6 +89,7 @@ class Client
             'status' => $data['shopOrderInfo']['status'],
             'message' => $data['shopOrderInfo']['message'],
             'data' => $shopOrderData,
+            'availability' => $data['shopOrderInfo']['availability'] ?? null,
         ]);
     }
 
