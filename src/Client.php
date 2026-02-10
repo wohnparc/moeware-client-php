@@ -11,10 +11,12 @@ use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Client as GQLClient;
 use Wohnparc\Moeware\Data\ArticleRef;
 use Wohnparc\Moeware\Data\SetArticleRef;
-use Wohnparc\Moeware\Data\ShopMoeveAvailability;
 use Wohnparc\Moeware\Data\ShopOrderData;
 
-/** @phpstan-import-type ShopOrderDataPayload from \Wohnparc\Moeware\Data\ShopOrderData */
+/**
+ * @phpstan-import-type ShopOrderDataPayload from \Wohnparc\Moeware\Data\ShopOrderData
+ * @phpstan-import-type ShopMoeveAvailabilityPayload from \Wohnparc\Moeware\Data\ShopMoeveAvailability
+ */
 class Client
 {
     /**
@@ -64,8 +66,16 @@ class Client
             return QueryShopOrderInfo::withErrors($response->getErrors());
         }
 
-
-        /** @phpstan-var array{shopOrderInfo: array{status: string, message: string|null, data: ShopOrderDataPayload|null, availability: array{available: bool, unavailabilityReason: string|null, activeDowntime: array{id: string, type: string, startedAt: string, endsAt: string}|null}|null}} $data */
+        /**
+         * @phpstan-var array{
+         *     shopOrderInfo: array{
+         *         status: string,
+         *         message: string|null,
+         *         data: ShopOrderDataPayload|null,
+         *         availability: ShopMoeveAvailabilityPayload|null,
+         *     },
+         * } $data
+         */
         $data = $response->getData();
 
         /** @phpstan-var ShopOrderDataPayload|null $shopOrderDataArray */
@@ -75,17 +85,11 @@ class Client
             ? ShopOrderData::fromArray($shopOrderDataArray)
             : null;
 
-        $availabilityArray = $data['shopOrderInfo']['availability'] ?? null;
-
-        $availability = $availabilityArray !== null
-            ? ShopMoeveAvailability::fromArray($availabilityArray)
-            : null;
-
         return QueryShopOrderInfo::fromArray([
             'status' => $data['shopOrderInfo']['status'],
             'message' => $data['shopOrderInfo']['message'],
             'data' => $shopOrderData,
-            'availability' => $availability,
+            'availability' => $data['shopOrderInfo']['availability'] ?? null,
         ]);
     }
 

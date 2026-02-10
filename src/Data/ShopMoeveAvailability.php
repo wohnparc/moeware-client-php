@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace Wohnparc\Moeware\Data;
 
+/**
+ * @phpstan-import-type MoeveActiveDowntimePayload from MoeveActiveDowntime
+ *
+ * @phpstan-type ShopMoeveAvailabilityPayload array{
+ *     available: bool,
+ *     unavailabilityReason: string|null,
+ *     activeDowntime: MoeveActiveDowntimePayload|null,
+ * }
+ */
 final class ShopMoeveAvailability
 {
     /**

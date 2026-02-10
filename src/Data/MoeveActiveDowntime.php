@@ -7,6 +7,14 @@ namespace Wohnparc\Moeware\Data;
 use DateTimeImmutable;
 use Wohnparc\Moeware\Util\Util;
 
+/**
+ * @phpstan-type MoeveActiveDowntimePayload array{
+ *     id: string,
+ *     type: string,
+ *     startedAt: string,
+ *     endsAt: string,
+ * }
+ */
 final class MoeveActiveDowntime
 {
     /**
