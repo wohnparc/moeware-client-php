@@ -26,7 +26,7 @@
     "pestphp/pest": "^v1.23.1",
     "phpstan/phpstan": "^1.12.0",
     "friendsofphp/php-cs-fixer": "^3.64.0",
-    "dominikb/composer-license-checker": "^2.6.0",
+    "dominikb/composer-license-checker": "^3.0.0",
     "comcast/php-legal-licenses": "^1.3.0"
   },
   "autoload": {
